@@ -1,0 +1,27 @@
+@use 'reset';
+@use "~normalize.css" as normalize;
+
+@use 'fonts';
+@use 'colors';
+
+html, body {
+  height: 100%;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  color: colors.$body-main;
+  font-size: 1.6rem;
+  font-family: 'League Spartan', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  flex: 1;
+}
