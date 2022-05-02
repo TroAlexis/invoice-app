@@ -1,15 +1,18 @@
-import { Constraints } from "../../../types/size";
-import { classNames } from "../../../assets/utils/dom";
+import { Constraints } from "@/constants/size";
+import { classNames } from "assets/utils/dom";
 import { PropsWithChildren } from "react";
 
 import styles from "./Text.module.scss";
 
 interface Props {
-  type?: Constraints,
+  type?: Constraints;
 }
 
-export default function Text({type = Constraints.TIGHT, children}: PropsWithChildren<Props>) {
+export default function Text({
+  type = Constraints.TIGHT,
+  children,
+}: PropsWithChildren<Props>) {
   const classes = classNames([styles.text, styles[type]]);
 
-  return <p className={classes}>{children}</p>
+  return <p className={classes}>{children}</p>;
 }
