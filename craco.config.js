@@ -1,4 +1,5 @@
 const path = require("path");
+const { addSpriteLoader } = require("./config/craco.sprite");
 
 const PATH_TO_SRC = "./src";
 
@@ -16,6 +17,9 @@ module.exports = {
       images: path.join(
         path.resolve(__dirname, `${PATH_TO_SRC}/assets/images`)
       ),
+    },
+    configure: (webpackConfig) => {
+      return addSpriteLoader(webpackConfig);
     },
   },
 };
