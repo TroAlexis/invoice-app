@@ -1,27 +1,17 @@
+@use "styles/_text.scss";
+
 .heading {
   font-weight: bold;
 }
 
 .h1 {
-  font-size: 3.2rem;
-  line-height: 1.125;
-  letter-spacing: -1px;
+  @include text.h1;
 }
 
 .h2 {
-  font-size: 2rem;
-  line-height: 1.1;
-  letter-spacing: -0.625px;
+  @include text.h2;
 }
 
 .h3 {
-  font-size: 1.6rem;
-  line-height: 1.5;
-  letter-spacing: -0.8px;
-
-  &.small {
-    font-size: 1.2rem;
-    line-height: 1.25;
-    letter-spacing: -0.25px;
-  }
+  @include text.h3;
 }
