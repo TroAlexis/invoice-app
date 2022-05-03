@@ -6,7 +6,7 @@ import React, { PropsWithChildren } from "react";
 import { SlotProps } from "@/types/shared";
 
 interface Props {
-  color?: Color.VIOLET;
+  color?: Color.VIOLET | Color.RED | Color.BLACK | Color.SECONDARY;
   fluid?: boolean;
   icon?: (props: SlotProps) => React.ReactNode;
 }
