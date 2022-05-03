@@ -1,0 +1,39 @@
+@use "styles/_colors.scss";
+@use "styles/_variables.scss";
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.6rem 2.4rem;
+  font-size: 1.2rem;
+  border: 0;
+  border-radius: 24px;
+  outline: 0;
+  cursor: pointer;
+  opacity: 1;
+  transition: variables.$transition-fast;
+  transition-property: opacity;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &.is-violet {
+    color: #fff;
+    background-color: colors.$violet-400;
+  }
+
+  &.is-fluid {
+    display: flex;
+    width: auto;
+  }
+
+  &.has-icon {
+    padding: 0.8rem 1.5rem 0.8rem 0.8rem;
+  }
+}
+
+.icon {
+  margin-right: 1.6rem;
+}
