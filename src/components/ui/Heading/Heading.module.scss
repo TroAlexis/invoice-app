@@ -1,27 +1,27 @@
 .heading {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .h1 {
-    font-size: 3.2rem;
-    line-height: 1.125;
-    letter-spacing: -1px;
+  font-size: 3.2rem;
+  line-height: 1.125;
+  letter-spacing: -1px;
 }
 
 .h2 {
-    font-size: 2rem;
-    line-height: 1.1;
-    letter-spacing: -0.625px;
+  font-size: 2rem;
+  line-height: 1.1;
+  letter-spacing: -0.625px;
 }
 
 .h3 {
-    font-size: 1.6rem;
-    line-height: 1.5;
-    letter-spacing: -0.8px;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  letter-spacing: -0.8px;
 
-    .small {
-        font-size: 1.2rem;
-        line-height: 1.25;
-        letter-spacing: -0.25px;
-    }
+  &.small {
+    font-size: 1.2rem;
+    line-height: 1.25;
+    letter-spacing: -0.25px;
+  }
 }
