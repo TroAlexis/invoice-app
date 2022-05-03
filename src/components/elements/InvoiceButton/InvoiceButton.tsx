@@ -7,18 +7,21 @@ import { classNames } from "assets/utils/dom";
 import styles from "components/elements/InvoiceButton/InvoiceButton.module.scss";
 import Icon from "components/ui/Icon/Icon";
 
-export default function InvoiceButton() {
-  const renderButtonIcon = ({ classes }: SlotProps) => {
-    const className = classNames([classes, styles.icon]);
+interface Props
+  extends Omit<React.ComponentPropsWithoutRef<"button">, "color"> {}
 
-    return <Icon name="plus" size={Size.REGULAR} className={className} />;
-  };
-
+export default function InvoiceButton(attrs: Props) {
   return (
-    <Button icon={renderButtonIcon} fluid>
+    <Button icon={renderButtonIcon} {...attrs}>
       <Heading level="h3" element="p" size={Size.SMALL}>
         New Invoice
       </Heading>
     </Button>
   );
+}
+
+function renderButtonIcon({ classes }: SlotProps) {
+  const className = classNames([classes, styles.icon]);
+
+  return <Icon name="plus" size={Size.REGULAR} className={className} />;
 }

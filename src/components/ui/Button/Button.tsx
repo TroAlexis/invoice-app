@@ -16,6 +16,7 @@ export default function Button({
   fluid,
   icon,
   children,
+  ...attrs
 }: PropsWithChildren<Props>) {
   const classes = classNames({
     [styles.button]: true,
@@ -25,7 +26,7 @@ export default function Button({
   });
 
   return (
-    <button className={classes}>
+    <button className={classes} {...attrs}>
       {icon?.({ classes: styles.icon })}
 
       {children}
