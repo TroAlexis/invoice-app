@@ -1,4 +1,4 @@
-import { ClassNames, ClassNamesArray, ClassNamesObject } from "../../types/shared";
+import { ClassNames, ClassNamesArray, ClassNamesObject } from "@/types/shared";
 
 export const classNames = (classes: ClassNames) => {
   if (typeof classes === "string") {
@@ -7,7 +7,9 @@ export const classNames = (classes: ClassNames) => {
 
   const isArray = Array.isArray(classes);
 
-  const classNames = isArray ? handleClassesArray(classes) : handleClassesObject(classes);
+  const classNames = isArray
+    ? handleClassesArray(classes)
+    : handleClassesObject(classes);
 
   return joinClassNames(classNames);
 };
@@ -23,5 +25,4 @@ function handleClassesArray(classes: ClassNamesArray): Array<string> {
 function handleClassesObject(classes: ClassNamesObject): Array<string> {
   const classNames = Object.keys(classes);
   return classNames.filter((name) => classes[name]);
-
 }
