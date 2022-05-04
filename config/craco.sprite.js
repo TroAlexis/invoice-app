@@ -17,7 +17,6 @@ const addSpriteLoader = (webpackConfig) => {
 
   loaders.oneOf.unshift(spriteLoader);
 
-  console.log(loaders.oneOf);
   return webpackConfig;
 };
 
