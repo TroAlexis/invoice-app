@@ -18,15 +18,12 @@ export function InputBase({
   type = "text",
   className,
 }: InputProps) {
-  const wrapperClasses = classNames([
-    className,
-    styles.wrapper,
-    size && styles[size],
-  ]);
+  const wrapperClasses = classNames([className, styles.wrapper]);
+  const inputClasses = classNames([styles.input, size && styles[size]]);
 
   return (
     <div className={wrapperClasses}>
-      <input type={type} className={styles.input} />
+      <input type={type} className={inputClasses} />
     </div>
   );
 }

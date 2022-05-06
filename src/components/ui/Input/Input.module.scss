@@ -2,12 +2,7 @@
 @use "styles/_colors.scss";
 
 .wrapper {
-  position: relative;
   display: inline-flex;
-  border: 1px solid colors.$grey-300;
-  border-radius: 4px;
-
-  @include text.h3;
 }
 
 .input {
@@ -19,6 +14,9 @@
   line-height: inherit;
   letter-spacing: inherit;
   background-color: transparent;
-  border: 0;
+  border: 1px solid colors.$grey-300;
+  border-radius: 4px;
   outline: 0;
+
+  @include text.h3;
 }
