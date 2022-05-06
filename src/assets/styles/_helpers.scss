@@ -13,7 +13,9 @@
     @if type-of($value) == "map" and $recursive {
       @include include-properties($value, $name-string);
     } @else {
-      @include include-property($name-string, $value);
+      @if type-of($value) != "map" {
+        @include include-property($name-string, $value);
+      }
     }
   }
 }

@@ -12,7 +12,7 @@
 @mixin h3() {
   $h3-sizes: map.get($sizes, h3);
 
-  @include helpers.include-properties($h3-sizes);
+  @include helpers.include-properties($h3-sizes, $recursive: false);
 
   &.small {
     @include helpers.include-properties(map.get($h3-sizes, small));
