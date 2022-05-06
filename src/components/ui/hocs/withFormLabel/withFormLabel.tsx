@@ -7,6 +7,7 @@ import { classNames } from "assets/utils/dom";
 export interface WithFormLabelProps {
   label?: string | ((props: SlotProps) => JSX.Element);
   className?: string;
+  wrapperClassName?: string;
 }
 
 export default function withFormLabel<T extends WithFormLabelProps>(
@@ -15,9 +16,10 @@ export default function withFormLabel<T extends WithFormLabelProps>(
   const ComponentWithFormLabel = (props: T) => {
     const labelElement = getLabelElement(props.label);
     const wrappedClasses = classNames([props.className, styles.labeled]);
+    const wrapperClasses = classNames([props.wrapperClassName, styles.wrapper]);
 
     return (
-      <div className={styles.wrapper}>
+      <div className={wrapperClasses}>
         {props.label && labelElement}
 
         <WrappedComponent {...props} className={wrappedClasses} />
