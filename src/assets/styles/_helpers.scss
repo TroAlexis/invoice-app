@@ -1,0 +1,19 @@
+@mixin include-property($name, $value) {
+  #{$name}: $value;
+}
+
+@mixin include-properties($properties, $prefix: false, $recursive: true) {
+  @each $name, $value in $properties {
+    $name-string: "#{$prefix}-#{$name}";
+
+    @if $prefix == false {
+      $name-string: $name;
+    }
+
+    @if type-of($value) == "map" and $recursive {
+      @include include-properties($value, $name-string);
+    } @else {
+      @include include-property($name-string, $value);
+    }
+  }
+}

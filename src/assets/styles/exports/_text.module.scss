@@ -1,0 +1,8 @@
+@use "styles/_text.scss";
+@use "styles/_helpers.scss";
+
+// stylelint-disable
+:export {
+  @include helpers.include-properties(text.$sizes);
+}
+// stylelint-enable

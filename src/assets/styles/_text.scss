@@ -1,23 +1,43 @@
+@use "sass:map";
+@use "styles/_helpers.scss";
+
 @mixin h1() {
-  font-size: 3.2rem;
-  line-height: 1.125;
-  letter-spacing: -1px;
+  @include helpers.include-properties(map.get($sizes, h1));
 }
 
 @mixin h2() {
-  font-size: 2rem;
-  line-height: 1.1;
-  letter-spacing: -0.625px;
+  @include helpers.include-properties(map.get($sizes, h2));
 }
 
-@mixin h3($size: false) {
-  font-size: 1.6rem;
-  line-height: 1.5;
-  letter-spacing: -0.8px;
+@mixin h3() {
+  $h3-sizes: map.get($sizes, h3);
+
+  @include helpers.include-properties($h3-sizes);
 
   &.small {
-    font-size: 1.2rem;
-    line-height: 1.25;
-    letter-spacing: -0.25px;
+    @include helpers.include-properties(map.get($h3-sizes, small));
   }
 }
+
+$sizes: (
+  h1: (
+    font-size: 3.2rem,
+    line-height: 1.125,
+    letter-spacing: -1px,
+  ),
+  h2: (
+    font-size: 2rem,
+    line-height: 1.1,
+    letter-spacing: -0.625px,
+  ),
+  h3: (
+    font-size: 1.6rem,
+    line-height: 1.5,
+    letter-spacing: -0.8px,
+    small: (
+      font-size: 1.2rem,
+      line-height: 1.25,
+      letter-spacing: -0.25px,
+    ),
+  ),
+);

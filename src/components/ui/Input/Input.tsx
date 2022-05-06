@@ -2,36 +2,33 @@ import React, { HTMLInputTypeAttribute } from "react";
 import styles from "./Input.module.scss";
 import { Size } from "@/constants/size";
 import { classNames } from "assets/utils/dom";
-import { SlotProps } from "@/types/shared";
+import withFormLabel, {
+  WithFormLabelProps,
+} from "components/ui/hocs/withFormLabel/withFormLabel";
 
-interface Props extends React.ComponentPropsWithoutRef<"div"> {
-  label?: string | ((props: SlotProps) => JSX.Element);
+interface InputProps
+  extends React.ComponentPropsWithoutRef<"div">,
+    WithFormLabelProps {
   size?: Size.SMALL;
   type?: HTMLInputTypeAttribute;
 }
 
-export default function Input({
-  label,
+export function InputBase({
   size = Size.SMALL,
   type = "text",
-}: Props) {
-  const labelElement = getLabelElement(label);
-
-  const wrapperClasses = classNames([styles.wrapper, size && styles[size]]);
+  className,
+}: InputProps) {
+  const wrapperClasses = classNames([
+    className,
+    styles.wrapper,
+    size && styles[size],
+  ]);
 
   return (
     <div className={wrapperClasses}>
       <input type={type} className={styles.input} />
-
-      {label && labelElement}
     </div>
   );
 }
 
-function getLabelElement(label: Props["label"]) {
-  return typeof label === "function" ? (
-    label({ classes: styles.label })
-  ) : (
-    <span className={styles.label}>{label}</span>
-  );
-}
+export default withFormLabel(InputBase);
