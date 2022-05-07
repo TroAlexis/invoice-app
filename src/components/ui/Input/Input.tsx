@@ -14,13 +14,13 @@ interface Props extends InputProps, WithFormLabelProps {
 }
 
 export const InputBase = forwardRef<HTMLInputElement, Props>(
-  ({ size = Size.SMALL, type = "text", className }, ref) => {
+  ({ size = Size.SMALL, type = "text", className, ...inputProps }, ref) => {
     const wrapperClasses = classNames([className, styles.wrapper]);
     const inputClasses = classNames([styles.input, size && styles[size]]);
 
     return (
       <div className={wrapperClasses}>
-        <input type={type} className={inputClasses} ref={ref} />
+        <input type={type} className={inputClasses} ref={ref} {...inputProps} />
       </div>
     );
   }
