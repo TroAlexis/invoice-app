@@ -1,5 +1,6 @@
 @use "styles/_text.scss";
 @use "styles/_colors.scss";
+@use "styles/_variables.scss";
 
 .wrapper {
   display: inline-flex;
@@ -17,6 +18,14 @@
   border: 1px solid colors.$grey-300;
   border-radius: 4px;
   outline: 0;
+  transition: variables.$transition-fast;
+  transition-property: border-color;
 
   @include text.h3;
+
+  &:hover,
+  &:active,
+  &:focus {
+    border-color: colors.$violet-400;
+  }
 }
