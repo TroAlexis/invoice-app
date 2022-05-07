@@ -1,7 +1,7 @@
 import styles from "./withFormLabel.module.scss";
-import { SlotProps } from "@/types/shared";
-import React from "react";
-import { withDisplayName } from "assets/utils/hoc.js";
+import { SlotProps, WithForwardedRef } from "@/types/shared";
+import React, { forwardRef } from "react";
+import { withDisplayName } from "assets/utils/hoc";
 import { classNames } from "assets/utils/dom";
 
 export interface WithFormLabelProps {
@@ -10,10 +10,10 @@ export interface WithFormLabelProps {
   wrapperClassName?: string;
 }
 
-export default function withFormLabel<T extends WithFormLabelProps>(
-  WrappedComponent: React.ComponentType<T>
-): React.ComponentType<T> {
-  const ComponentWithFormLabel = (props: T) => {
+function getWithFormLabelComponent<Props extends WithFormLabelProps>(
+  WrappedComponent: React.ComponentType<Props>
+) {
+  return ({ fRef, ...props }: Props & WithForwardedRef) => {
     const labelElement = getLabelElement(props.label);
     const wrappedClasses = classNames([props.className, styles.labeled]);
     const wrapperClasses = classNames([props.wrapperClassName, styles.wrapper]);
@@ -22,16 +22,14 @@ export default function withFormLabel<T extends WithFormLabelProps>(
       <div className={wrapperClasses}>
         {props.label && labelElement}
 
-        <WrappedComponent {...props} className={wrappedClasses} />
+        <WrappedComponent
+          {...(props as Props)}
+          className={wrappedClasses}
+          ref={fRef}
+        />
       </div>
     );
   };
-
-  return withDisplayName(
-    ComponentWithFormLabel,
-    WrappedComponent,
-    "withFormLabel"
-  );
 }
 
 function getLabelElement(label: WithFormLabelProps["label"]) {
@@ -40,4 +38,21 @@ function getLabelElement(label: WithFormLabelProps["label"]) {
   ) : (
     <span className={styles.label}>{label}</span>
   );
+}
+
+export default function withFormLabel<Props extends WithFormLabelProps>(
+  WrappedComponent: React.ComponentType<Props>
+) {
+  const ComponentWithFormLabel =
+    getWithFormLabelComponent<Props>(WrappedComponent);
+
+  const Component = withDisplayName<Props>(
+    ComponentWithFormLabel,
+    WrappedComponent,
+    "withFormLabel"
+  );
+
+  return forwardRef<HTMLElement, Props>((props, ref) => {
+    return <Component {...props} fRef={ref} />;
+  });
 }
