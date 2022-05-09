@@ -1,0 +1,33 @@
+@use "styles/_colors.scss";
+@use "styles/_variables.scss";
+
+.wrapper {
+  &#{&} {
+    display: inline-flex;
+
+    // stylelint-disable
+    :global {
+      .react-datepicker__input-container {
+        display: inline-flex;
+      }
+    }
+    // stylelint-enable
+  }
+}
+
+.icon {
+  color: colors.$violet-200;
+  transition: variables.$transition-fast;
+  transition-property: color;
+  pointer-events: none;
+}
+
+.input {
+  &:hover,
+  &:active,
+  &:focus {
+    + .icon {
+      color: colors.$violet-400;
+    }
+  }
+}
