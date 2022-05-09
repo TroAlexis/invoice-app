@@ -4,7 +4,7 @@ import { classNames } from "assets/utils/dom";
 import React from "react";
 
 interface Props extends React.ComponentPropsWithoutRef<"svg"> {
-  size?: Size.REGULAR | Size.SMALL;
+  size?: Size.REGULAR | Size.SMALL | Size.MEDIUM;
   name: string;
 }
 
