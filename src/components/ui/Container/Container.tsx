@@ -1,13 +1,11 @@
 import styles from "./Container.module.scss";
-import { classNames } from "assets/js/utils/dom";
-import React from "react";
+import { classNames } from "utils/dom";
+import React, { ComponentPropsWithoutRef } from "react";
 
-interface Props {
-  children: React.ReactNode;
-}
+interface Props extends ComponentPropsWithoutRef<"div"> {}
 
-export default function Container({ children }: Props) {
-  const classes = classNames(styles.container);
+export default function Container({ children, className }: Props) {
+  const classes = classNames([styles.container, className]);
 
   return <div className={classes}>{children}</div>;
 }
