@@ -24,7 +24,10 @@
       "components/*": ["./components/*"],
       "assets/*": ["./assets/*"],
       "styles/*": ["./assets/styles/*"],
-      "images/*": ["./assets/images/*"]
+      "images/*": ["./assets/images/*"],
+      "constants/*": ["./assets/js/constants/*"],
+      "types/*": ["./assets/js/types/*"],
+      "utils/*": ["./assets/js/utils/*"]
     },
     "jsx": "react-jsx",
   },
