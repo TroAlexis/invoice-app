@@ -1,4 +1,4 @@
-import { Size } from "@/constants/size";
+import { Size } from "assets/js/constants/size";
 import styles from "./Heading.module.scss";
 import React, { ElementType, PropsWithChildren } from "react";
 import { classNames } from "assets/utils/dom";

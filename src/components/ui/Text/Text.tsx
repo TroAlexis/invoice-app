@@ -1,4 +1,4 @@
-import { Constraints } from "@/constants/size";
+import { Constraints } from "assets/js/constants/size";
 import { classNames } from "assets/utils/dom";
 import { PropsWithChildren } from "react";
 

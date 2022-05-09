@@ -1,5 +1,5 @@
 import styles from "./Icon.module.scss";
-import { Size } from "@/constants/size";
+import { Size } from "assets/js/constants/size";
 import { classNames } from "assets/utils/dom";
 import React from "react";
 

@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLInputTypeAttribute } from "react";
 import styles from "./Input.module.scss";
-import { Size } from "@/constants/size";
+import { Size } from "assets/js/constants/size";
 import { classNames } from "assets/utils/dom";
 import withFormLabel, {
   WithFormLabelProps,

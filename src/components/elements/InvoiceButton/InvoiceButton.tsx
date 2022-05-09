@@ -1,6 +1,6 @@
 import Button from "components/ui/Button/Button";
 import Heading from "components/ui/Heading/Heading";
-import { Size } from "@/constants/size";
+import { Size } from "assets/js/constants/size";
 import React from "react";
 import { SlotProps } from "@/types/shared";
 import { classNames } from "assets/utils/dom";
