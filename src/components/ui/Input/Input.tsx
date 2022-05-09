@@ -5,7 +5,7 @@ import { classNames } from "assets/js/utils/dom";
 import withFormLabel, {
   WithFormLabelProps,
 } from "components/ui/hocs/withFormLabel/withFormLabel";
-import { RenderSlotProps, RenderSlotWithProps } from "@/types/shared";
+import { RenderSlotProps, RenderSlotWithProps } from "assets/js/types/shared";
 
 type InputProps = Omit<React.ComponentPropsWithRef<"input">, "size">;
 

@@ -3,7 +3,7 @@ import {
   ClassNames,
   ClassNamesArray,
   ClassNamesObject,
-} from "@/types/shared";
+} from "assets/js/types/shared";
 
 export const classNames = (classes: ClassNames) => {
   if (typeof classes === "string") {

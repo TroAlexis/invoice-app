@@ -3,7 +3,7 @@ import styles from "./Button.module.scss";
 import { classNames } from "assets/js/utils/dom";
 import { Color } from "assets/js/constants/color";
 import React, { PropsWithChildren } from "react";
-import { SlotProps } from "@/types/shared";
+import { SlotProps } from "assets/js/types/shared";
 
 interface Props {
   color?: Color.VIOLET | Color.RED | Color.BLACK | Color.SECONDARY;
