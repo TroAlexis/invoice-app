@@ -1,8 +1,10 @@
 import React from "react";
 
-export type ClassNamesObject = Record<string, boolean | undefined>;
-export type ClassNamesArray = Array<string | false | undefined>;
-export type ClassNames = string | ClassNamesObject | ClassNamesArray;
+export type Falsy = false | 0 | "" | null | undefined;
+export type ClassName = string | Falsy;
+export type ClassNamesObject = Record<string, true | Falsy>;
+export type ClassNamesArray = Array<ClassName>;
+export type ClassNames = ClassName | ClassNamesObject | ClassNamesArray;
 
 export interface SlotProps {
   classes?: string;
