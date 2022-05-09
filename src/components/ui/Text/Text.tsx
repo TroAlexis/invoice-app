@@ -1,5 +1,5 @@
 import { Constraints } from "assets/js/constants/size";
-import { classNames } from "assets/utils/dom";
+import { classNames } from "assets/js/utils/dom";
 import { PropsWithChildren } from "react";
 
 import styles from "./Text.module.scss";

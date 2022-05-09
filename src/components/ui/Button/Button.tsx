@@ -1,6 +1,6 @@
 import styles from "./Button.module.scss";
 
-import { classNames } from "assets/utils/dom";
+import { classNames } from "assets/js/utils/dom";
 import { Color } from "assets/js/constants/color";
 import React, { PropsWithChildren } from "react";
 import { SlotProps } from "@/types/shared";

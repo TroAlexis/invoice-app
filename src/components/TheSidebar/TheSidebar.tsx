@@ -2,7 +2,7 @@ import styles from "./TheSidebar.module.scss";
 import iconStyles from "components/ui/Icon/Icon.module.scss";
 import Icon from "components/ui/Icon/Icon";
 import { Size } from "assets/js/constants/size";
-import { classNames } from "assets/utils/dom";
+import { classNames } from "assets/js/utils/dom";
 
 export default function TheSidebar() {
   return (

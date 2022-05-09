@@ -1,5 +1,5 @@
 import styles from "./Container.module.scss";
-import { classNames } from "assets/utils/dom";
+import { classNames } from "assets/js/utils/dom";
 import React from "react";
 
 interface Props {

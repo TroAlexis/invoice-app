@@ -4,7 +4,7 @@ import withFormLabel, {
   WithFormLabelProps,
 } from "../hocs/withFormLabel/withFormLabel";
 import styles from "./Datepicker.module.scss";
-import { classNames } from "assets/utils/dom";
+import { classNames } from "assets/js/utils/dom";
 import { InputBase } from "components/ui/Input/Input";
 import Icon from "components/ui/Icon/Icon";
 
