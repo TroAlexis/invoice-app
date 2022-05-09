@@ -1,7 +1,7 @@
 export enum Size {
   SMALL = "small",
   REGULAR = "regular",
-  MEDUIM = "medium",
+  MEDIUM = "medium",
 }
 
 export enum Constraints {
