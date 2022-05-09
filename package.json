@@ -43,7 +43,9 @@
     "build": "craco build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint:scss:fix": "stylelint '**/*.scss' --fix",
+    "lint:js:fix": "prettier '**/*.{js,jsx,ts,tsx,scss,css,md}' --write"
   },
   "eslintConfig": {
     "extends": [
