@@ -15,19 +15,42 @@ export function DatepickerBase<
   props: ReactDatePickerProps<CustomModifierNames, WithRange> &
     WithFormLabelProps
 ) {
-  const wrapperClasses = classNames([props.wrapperClassName, styles.wrapper]);
+  const classes = getClasses(props);
   const input = props.customInput || customInput();
 
-  return (
-    <ReactDatePicker
-      {...props}
-      wrapperClassName={wrapperClasses}
-      customInput={input}
-    />
-  );
+  return <ReactDatePicker {...props} customInput={input} {...classes} />;
 }
 
-function customInput(): JSX.Element {
+function getClasses<M extends string, W extends boolean | undefined>(
+  props: ReactDatePickerProps<M, W>
+): Partial<ReactDatePickerProps<M, W>> {
+  const wrapperClassName = classNames([props.wrapperClassName, styles.wrapper]);
+
+  const calendarClassName = classNames([
+    props.calendarClassName,
+    styles.calendar,
+  ]);
+
+  const dayClassName = (date: Date) => {
+    return classNames([props.dayClassName?.(date), styles.day]) || null;
+  };
+
+  const monthClassName = (date: Date) => {
+    return classNames([props.monthClassName?.(date), styles.month]) || null;
+  };
+
+  return {
+    wrapperClassName,
+    calendarClassName,
+    dayClassName,
+    monthClassName,
+  };
+}
+
+function customInput<
+  M extends string,
+  W extends boolean | undefined
+>(): ReactDatePickerProps<M, W>["customInput"] {
   return (
     <InputBase
       inputClassName={styles.input}

@@ -1,17 +1,28 @@
 @use "styles/_colors.scss";
 @use "styles/_variables.scss";
+@use "styles/_text.scss";
+@use "sass:map";
+
+$text-color: colors.$black-500;
+$padding-top: 2.5rem;
+$padding-y: 2rem;
+
+// ------ Selectors -------
+
+$root-selector: ".react-datepicker";
+$day-selector: "#{$root-selector}__day";
+$day-outside-selector: "#{$day-selector}--outside-month";
+$day-selected-selector: "#{$day-selector}--keyboard-selected";
 
 .wrapper {
   &#{&} {
     display: inline-flex;
 
-    // stylelint-disable
     :global {
       .react-datepicker__input-container {
         display: inline-flex;
       }
     }
-    // stylelint-enable
   }
 }
 
@@ -30,4 +41,85 @@
       color: colors.$violet-400;
     }
   }
+}
+
+.calendar {
+  &#{&} {
+    padding: $padding-top $padding-y 3.2rem;
+    color: $text-color;
+    font-weight: 700;
+    font-family: inherit;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgb(72 84 159 / 25%);
+
+    @include text.h3-small;
+  }
+
+  :global {
+    .react-datepicker {
+      &__header {
+        background-color: transparent;
+        border-bottom: 0;
+      }
+
+      &__current-month {
+        font-size: 1em;
+      }
+
+      &__triangle,
+      &__day-names {
+        display: none;
+      }
+
+      &__navigation {
+        top: $padding-top;
+        transform: scale(0.8) translateY(-10%);
+
+        &--next {
+          right: $padding-y;
+        }
+
+        &--previous {
+          left: $padding-y;
+        }
+
+        &:hover {
+          *::before {
+            border-color: colors.$violet-400;
+          }
+        }
+
+        &-icon {
+          &::before {
+            transition: variables.$transition-fast;
+            transition-property: border-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+.day {
+  color: $text-color;
+  font-size: 1em;
+  background-color: transparent;
+  transition: variables.$transition-fast;
+  transition-property: color;
+
+  &:hover:not(:global(#{$day-outside-selector})),
+  &:global(#{$day-selected-selector}) {
+    color: colors.$violet-400;
+    background-color: transparent;
+  }
+
+  &:global(#{$day-outside-selector}) {
+    opacity: 0.08;
+  }
+}
+
+.month {
+  color: $text-color;
+  font-size: 1em;
 }
