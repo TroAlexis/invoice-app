@@ -2,7 +2,12 @@
 @use "styles/_colors.scss";
 @use "styles/_variables.scss";
 
+$icon-size-small: 1.6rem;
+$icon-margin-small: 0.5rem;
+$icon-offset-small: 1.6rem;
+
 .wrapper {
+  position: relative;
   display: inline-flex;
 }
 
@@ -28,4 +33,19 @@
   &:focus {
     border-color: colors.$violet-400;
   }
+
+  &.has-icon {
+    &.small {
+      padding-right: $icon-offset-small + $icon-size-small + $icon-margin-small;
+    }
+  }
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  right: $icon-offset-small;
+  width: $icon-size-small;
+  height: $icon-size-small;
+  transform: translateY(-50%);
 }
