@@ -1,8 +1,8 @@
 import styles from "./withFormLabel.module.scss";
-import { SlotProps, WithForwardedRef } from "assets/js/types/shared";
+import { SlotProps, WithForwardedRef } from "types/shared";
 import React, { forwardRef } from "react";
-import { withDisplayName } from "assets/js/utils/hoc";
-import { classNames } from "assets/js/utils/dom";
+import { withDisplayName } from "utils/hoc";
+import { classNames } from "utils/dom";
 
 export interface WithFormLabelProps {
   label?: string | ((props: SlotProps) => JSX.Element);

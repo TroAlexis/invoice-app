@@ -1,9 +1,9 @@
 import Button from "components/ui/Button/Button";
 import Heading from "components/ui/Heading/Heading";
-import { Size } from "assets/js/constants/size";
+import { Size } from "constants/size";
 import React from "react";
-import { SlotProps } from "assets/js/types/shared";
-import { classNames } from "assets/js/utils/dom";
+import { SlotProps } from "types/shared";
+import { classNames } from "utils/dom";
 import styles from "components/elements/InvoiceButton/InvoiceButton.module.scss";
 import Icon from "components/ui/Icon/Icon";
 

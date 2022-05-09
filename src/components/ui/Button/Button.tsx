@@ -1,9 +1,9 @@
 import styles from "./Button.module.scss";
 
-import { classNames } from "assets/js/utils/dom";
-import { Color } from "assets/js/constants/color";
+import { classNames } from "utils/dom";
+import { Color } from "constants/color";
 import React, { PropsWithChildren } from "react";
-import { SlotProps } from "assets/js/types/shared";
+import { SlotProps } from "types/shared";
 
 interface Props {
   color?: Color.VIOLET | Color.RED | Color.BLACK | Color.SECONDARY;

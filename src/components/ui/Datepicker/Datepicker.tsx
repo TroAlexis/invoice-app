@@ -2,9 +2,9 @@ import ReactDatePicker, { ReactDatePickerProps } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import withFormLabel, {
   WithFormLabelProps,
-} from "../hocs/withFormLabel/withFormLabel";
+} from "components/ui/hocs/withFormLabel/withFormLabel";
 import styles from "./Datepicker.module.scss";
-import { classNames } from "assets/js/utils/dom";
+import { classNames } from "utils/dom";
 import { InputBase } from "components/ui/Input/Input";
 import Icon from "components/ui/Icon/Icon";
 

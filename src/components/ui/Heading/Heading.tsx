@@ -1,7 +1,7 @@
-import { Size } from "assets/js/constants/size";
+import { Size } from "constants/size";
 import styles from "./Heading.module.scss";
 import React, { ElementType, PropsWithChildren } from "react";
-import { classNames } from "assets/js/utils/dom";
+import { classNames } from "utils/dom";
 
 const Headings = {
   h1: "h1",
