@@ -2,10 +2,10 @@ import styles from "./Button.module.scss";
 
 import { classNames } from "utils/dom";
 import { Color } from "constants/color";
-import React, { PropsWithChildren } from "react";
+import React, { ComponentPropsWithoutRef } from "react";
 import { SlotProps } from "types/shared";
 
-interface Props {
+interface Props extends ComponentPropsWithoutRef<"button"> {
   color?: Color.VIOLET | Color.RED | Color.BLACK | Color.SECONDARY;
   fluid?: boolean;
   icon?: (props: SlotProps) => React.ReactNode;
@@ -17,7 +17,7 @@ export default function Button({
   icon,
   children,
   ...attrs
-}: PropsWithChildren<Props>) {
+}: Props) {
   const classes = classNames({
     [styles.button]: true,
     [styles["is-fluid"]]: fluid,
