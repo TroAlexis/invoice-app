@@ -8,9 +8,9 @@ export default function Default() {
     <div className={styles.layout}>
       <TheSidebar />
 
-      <div className={styles.main}>
+      <main className={styles.main}>
         <Outlet />
-      </div>
+      </main>
     </div>
   );
 }
