@@ -5,6 +5,8 @@ import reportWebVitals from "./reportWebVitals";
 
 import "./assets/styles/base.scss";
 import App from "./components/App/App";
+import { Provider } from "react-redux";
+import store from "@/store";
 
 // Sprite module
 import "@/svgSprite";
@@ -14,9 +16,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 
