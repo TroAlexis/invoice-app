@@ -2,7 +2,7 @@ import { AuthAction, AuthActionType, AuthState } from "@/store/types/auth";
 import { Reducer } from "redux";
 
 export const defaultState: AuthState = {
-  user: null,
+  session: null,
   authenticated: false,
   loading: false,
   error: null,
@@ -13,20 +13,29 @@ const authReducer: Reducer<AuthState, AuthAction> = (
   action: AuthAction
 ): AuthState => {
   switch (action.type) {
-    case AuthActionType.LOGIN:
-      return { user: null, loading: true, authenticated: false, error: null };
-    case AuthActionType.LOGIN_SUCCESS:
+    case AuthActionType.LOADING:
+      return { ...state, loading: true };
+    case AuthActionType.SET_SESSION:
       return {
-        user: action.user,
+        session: action.session,
         loading: false,
         authenticated: true,
         error: null,
       };
     case AuthActionType.LOGIN_ERROR:
       return {
-        user: null,
+        session: null,
         loading: false,
         authenticated: false,
+        error: action.error,
+      };
+    case AuthActionType.LOGOUT:
+      return {
+        ...defaultState,
+      };
+    case AuthActionType.LOGOUT_ERROR:
+      return {
+        ...state,
         error: action.error,
       };
     default:

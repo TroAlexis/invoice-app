@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./default.module.scss";
 import TheSidebar from "components/TheSidebar/TheSidebar";
 import { Outlet } from "react-router-dom";
+import RequireAuth from "components/RequireAuth/RequireAuth";
 
 export default function Default() {
   return (
@@ -9,7 +10,9 @@ export default function Default() {
       <TheSidebar />
 
       <main className={styles.main}>
-        <Outlet />
+        <RequireAuth>
+          <Outlet />
+        </RequireAuth>
       </main>
     </div>
   );
