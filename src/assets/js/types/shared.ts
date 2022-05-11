@@ -10,6 +10,8 @@ export interface SlotProps {
   classes?: string;
 }
 
+export type BasicSlot = string | RenderSlot;
+
 export type RenderSlot = (props?: SlotProps) => JSX.Element;
 
 export type RenderSlotProps<SlotName extends string, ParentProps> = SlotProps &
