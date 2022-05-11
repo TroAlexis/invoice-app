@@ -1,11 +1,11 @@
 import React, { forwardRef, HTMLInputTypeAttribute } from "react";
 import styles from "./Input.module.scss";
 import { Size } from "constants/size";
-import { classNames } from "utils/dom";
 import withFormLabel, {
   WithFormLabelProps,
 } from "components/ui/hocs/withFormLabel/withFormLabel";
 import { RenderSlotProps, RenderSlotWithProps } from "types/shared";
+import { classNames } from "utils/classnames";
 
 type InputProps = Omit<React.ComponentPropsWithRef<"input">, "size">;
 

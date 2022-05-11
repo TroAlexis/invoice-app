@@ -4,8 +4,8 @@ import TheSidebar, { Classes } from "components/TheSidebar/TheSidebar";
 import { Outlet } from "react-router-dom";
 import { useTypedSelector } from "@/hooks/useTypedStore";
 import { AuthState } from "@/store/types/auth";
-import { classNames } from "utils/dom";
 import LoginForm from "components/LoginForm/LoginForm";
+import { classNames } from "utils/classnames";
 
 export default function Default() {
   const { session } = useTypedSelector((state) => state.auth);

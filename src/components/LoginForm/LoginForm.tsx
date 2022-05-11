@@ -1,9 +1,10 @@
 import styles from "./LoginForm.module.scss";
 import { ComponentPropsWithoutRef } from "react";
 import Heading from "components/ui/Heading/Heading";
-import { classNames } from "utils/dom";
 import Input from "components/ui/Input/Input";
 import Button from "components/ui/Button/Button";
+import { Size } from "constants/size";
+import { classNames } from "utils/classnames";
 
 interface Props extends ComponentPropsWithoutRef<"form"> {}
 
@@ -20,7 +21,7 @@ export default function LoginForm(props: Props) {
 
       <Input label="Password" name="password" wrapperClassName={styles.input} />
 
-      <Button type="submit" className={styles.submit}>
+      <Button type="submit" size={Size.MEDIUM} className={styles.submit}>
         Login
       </Button>
     </form>

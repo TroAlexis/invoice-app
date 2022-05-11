@@ -3,9 +3,9 @@ import Heading from "components/ui/Heading/Heading";
 import { Size } from "constants/size";
 import React from "react";
 import { SlotProps } from "types/shared";
-import { classNames } from "utils/dom";
 import styles from "components/elements/InvoiceButton/InvoiceButton.module.scss";
 import Icon from "components/ui/Icon/Icon";
+import { classNames } from "utils/classnames";
 
 interface Props
   extends Omit<React.ComponentPropsWithoutRef<"button">, "color"> {}

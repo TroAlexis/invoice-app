@@ -1,6 +1,6 @@
 import styles from "./Container.module.scss";
-import { classNames } from "utils/dom";
 import React, { ComponentPropsWithoutRef } from "react";
+import { classNames } from "utils/classnames";
 
 interface Props extends ComponentPropsWithoutRef<"div"> {}
 

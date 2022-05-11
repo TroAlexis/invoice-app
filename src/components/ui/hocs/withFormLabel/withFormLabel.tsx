@@ -2,7 +2,7 @@ import styles from "./withFormLabel.module.scss";
 import { SlotProps, WithForwardedRef } from "types/shared";
 import React, { forwardRef } from "react";
 import { withDisplayName } from "utils/hoc";
-import { classNames } from "utils/dom";
+import { classNames } from "utils/classnames";
 
 export interface WithFormLabelProps {
   label?: string | ((props: SlotProps) => JSX.Element);

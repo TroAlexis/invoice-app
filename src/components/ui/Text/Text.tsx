@@ -1,8 +1,8 @@
 import { Constraints } from "constants/size";
-import { classNames } from "utils/dom";
 import { PropsWithChildren } from "react";
 
 import styles from "./Text.module.scss";
+import { classNames } from "utils/classnames";
 
 interface Props {
   type?: Constraints;

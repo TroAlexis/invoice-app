@@ -1,7 +1,7 @@
 import styles from "./Icon.module.scss";
 import { Size } from "constants/size";
-import { classNames } from "utils/dom";
 import React from "react";
+import { classNames } from "utils/classnames";
 
 interface Props extends React.ComponentPropsWithoutRef<"svg"> {
   size?: Size.REGULAR | Size.SMALL | Size.MEDIUM;

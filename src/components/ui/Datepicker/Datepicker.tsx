@@ -4,9 +4,9 @@ import withFormLabel, {
   WithFormLabelProps,
 } from "components/ui/hocs/withFormLabel/withFormLabel";
 import styles from "./Datepicker.module.scss";
-import { classNames } from "utils/dom";
 import { InputBase } from "components/ui/Input/Input";
 import Icon from "components/ui/Icon/Icon";
+import { classNames } from "utils/classnames";
 
 export function DatepickerBase<
   CustomModifierNames extends string,

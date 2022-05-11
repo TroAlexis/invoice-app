@@ -2,8 +2,8 @@ import styles from "./TheSidebar.module.scss";
 import iconStyles from "components/ui/Icon/Icon.module.scss";
 import Icon from "components/ui/Icon/Icon";
 import { Size } from "constants/size";
-import { classNames } from "utils/dom";
 import { ComponentPropsWithoutRef } from "react";
+import { classNames } from "utils/classnames";
 
 export interface Classes {
   className?: string;
