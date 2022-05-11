@@ -1,6 +1,10 @@
-import React from "react";
+import { Dispatch, Ref, SetStateAction } from "react";
 
+export type ValueOf<T> = T[keyof T];
 export type Falsy = false | 0 | "" | null | undefined;
+
+export type UseStateSetter<T> = Dispatch<SetStateAction<T>>;
+
 export type ClassName = string | Falsy;
 export type ClassNamesObject = Record<string, true | Falsy>;
 export type ClassNamesArray = Array<ClassNames>;
@@ -22,5 +26,5 @@ export type RenderSlotWithProps<SlotName extends string, ParentProps> = (
 ) => JSX.Element;
 
 export interface WithForwardedRef {
-  fRef?: React.Ref<HTMLElement> | null;
+  fRef?: Ref<HTMLElement> | null;
 }
