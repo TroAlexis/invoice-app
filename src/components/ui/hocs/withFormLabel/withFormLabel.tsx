@@ -13,10 +13,10 @@ export interface WithFormLabelProps {
 function getWithFormLabelComponent<Props extends WithFormLabelProps>(
   WrappedComponent: React.ComponentType<Props>
 ) {
-  return ({ fRef, ...props }: Props & WithForwardedRef) => {
+  return ({ fRef, wrapperClassName, ...props }: Props & WithForwardedRef) => {
     const labelElement = getLabelElement(props.label);
     const wrappedClasses = classNames([props.className, styles.labeled]);
-    const wrapperClasses = classNames([props.wrapperClassName, styles.wrapper]);
+    const wrapperClasses = classNames([wrapperClassName, styles.wrapper]);
 
     return (
       <div className={wrapperClasses}>
