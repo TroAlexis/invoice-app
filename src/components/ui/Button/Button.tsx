@@ -16,14 +16,18 @@ export default function Button({
   fluid,
   icon,
   children,
+  className,
   ...attrs
 }: Props) {
-  const classes = classNames({
-    [styles.button]: true,
-    [styles["is-fluid"]]: fluid,
-    [styles[`is-${color}`]]: !!color,
-    [styles["has-icon"]]: !!icon,
-  });
+  const classes = classNames([
+    className,
+    styles.button,
+    {
+      [styles["is-fluid"]]: fluid,
+      [styles[`is-${color}`]]: !!color,
+      [styles["has-icon"]]: !!icon,
+    },
+  ]);
 
   return (
     <button className={classes} {...attrs}>
