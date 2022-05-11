@@ -1,6 +1,13 @@
 import supabase from "@/api";
 import { UserCredentials } from "@supabase/supabase-js";
 
+type Database = typeof supabase;
+type AuthProvider = Database["auth"];
+
+const signUp = (...args: Parameters<AuthProvider["signUp"]>) => {
+  return supabase.auth.signUp(...args);
+};
+
 const logIn = ({
   provider = "github",
   ...credentials
@@ -24,12 +31,13 @@ const getSession = () => {
 };
 
 const onStateChange = (
-  ...args: Parameters<typeof supabase.auth.onAuthStateChange>
+  ...args: Parameters<AuthProvider["onAuthStateChange"]>
 ) => {
   return supabase.auth.onAuthStateChange(...args);
 };
 
 const authApi = {
+  signUp,
   logIn,
   logOut,
   getUser,
