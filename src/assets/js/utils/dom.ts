@@ -32,10 +32,15 @@ function transformClassNames(classes: ClassNames) {
 }
 
 function handleClassesArray(classes: ClassNamesArray): ClassName[] {
-  return classes.filter((name): name is string => !!name);
+  return classes
+    .filter((name) => !!name)
+    .map((className) => {
+      return classNames(className);
+    });
 }
 
 function handleClassesObject(classes: ClassNamesObject): ClassName[] {
   const classNames = Object.keys(classes);
-  return classNames.filter((name) => classes[name]);
+  const filteredClassNames = classNames.filter((name) => classes[name]);
+  return handleClassesArray(filteredClassNames);
 }
