@@ -8,3 +8,27 @@
   flex: 1;
   flex-direction: column;
 }
+
+.sidebar {
+  flex: 1;
+  border-radius: 0;
+
+  &.is-not-authenticated {
+    .logo {
+      border-radius: 0;
+
+      &::after {
+        transform: translateX(100%);
+      }
+    }
+
+    .profile {
+      display: none;
+    }
+  }
+}
+
+.form {
+  min-width: 20vw;
+  margin: 3rem auto 0;
+}

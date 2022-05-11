@@ -24,6 +24,9 @@ $logo-padding: 3.2rem;
 
 .logo {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: $logo-padding;
   overflow: hidden;
   color: colors.$white;

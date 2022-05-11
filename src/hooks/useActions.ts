@@ -1,9 +1,25 @@
 import { useDispatch } from "react-redux";
-import { bindActionCreators } from "redux";
+import {
+  ActionCreator,
+  ActionCreatorsMapObject,
+  bindActionCreators,
+} from "redux";
+import { useMemo } from "react";
 
-import * as AuthActionCreators from "@/store/action-creators/auth";
+export function useActions<A, M extends ActionCreatorsMapObject<A>>(
+  actionCreators: M
+): M;
+export function useActions<A, M extends ActionCreator<A>>(actionCreators: M): M;
+export function useActions<
+  N extends ActionCreator<any>,
+  M extends ActionCreator<any>
+>(actionCreators: N): M;
 
-export const useActions = () => {
+export function useActions<M extends ActionCreatorsMapObject>(
+  actionCreators: M
+): M {
   const dispatch = useDispatch();
-  return bindActionCreators(AuthActionCreators, dispatch);
-};
+  return useMemo(() => {
+    return bindActionCreators(actionCreators, dispatch);
+  }, [actionCreators, dispatch]);
+}

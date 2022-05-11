@@ -1,0 +1,24 @@
+@use "styles/_colors.scss";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+  background-color: colors.$white;
+  border-radius: 20px;
+}
+
+.heading {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.input {
+  & + & {
+    margin-top: 2rem;
+  }
+}
+
+.submit {
+  margin-top: 2rem;
+}
