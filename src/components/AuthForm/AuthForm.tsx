@@ -25,6 +25,7 @@ export interface Props
   headingSlot?: BasicSlot;
   submitSlot?: BasicSlot;
   classes?: typeof baseClasses;
+  loading?: boolean;
   onSubmit: (data: FormData) => void;
 }
 
@@ -34,7 +35,8 @@ const handleInput = (
 ) => {
   return (e: SyntheticEvent<HTMLInputElement>) =>
     setter((prevData) => {
-      return { ...prevData, [name]: e.currentTarget.value };
+      const target = e.target as HTMLInputElement;
+      return { ...prevData, [name]: target.value };
     });
 };
 
@@ -44,6 +46,7 @@ export default function AuthForm({
   className,
   onSubmit,
   classes,
+  loading,
   children,
   ...props
 }: Props) {
@@ -88,7 +91,12 @@ export default function AuthForm({
         wrapperClassName={styles.input}
       />
 
-      <Button type="submit" size={Size.MEDIUM} className={styles.submit}>
+      <Button
+        type="submit"
+        size={Size.MEDIUM}
+        className={styles.submit}
+        loading={loading}
+      >
         {renderSlot(submitSlot)}
       </Button>
 
