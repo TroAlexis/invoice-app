@@ -9,25 +9,39 @@
   flex-direction: column;
 }
 
+$transition-delay: 250ms;
+$sidebar-width-transition-timing: 500ms;
+$logo-after-transition-timing: 500ms;
+
 .sidebar {
+  flex-grow: 0.0001;
+  transition: flex-grow $sidebar-width-transition-timing ease;
+  transition-delay: $transition-delay;
+
+  .logo {
+    &::after {
+      transform: translateX(0%);
+      transition: transform $logo-after-transition-timing ease-out;
+    }
+  }
+
+  .navigation {
+    justify-content: center;
+  }
+
   &.is-not-authenticated {
     flex: 1;
     border-radius: 0;
-
-    .navigation {
-      justify-content: center;
-    }
+    transition-delay: -100ms;
 
     .logo {
       border-radius: 0;
 
       &::after {
         transform: translateX(100%);
+        transition-delay: $sidebar-width-transition-timing * 0.5;
+        transition-duration: $logo-after-transition-timing;
       }
-    }
-
-    .profile {
-      display: none;
     }
   }
 }

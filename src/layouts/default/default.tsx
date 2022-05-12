@@ -8,19 +8,33 @@ import WelcomeForm from "components/WelcomeForm/WelcomeForm";
 import { Path } from "constants/route";
 import { CSSTransition } from "react-transition-group";
 import AnimatedRoutes from "components/AnimatedRoutes/AnimatedRoutes";
+import { useEventSelf } from "@/hooks/useEventSelf";
 
 export default function Default() {
+  const { ref, withEventSelf } = useEventSelf();
   const { session } = useTypedSelector((state) => state.auth);
-  const isAuthenticated = Boolean(session);
+  const hasSession = Boolean(session);
 
-  const sidebarClasses = getSideBarClasses(isAuthenticated);
+  const [transitioned, setTransitioned] = useState<boolean>(hasSession);
 
-  const [isLoggedIn] = useState(false);
+  const isAuthenticated = hasSession && transitioned;
+  const isFormVisible = !hasSession && !transitioned;
+
+  const onTransitionEnd = withEventSelf(() => {
+    setTransitioned(hasSession);
+  });
+
+  const sidebarClasses = getSideBarClasses(hasSession);
 
   return (
     <div className={styles.layout}>
-      <TheSidebar {...sidebarClasses}>
-        {!isAuthenticated && <AuthenticationRoutes visible={!isLoggedIn} />}
+      <TheSidebar
+        ref={ref}
+        {...sidebarClasses}
+        onTransitionEnd={onTransitionEnd}
+        isAuthenticated={isAuthenticated}
+      >
+        {!isAuthenticated && <AuthenticationRoutes visible={isFormVisible} />}
       </TheSidebar>
 
       {isAuthenticated && (
@@ -33,20 +47,15 @@ export default function Default() {
 }
 
 function getSideBarClasses(isAuthenticated: boolean): Partial<Classes> {
-  if (isAuthenticated) {
-    return {};
-  }
-
   const className = classNames([
     styles.sidebar,
-    styles["is-not-authenticated"],
+    !isAuthenticated && styles["is-not-authenticated"],
   ]);
 
   return {
     className,
     logoClassName: styles.logo,
     navigationClassName: styles.navigation,
-    profileClassName: styles.profile,
   };
 }
 
