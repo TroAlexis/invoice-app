@@ -2,8 +2,14 @@ import styles from "./TheSidebar.module.scss";
 import iconStyles from "components/ui/Icon/Icon.module.scss";
 import Icon from "components/ui/Icon/Icon";
 import { Size } from "constants/size";
-import { ComponentPropsWithoutRef } from "react";
+import {
+  ComponentPropsWithoutRef,
+  ComponentPropsWithRef,
+  forwardRef,
+} from "react";
 import { classNames } from "utils/classnames";
+import authApi from "@/api/auth";
+import { CSSTransition } from "react-transition-group";
 
 export interface Classes {
   className?: string;
@@ -13,31 +19,48 @@ export interface Classes {
 }
 
 interface Props
-  extends ComponentPropsWithoutRef<"nav">,
-    Omit<Classes, "className"> {}
-
-export default function TheSidebar({ children, ...props }: Props) {
-  const {
-    className,
-    profileClassName,
-    logoClassName,
-    navigationClassName,
-    ...attrs
-  } = props;
-  const classes = getClasses(props);
-
-  return (
-    <nav className={classes.className} {...attrs}>
-      <Logo className={classes.logoClassName} />
-      <div className={classes.navigationClassName}>
-        {children || <Navigation />}
-      </div>
-      <div className={classes.profileClassName}>
-        <Profile />
-      </div>
-    </nav>
-  );
+  extends ComponentPropsWithRef<"nav">,
+    Omit<Classes, "className"> {
+  isAuthenticated?: boolean;
 }
+
+const TheSidebar = forwardRef<HTMLElement, Props>(
+  ({ children, ...props }, ref) => {
+    const {
+      className,
+      profileClassName,
+      logoClassName,
+      navigationClassName,
+      isAuthenticated,
+      ...attrs
+    } = props;
+    const classes = getClasses(props);
+
+    return (
+      <nav
+        className={classes.className}
+        ref={ref}
+        onClick={authApi.logOut}
+        {...attrs}
+      >
+        <Logo className={classes.logoClassName} />
+        <div className={classes.navigationClassName}>
+          {children || <Navigation />}
+        </div>
+        <CSSTransition
+          timeout={200}
+          classNames="fade"
+          in={isAuthenticated}
+          unmountOnExit
+        >
+          <div className={classes.profileClassName}>
+            <Profile />
+          </div>
+        </CSSTransition>
+      </nav>
+    );
+  }
+);
 
 function getClasses(props: Partial<Props>): Classes {
   const className = classNames([styles.sidebar, props.className]);
@@ -82,3 +105,5 @@ function Profile() {
     </figure>
   );
 }
+
+export default TheSidebar;
