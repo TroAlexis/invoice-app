@@ -1,23 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./default.module.scss";
 import TheSidebar, { Classes } from "components/TheSidebar/TheSidebar";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet, Route } from "react-router-dom";
 import { useTypedSelector } from "@/hooks/useTypedStore";
-import { AuthState } from "@/store/types/auth";
-import LoginForm from "components/LoginForm/LoginForm";
 import { classNames } from "utils/classnames";
+import WelcomeForm from "components/WelcomeForm/WelcomeForm";
+import { Path } from "constants/route";
+import { CSSTransition } from "react-transition-group";
+import AnimatedRoutes from "components/AnimatedRoutes/AnimatedRoutes";
 
 export default function Default() {
   const { session } = useTypedSelector((state) => state.auth);
-  const sidebarClasses = getSideBarClasses(session);
+  const isAuthenticated = Boolean(session);
+
+  const sidebarClasses = getSideBarClasses(isAuthenticated);
+
+  const [isLoggedIn] = useState(false);
 
   return (
     <div className={styles.layout}>
       <TheSidebar {...sidebarClasses}>
-        {!session && <LoginForm className={styles.form} />}
+        {!isAuthenticated && <AuthenticationRoutes visible={!isLoggedIn} />}
       </TheSidebar>
 
-      {session && (
+      {isAuthenticated && (
         <main className={styles.main}>
           <Outlet />
         </main>
@@ -26,8 +32,8 @@ export default function Default() {
   );
 }
 
-function getSideBarClasses(session: AuthState["session"]): Partial<Classes> {
-  if (session) {
+function getSideBarClasses(isAuthenticated: boolean): Partial<Classes> {
+  if (isAuthenticated) {
     return {};
   }
 
@@ -39,6 +45,28 @@ function getSideBarClasses(session: AuthState["session"]): Partial<Classes> {
   return {
     className,
     logoClassName: styles.logo,
+    navigationClassName: styles.navigation,
     profileClassName: styles.profile,
   };
+}
+
+function AuthenticationRoutes({ visible }: { visible: boolean }) {
+  return (
+    <CSSTransition in={visible} classNames="fade" timeout={200} unmountOnExit>
+      <AnimatedRoutes
+        switchProps={{ mode: "out-in" }}
+        transitionProps={{ classNames: "fade", timeout: 200 }}
+      >
+        {[Path.LOGIN, Path.SIGNUP].map((path) => (
+          <Route
+            path={path}
+            key={path}
+            element={<WelcomeForm className={styles.form} form={path} />}
+          />
+        ))}
+
+        <Route path="*" element={<Navigate to={`/${Path.LOGIN}`} replace />} />
+      </AnimatedRoutes>
+    </CSSTransition>
+  );
 }

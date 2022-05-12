@@ -1,29 +1,14 @@
-import styles from "./LoginForm.module.scss";
-import { ComponentPropsWithoutRef } from "react";
-import Heading from "components/ui/Heading/Heading";
-import Input from "components/ui/Input/Input";
-import Button from "components/ui/Button/Button";
-import { Size } from "constants/size";
-import { classNames } from "utils/classnames";
+import AuthForm, { Props } from "components/AuthForm/AuthForm";
 
-interface Props extends ComponentPropsWithoutRef<"form"> {}
-
-export default function LoginForm(props: Props) {
-  const className = classNames([props.className, styles.form]);
+export default function LoginForm(props: Partial<Props>) {
+  const handleSubmit = () => {};
 
   return (
-    <form className={className}>
-      <Heading level="h1" className={styles.heading}>
-        Login to your account
-      </Heading>
-
-      <Input label="Email" name="email" wrapperClassName={styles.input} />
-
-      <Input label="Password" name="password" wrapperClassName={styles.input} />
-
-      <Button type="submit" size={Size.MEDIUM} className={styles.submit}>
-        Login
-      </Button>
-    </form>
+    <AuthForm
+      onSubmit={handleSubmit}
+      headingSlot="Login to your account"
+      submitSlot="Login"
+      {...props}
+    />
   );
 }

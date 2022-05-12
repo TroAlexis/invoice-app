@@ -10,10 +10,14 @@
 }
 
 .sidebar {
-  flex: 1;
-  border-radius: 0;
-
   &.is-not-authenticated {
+    flex: 1;
+    border-radius: 0;
+
+    .navigation {
+      justify-content: center;
+    }
+
     .logo {
       border-radius: 0;
 
@@ -30,5 +34,5 @@
 
 .form {
   min-width: 20vw;
-  margin: 3rem auto 0;
+  margin: 3rem auto;
 }
