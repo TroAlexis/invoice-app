@@ -1,0 +1,33 @@
+@use "sass:list";
+
+@mixin transition-property($property, $value) {
+  #{$property}: $value;
+}
+
+@mixin transition-timing($property, $timing) {
+  transition: $property $timing;
+}
+
+@mixin simple-transition($name, $property, $from, $to, $timing) {
+  .#{$name}-enter,
+  .#{$name}-appear {
+    @include transition-property($property, $from);
+  }
+
+  .#{$name}-enter-active,
+  .#{$name}-appear-active {
+    @include transition-property($property, $to);
+    @include transition-timing($property, $timing);
+  }
+
+  .#{$name}-exit {
+    @include transition-property($property, $to);
+  }
+
+  .#{$name}-exit-active {
+    @include transition-property($property, $from);
+    @include transition-timing($property, $timing);
+  }
+}
+
+@include simple-transition("fade", opacity, 0, 1, 200ms);
