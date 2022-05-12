@@ -13,12 +13,11 @@ import "@/svgSprite";
 
 // Init auth ------
 const boundSetSession = bindActionCreators(setSession, store.dispatch);
-const userSession = authApi.getSession();
 
-setSession(userSession);
+authApi.onStateChange(async (event, session) => {
+  const { user } = await authApi.refreshSession();
 
-authApi.onStateChange((event, session) => {
-  boundSetSession(session);
+  boundSetSession(user && session);
 });
 // Init auth ------
 

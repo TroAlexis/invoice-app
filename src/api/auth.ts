@@ -30,6 +30,10 @@ const getSession = () => {
   return supabase.auth.session();
 };
 
+const refreshSession = () => {
+  return supabase.auth.refreshSession();
+};
+
 const onStateChange = (
   ...args: Parameters<AuthProvider["onAuthStateChange"]>
 ) => {
@@ -42,6 +46,7 @@ const authApi = {
   logOut,
   getUser,
   getSession,
+  refreshSession,
   onStateChange,
 };
 
