@@ -3,7 +3,6 @@ import { Reducer } from "redux";
 
 export const defaultState: AuthState = {
   session: null,
-  authenticated: false,
   loading: false,
   error: null,
 };
@@ -19,14 +18,12 @@ const authReducer: Reducer<AuthState, AuthAction> = (
       return {
         session: action.session,
         loading: false,
-        authenticated: true,
         error: null,
       };
     case AuthActionType.LOGIN_ERROR:
       return {
         session: null,
         loading: false,
-        authenticated: false,
         error: action.error,
       };
     case AuthActionType.LOGOUT:

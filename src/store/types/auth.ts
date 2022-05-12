@@ -2,7 +2,6 @@ import { ApiError, Session } from "@supabase/supabase-js";
 import { Action } from "redux";
 
 export interface AuthState {
-  authenticated: boolean;
   loading: boolean;
   error: unknown;
   session: Session | null;
