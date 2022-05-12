@@ -15,9 +15,7 @@ import "@/svgSprite";
 const boundSetSession = bindActionCreators(setSession, store.dispatch);
 
 authApi.onStateChange(async (event, session) => {
-  const { user } = await authApi.refreshSession();
-
-  boundSetSession(user && session);
+  boundSetSession(session);
 });
 // Init auth ------
 
