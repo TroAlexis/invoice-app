@@ -39,7 +39,6 @@ $logo-after-transition-timing: 500ms;
 
       &::after {
         transform: translateX(100%);
-        transition-delay: $sidebar-width-transition-timing * 0.5;
         transition-duration: $logo-after-transition-timing;
       }
     }
