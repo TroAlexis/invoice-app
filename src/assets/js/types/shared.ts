@@ -3,6 +3,7 @@ import { Dispatch, Ref, SetStateAction } from "react";
 export type ValueOf<T> = T[keyof T];
 export type Falsy = false | 0 | "" | null | undefined;
 
+export type Callback = (...args: any[]) => any;
 export type UseStateSetter<T> = Dispatch<SetStateAction<T>>;
 
 export type ClassName = string | Falsy;

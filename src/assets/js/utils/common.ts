@@ -1,4 +1,4 @@
-type Callback = (...args: any[]) => any;
+import { Callback } from "types/shared";
 
 export function logger(...args: any[]) {
   console.log("Arguments: ", ...args);
