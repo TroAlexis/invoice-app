@@ -5,11 +5,13 @@ import React, { ComponentPropsWithoutRef } from "react";
 import { SlotProps } from "types/shared";
 import { Size } from "constants/size";
 import { classNames } from "utils/classnames";
+import Loader from "components/ui/Loader/Loader";
 
 interface Props extends ComponentPropsWithoutRef<"button"> {
   color?: Color.VIOLET | Color.RED | Color.BLACK | Color.SECONDARY;
   fluid?: boolean;
   size?: Size.REGULAR | Size.MEDIUM;
+  loading?: boolean;
   icon?: (props: SlotProps) => React.ReactNode;
 }
 
@@ -19,6 +21,7 @@ export default function Button({
   icon,
   size = Size.REGULAR,
   children,
+  loading,
   className,
   ...attrs
 }: Props) {
@@ -35,9 +38,15 @@ export default function Button({
 
   return (
     <button className={classes} {...attrs}>
-      {icon?.({ classes: styles.icon })}
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          {icon?.({ classes: styles.icon })}
 
-      {children}
+          {children}
+        </>
+      )}
     </button>
   );
 }
