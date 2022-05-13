@@ -9,10 +9,14 @@ import { Path } from "constants/route";
 import { CSSTransition } from "react-transition-group";
 import AnimatedRoutes from "components/AnimatedRoutes/AnimatedRoutes";
 import { useEventSelf } from "@/hooks/useEventSelf";
+import { RootState } from "@/store/reducers";
+import { shallowEqual } from "react-redux";
+
+const authSelector = ({ auth }: RootState) => auth;
 
 export default function Default() {
   const { ref, withEventSelf } = useEventSelf();
-  const { session } = useTypedSelector((state) => state.auth);
+  const { session } = useTypedSelector(authSelector, shallowEqual);
   const hasSession = Boolean(session);
 
   const [transitioned, setTransitioned] = useState<boolean>(hasSession);
@@ -37,11 +41,7 @@ export default function Default() {
         {!isAuthenticated && <AuthenticationRoutes visible={isFormVisible} />}
       </TheSidebar>
 
-      {isAuthenticated && (
-        <main className={styles.main}>
-          <Outlet />
-        </main>
-      )}
+      <Main visible={isAuthenticated} />
     </div>
   );
 }
@@ -59,9 +59,19 @@ function getSideBarClasses(isAuthenticated: boolean): Partial<Classes> {
   };
 }
 
-function AuthenticationRoutes({ visible }: { visible: boolean }) {
+interface Transitionable {
+  visible: boolean;
+}
+
+function AuthenticationRoutes({ visible }: Transitionable) {
   return (
-    <CSSTransition in={visible} classNames="fade" timeout={200} unmountOnExit>
+    <CSSTransition
+      in={visible}
+      classNames="fade"
+      timeout={200}
+      unmountOnExit
+      mountOnEnter
+    >
       <AnimatedRoutes
         switchProps={{ mode: "out-in" }}
         transitionProps={{ classNames: "fade", timeout: 200 }}
@@ -76,6 +86,25 @@ function AuthenticationRoutes({ visible }: { visible: boolean }) {
 
         <Route path="*" element={<Navigate to={`/${Path.LOGIN}`} replace />} />
       </AnimatedRoutes>
+    </CSSTransition>
+  );
+}
+
+function Main({ visible }: Transitionable) {
+  return (
+    <CSSTransition
+      timeout={{
+        enter: 200,
+        exit: 0,
+      }}
+      in={visible}
+      classNames="fade"
+      mountOnEnter
+      unmountOnExit
+    >
+      <main className={styles.main}>
+        <Outlet />
+      </main>
     </CSSTransition>
   );
 }
