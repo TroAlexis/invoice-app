@@ -1,16 +1,19 @@
-import React, { useState } from "react";
-import styles from "./default.module.scss";
-import TheSidebar, { Classes } from "components/TheSidebar/TheSidebar";
-import { Navigate, Outlet, Route } from "react-router-dom";
-import { useTypedSelector } from "@/hooks/useTypedStore";
-import { classNames } from "utils/classnames";
-import WelcomeForm from "components/WelcomeForm/WelcomeForm";
-import { Path } from "constants/route";
-import { CSSTransition } from "react-transition-group";
-import AnimatedRoutes from "components/AnimatedRoutes/AnimatedRoutes";
 import { useEventSelf } from "@/hooks/useEventSelf";
+import { useTypedSelector } from "@/hooks/useTypedStore";
 import { RootState } from "@/store/reducers";
+import AnimatedRoutes from "components/AnimatedRoutes/AnimatedRoutes";
+import TheSidebar, { Classes } from "components/TheSidebar/TheSidebar";
+import WelcomeForm from "components/WelcomeForm/WelcomeForm";
+
+import { Path } from "constants/route";
+
+import React, { useState } from "react";
 import { shallowEqual } from "react-redux";
+import { Navigate, Outlet, Route } from "react-router-dom";
+import { CSSTransition } from "react-transition-group";
+
+import { classNames } from "utils/classnames";
+import styles from "./default.module.scss";
 
 const authSelector = ({ auth }: RootState) => auth;
 
