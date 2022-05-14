@@ -1,7 +1,7 @@
 import { Size } from "constants/size";
-import styles from "./Heading.module.scss";
 import React, { ComponentPropsWithoutRef, ElementType } from "react";
 import { classNames } from "utils/classnames";
+import styles from "./Heading.module.scss";
 
 const Headings = {
   h1: "h1",
@@ -9,7 +9,7 @@ const Headings = {
   h3: "h3",
 } as const;
 
-interface Props extends ComponentPropsWithoutRef<"p"> {
+export interface Props extends ComponentPropsWithoutRef<"p"> {
   element?: ElementType;
   level: keyof typeof Headings;
   size?: Size.SMALL;
