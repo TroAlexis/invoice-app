@@ -1,33 +1,106 @@
 @use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+
+@function get-prop($property) {
+  @return list.nth($property, 1);
+}
+
+@function get-value($property) {
+  @return list.nth($property, 2);
+}
 
 @mixin transition-property($property, $value) {
   #{$property}: $value;
 }
 
-@mixin transition-timing($property, $timing) {
-  transition: $property $timing;
+@mixin transition-properties($properties) {
+  @each $property, $config in $properties {
+    $value: map.get($config, "value");
+
+    @include transition-property($property, $value);
+  }
 }
 
-@mixin simple-transition($name, $property, $from, $to, $timing) {
+@mixin transition-timing($properties) {
+  $timings: ();
+
+  @each $property, $config in $properties {
+    $value: map.get($config, "value");
+    $timing: map.get($config, "timing");
+    $timings: list.join($timings, (#{$property $timing}), $separator: comma);
+  }
+
+  transition: $timings;
+}
+
+@mixin simple-transition($name, $config) {
+  $from: map.get($config, "from");
+  $to: map.get($config, "to");
+
   .#{$name}-enter,
   .#{$name}-appear {
-    @include transition-property($property, $from);
+    @include transition-properties($from);
   }
 
   .#{$name}-enter-active,
   .#{$name}-appear-active {
-    @include transition-property($property, $to);
-    @include transition-timing($property, $timing);
+    @include transition-properties($to);
+    @include transition-timing($to);
   }
 
   .#{$name}-exit {
-    @include transition-property($property, $to);
+    @include transition-properties($to);
   }
 
   .#{$name}-exit-active {
-    @include transition-property($property, $from);
-    @include transition-timing($property, $timing);
+    @include transition-properties($from);
+    @include transition-timing($from);
   }
 }
 
-@include simple-transition("fade", opacity, 0, 1, 200ms);
+// Fade
+@include simple-transition(
+  "fade",
+  (
+    from: (
+      opacity: (
+        value: 0,
+        timing: 200ms,
+      ),
+    ),
+    to: (
+      opacity: (
+        value: 1,
+        timing: 200ms,
+      ),
+    ),
+  )
+);
+
+$fade-in-left-timing: 600ms cubic-bezier(0.39, 0.09, 0, 1.35);
+@include simple-transition(
+  "fade-in-left",
+  (
+    from: (
+      opacity: (
+        value: 0,
+        timing: $fade-in-left-timing,
+      ),
+      transform: (
+        value: translate3d(-100%, 0, 0),
+        timing: $fade-in-left-timing,
+      ),
+    ),
+    to: (
+      opacity: (
+        value: 1,
+        timing: $fade-in-left-timing,
+      ),
+      transform: (
+        value: translate3d(0, 0, 0),
+        timing: $fade-in-left-timing,
+      ),
+    ),
+  )
+);
