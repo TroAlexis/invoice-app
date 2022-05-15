@@ -1,14 +1,15 @@
-import styles from "./Button.module.scss";
+import Loader from "components/ui/Loader/Loader";
 
 import { Color } from "constants/color";
+import { Size } from "constants/size";
 import React, { ComponentPropsWithoutRef } from "react";
 import { SlotProps } from "types/shared";
-import { Size } from "constants/size";
 import { classNames } from "utils/classnames";
-import Loader from "components/ui/Loader/Loader";
+import styles from "./Button.module.scss";
 
 interface Props extends ComponentPropsWithoutRef<"button"> {
   color?: Color.VIOLET | Color.RED | Color.BLACK | Color.SECONDARY;
+  outline?: boolean;
   fluid?: boolean;
   size?: Size.REGULAR | Size.MEDIUM;
   loading?: boolean;
@@ -20,6 +21,7 @@ export default function Button({
   fluid,
   icon,
   size = Size.REGULAR,
+  outline,
   children,
   loading,
   className,
@@ -32,6 +34,7 @@ export default function Button({
     {
       [styles["is-fluid"]]: fluid,
       [styles[`is-${color}`]]: !!color,
+      [styles["is-outline"]]: !!outline,
       [styles["has-icon"]]: !!icon,
     },
   ]);

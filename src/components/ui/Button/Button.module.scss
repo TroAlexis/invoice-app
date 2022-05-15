@@ -31,6 +31,10 @@
     &:hover {
       opacity: 0.9;
     }
+
+    &.is-outline {
+      color: colors.$violet-400;
+    }
   }
 
   &.is-secondary {
@@ -59,6 +63,14 @@
     &:hover {
       background-color: colors.$red-200;
     }
+  }
+
+  &.is-outline {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    appearance: none;
   }
 
   &.is-fluid {
