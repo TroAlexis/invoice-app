@@ -1,24 +1,34 @@
-import baseClasses from "./AuthForm.module.scss";
+import AuthFormInfo, {
+  Props as AuthInfoProps,
+} from "components/AuthFormInfo/AuthFormInfo";
+import Button from "components/ui/Button/Button";
+import Heading from "components/ui/Heading/Heading";
+import Input from "components/ui/Input/Input";
+import { Size } from "constants/size";
+import { State } from "constants/state";
 import {
   ComponentPropsWithoutRef,
   FormEvent,
   SyntheticEvent,
   useState,
 } from "react";
-import Heading from "components/ui/Heading/Heading";
-import Input from "components/ui/Input/Input";
-import Button from "components/ui/Button/Button";
-import { Size } from "constants/size";
+import { CSSTransition } from "react-transition-group";
+import { CSSTransitionProps } from "react-transition-group/CSSTransition";
+import stateStyles from "styles/utils/states.module.scss";
 import { BasicSlot, UseStateSetter } from "types/shared";
 import { classNames } from "utils/classnames";
+import { mergeCssModules } from "utils/css-modules";
 import { renderSlot } from "utils/dom";
 import { withEventPrevent } from "utils/events";
-import { mergeCssModules } from "utils/css-modules";
+import baseClasses from "./AuthForm.module.scss";
 
 interface FormData {
   email: string;
   password: string;
 }
+
+type InfoState = State.SUCCESS | State.ERROR;
+type InfoProps = AuthInfoProps & { type: InfoState };
 
 export interface Props
   extends Omit<ComponentPropsWithoutRef<"form">, "onSubmit"> {
@@ -26,6 +36,7 @@ export interface Props
   submitSlot?: BasicSlot;
   classes?: typeof baseClasses;
   loading?: boolean;
+  info?: InfoProps;
   onSubmit: (data: FormData) => void;
 }
 
@@ -48,10 +59,18 @@ export default function AuthForm({
   classes,
   loading,
   children,
+  info,
   ...props
 }: Props) {
   const styles = mergeCssModules(baseClasses, classes);
-  const formClasses = classNames([className, styles.form]);
+
+  const hasInfo = !!info;
+
+  const formClasses = classNames([
+    className,
+    styles.form,
+    hasInfo && styles.opaque,
+  ]);
 
   const [data, setData] = useState<FormData>({
     email: "",
@@ -101,6 +120,42 @@ export default function AuthForm({
       </Button>
 
       {children}
+
+      {hasInfo && <Info {...info} />}
     </form>
+  );
+}
+
+function Info({ type, ...props }: InfoProps) {
+  const { heading, icon, description, ...rest } = props;
+
+  const typeClassName = stateStyles[type];
+
+  return (
+    <InfoTransition>
+      <AuthFormInfo
+        className={baseClasses.info}
+        heading={{ ...heading, className: typeClassName }}
+        icon={{ ...icon, className: typeClassName }}
+        description={description}
+        {...rest}
+      />
+    </InfoTransition>
+  );
+}
+
+function InfoTransition({
+  children,
+}: Pick<CSSTransitionProps, "in" | "children">) {
+  return (
+    <CSSTransition
+      in
+      appear
+      timeout={600}
+      classNames="fade-in-left"
+      unmountOnExit
+    >
+      {children}
+    </CSSTransition>
   );
 }
