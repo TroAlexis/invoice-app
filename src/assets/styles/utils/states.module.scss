@@ -1,0 +1,9 @@
+@use "styles/_colors.scss";
+
+.success {
+  color: colors.$green-400;
+}
+
+.error {
+  color: colors.$red-400;
+}
