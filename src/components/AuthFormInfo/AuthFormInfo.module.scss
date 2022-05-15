@@ -1,0 +1,19 @@
+@use "styles/_colors.scss";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  background-color: colors.$white;
+}
+
+.icon {
+  align-self: center;
+  width: 8rem;
+  height: 8rem;
+}
+
+.heading {
+  margin-bottom: 1rem;
+}
