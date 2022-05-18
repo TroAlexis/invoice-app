@@ -1,20 +1,29 @@
-import React from "react";
+import React, { ComponentType } from "react";
 
 export const getDisplayName = <T>(
   component: React.ComponentType<T>,
-  hocPrefix: string
+  defaultName: string = "Component"
 ) => {
-  const displayName = component.displayName || component.name || "Component";
-
-  return `${hocPrefix}${displayName}`;
+  return component.displayName || component.name || defaultName;
 };
 
 export const withDisplayName = <T>(
+  component: ComponentType<T>,
+  name: string
+) => {
+  component.displayName = name;
+
+  return component;
+};
+
+export const withWrappeeDisplayName = <T>(
   wrapper: React.ComponentType<T>,
   wrappee: React.ComponentType<T>,
   prefix: string
 ) => {
-  wrapper.displayName = getDisplayName(wrappee, prefix);
+  const displayName = `${prefix}${getDisplayName(wrappee)}`;
+
+  withDisplayName(wrapper, displayName);
 
   return wrapper;
 };

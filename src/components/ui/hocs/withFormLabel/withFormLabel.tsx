@@ -1,8 +1,8 @@
-import styles from "./withFormLabel.module.scss";
-import { SlotProps, WithForwardedRef } from "types/shared";
 import React, { forwardRef } from "react";
-import { withDisplayName } from "utils/hoc";
+import { SlotProps, WithForwardedRef } from "types/shared";
 import { classNames } from "utils/classnames";
+import { withWrappeeDisplayName } from "utils/hoc";
+import styles from "./withFormLabel.module.scss";
 
 export interface WithFormLabelProps {
   label?: string | ((props: SlotProps) => JSX.Element);
@@ -46,7 +46,7 @@ export default function withFormLabel<Props extends WithFormLabelProps>(
   const ComponentWithFormLabel =
     getWithFormLabelComponent<Props>(WrappedComponent);
 
-  const Component = withDisplayName<Props>(
+  const Component = withWrappeeDisplayName<Props>(
     ComponentWithFormLabel,
     WrappedComponent,
     "withFormLabel"
