@@ -41,18 +41,25 @@ function getLabelElement(label: WithFormLabelProps["label"]) {
 }
 
 export default function withFormLabel<Props extends WithFormLabelProps>(
-  WrappedComponent: React.ComponentType<Props>
+  ComponentToWrap: React.ComponentType<Props>
 ) {
   const ComponentWithFormLabel =
-    getWithFormLabelComponent<Props>(WrappedComponent);
+    getWithFormLabelComponent<Props>(ComponentToWrap);
 
-  const Component = withWrappeeDisplayName<Props>(
+  const WrappedComponent = withWrappeeDisplayName<Props>(
     ComponentWithFormLabel,
-    WrappedComponent,
+    ComponentToWrap,
     "withFormLabel"
   );
 
-  return forwardRef<HTMLElement, Props>((props, ref) => {
-    return <Component {...props} fRef={ref} />;
-  });
+  const WrappedComponentWithForwardedRef = forwardRef<HTMLElement, Props>(
+    (props, ref) => {
+      return <WrappedComponent {...props} fRef={ref} />;
+    }
+  );
+
+  return withWrappeeDisplayName(
+    WrappedComponentWithForwardedRef,
+    WrappedComponent
+  );
 }
