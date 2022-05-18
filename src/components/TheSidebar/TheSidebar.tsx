@@ -1,15 +1,16 @@
-import styles from "./TheSidebar.module.scss";
-import iconStyles from "components/ui/Icon/Icon.module.scss";
+import authApi from "@/api/auth";
 import Icon from "components/ui/Icon/Icon";
+import iconStyles from "components/ui/Icon/Icon.module.scss";
 import { Size } from "constants/size";
 import {
   ComponentPropsWithoutRef,
   ComponentPropsWithRef,
   forwardRef,
 } from "react";
-import { classNames } from "utils/classnames";
-import authApi from "@/api/auth";
 import { CSSTransition } from "react-transition-group";
+import { classNames } from "utils/classnames";
+import { withDisplayName } from "utils/hoc";
+import styles from "./TheSidebar.module.scss";
 
 export interface Classes {
   className?: string;
@@ -106,4 +107,4 @@ function Profile() {
   );
 }
 
-export default TheSidebar;
+export default withDisplayName(TheSidebar, "TheSidebar");
