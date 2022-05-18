@@ -1,11 +1,12 @@
-import React, { forwardRef, HTMLInputTypeAttribute } from "react";
-import styles from "./Input.module.scss";
-import { Size } from "constants/size";
 import withFormLabel, {
   WithFormLabelProps,
 } from "components/ui/hocs/withFormLabel/withFormLabel";
+import { Size } from "constants/size";
+import React, { forwardRef, HTMLInputTypeAttribute } from "react";
 import { RenderSlotProps, RenderSlotWithProps } from "types/shared";
 import { classNames } from "utils/classnames";
+import { withDisplayName } from "utils/hoc";
+import styles from "./Input.module.scss";
 
 type InputProps = Omit<React.ComponentPropsWithRef<"input">, "size">;
 
@@ -18,34 +19,42 @@ interface ComponentProps {
 
 interface Props extends ComponentProps, InputProps, WithFormLabelProps {}
 
-export const InputBase = forwardRef<HTMLInputElement, Props>(
-  (
-    {
-      size = Size.SMALL,
-      type = "text",
-      className,
-      inputClassName,
-      icon,
-      ...inputProps
-    },
-    ref
-  ) => {
-    const wrapperClasses = classNames([className, styles.wrapper]);
-    const inputClasses = classNames([
-      inputClassName,
-      styles.input,
-      size && styles[size],
-      icon && styles["has-icon"],
-    ]);
+export const InputBase = withDisplayName(
+  forwardRef<HTMLInputElement, Props>(
+    (
+      {
+        size = Size.SMALL,
+        type = "text",
+        className,
+        inputClassName,
+        icon,
+        ...inputProps
+      },
+      ref
+    ) => {
+      const wrapperClasses = classNames([className, styles.wrapper]);
+      const inputClasses = classNames([
+        inputClassName,
+        styles.input,
+        size && styles[size],
+        icon && styles["has-icon"],
+      ]);
 
-    return (
-      <div className={wrapperClasses}>
-        <input type={type} className={inputClasses} ref={ref} {...inputProps} />
+      return (
+        <div className={wrapperClasses}>
+          <input
+            type={type}
+            className={inputClasses}
+            ref={ref}
+            {...inputProps}
+          />
 
-        {renderInputIcon(icon, { size })}
-      </div>
-    );
-  }
+          {renderInputIcon(icon, { size })}
+        </div>
+      );
+    }
+  ),
+  "InputBase"
 );
 
 function renderInputIcon<P extends ComponentProps>(
