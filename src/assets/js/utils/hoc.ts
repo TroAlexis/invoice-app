@@ -16,10 +16,10 @@ export const withDisplayName = <T>(
   return component;
 };
 
-export const withWrappeeDisplayName = <T>(
+export const withWrappeeDisplayName = <T, W = T>(
   wrapper: React.ComponentType<T>,
-  wrappee: React.ComponentType<T>,
-  prefix: string
+  wrappee: React.ComponentType<W>,
+  prefix: string = ""
 ) => {
   const displayName = `${prefix}${getDisplayName(wrappee)}`;
 
