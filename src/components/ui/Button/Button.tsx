@@ -40,7 +40,7 @@ export default function Button({
   ]);
 
   return (
-    <button className={classes} {...attrs}>
+    <button className={classes} type="button" {...attrs}>
       {loading ? (
         <Loader />
       ) : (
