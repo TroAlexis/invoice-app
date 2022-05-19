@@ -3,6 +3,7 @@ import AuthFormInfo, {
 } from "components/AuthFormInfo/AuthFormInfo";
 import Button from "components/ui/Button/Button";
 import Heading from "components/ui/Heading/Heading";
+import withTransition from "components/ui/hocs/withTransition/withTransition";
 import Input from "components/ui/Input/Input";
 import { Size } from "constants/size";
 import { State } from "constants/state";
@@ -12,8 +13,6 @@ import {
   SyntheticEvent,
   useState,
 } from "react";
-import { CSSTransition } from "react-transition-group";
-import { CSSTransitionProps } from "react-transition-group/CSSTransition";
 import stateStyles from "styles/utils/states.module.scss";
 import { BasicSlot, UseStateSetter } from "types/shared";
 import { classNames } from "utils/classnames";
@@ -50,6 +49,19 @@ const handleInput = (
       return { ...prevData, [name]: target.value };
     });
 };
+
+const InfoComponent = withTransition(
+  Info,
+  {
+    component: null,
+  },
+  {
+    timeout: 600,
+    appear: true,
+    unmountOnExit: true,
+    classNames: "fade-in-left",
+  }
+);
 
 export default function AuthForm({
   headingSlot,
@@ -121,7 +133,7 @@ export default function AuthForm({
 
       {children}
 
-      {hasInfo && <Info {...info} />}
+      <InfoComponent props={info} />
     </form>
   );
 }
@@ -132,30 +144,12 @@ function Info({ type, ...props }: InfoProps) {
   const typeClassName = stateStyles[type];
 
   return (
-    <InfoTransition>
-      <AuthFormInfo
-        className={baseClasses.info}
-        heading={{ ...heading, className: typeClassName }}
-        icon={{ ...icon, className: typeClassName }}
-        description={description}
-        {...rest}
-      />
-    </InfoTransition>
-  );
-}
-
-function InfoTransition({
-  children,
-}: Pick<CSSTransitionProps, "in" | "children">) {
-  return (
-    <CSSTransition
-      in
-      appear
-      timeout={600}
-      classNames="fade-in-left"
-      unmountOnExit
-    >
-      {children}
-    </CSSTransition>
+    <AuthFormInfo
+      className={baseClasses.info}
+      heading={{ ...heading, className: typeClassName }}
+      icon={{ ...icon, className: typeClassName }}
+      description={description}
+      {...rest}
+    />
   );
 }
