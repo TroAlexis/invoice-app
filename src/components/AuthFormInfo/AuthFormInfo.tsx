@@ -1,3 +1,4 @@
+import Button from "components/ui/Button/Button";
 import Heading, { Props as HeadingProps } from "components/ui/Heading/Heading";
 import Icon, { Props as IconProps } from "components/ui/Icon/Icon";
 import Text from "components/ui/Text/Text";
@@ -11,6 +12,7 @@ export interface Props extends ComponentPropsWithoutRef<"div"> {
   heading: Omit<HeadingProps, "level">;
   description: BasicSlot;
   icon: IconProps;
+  action?: ActionProps;
 }
 
 export default function AuthFormInfo({
@@ -18,6 +20,7 @@ export default function AuthFormInfo({
   icon,
   heading,
   description,
+  action,
   ...props
 }: Props) {
   const classes = classNames([className, styles.wrapper]);
@@ -35,6 +38,28 @@ export default function AuthFormInfo({
       <Heading level="h3" className={headingClasses} {...headingProps} />
 
       <Text>{renderSlot(description)}</Text>
+
+      {action && <AuthFormAction className={styles.action} {...action} />}
     </div>
+  );
+}
+
+interface ActionProps {
+  text?: string;
+  handler?: Function;
+  className?: string;
+}
+
+function AuthFormAction({
+  text = "Try again",
+  handler,
+  ...props
+}: ActionProps) {
+  const handleClick = () => handler && handler();
+
+  return (
+    <Button outline onClick={handleClick} {...props}>
+      {text}
+    </Button>
   );
 }
