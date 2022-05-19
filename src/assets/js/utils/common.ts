@@ -20,3 +20,7 @@ export function withTrace<F extends Callback>(fn: F) {
     console.trace();
   };
 }
+
+export const isUndefined = <T>(
+  variable: T | undefined
+): variable is undefined => variable === undefined;
