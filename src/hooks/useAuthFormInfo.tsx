@@ -4,7 +4,7 @@ import { State } from "constants/state";
 import { useState } from "react";
 
 type Response = Awaited<ReturnType<AuthProvider["signUp"]>>;
-type Info = AuthFormProps["info"];
+type Info = NonNullable<AuthFormProps["info"]>;
 
 const infos: Record<State, Info | ((response?: Response) => Info)> = {
   [State.SUCCESS]: {
@@ -21,14 +21,14 @@ const infos: Record<State, Info | ((response?: Response) => Info)> = {
   }),
 };
 
-const getInfo = (type: State, response?: Response) => {
+const getInfo = (type: State, response?: Response): Info => {
   const info = infos[type];
 
   return typeof info === "function" ? info(response) : info;
 };
 
 export default function useAuthFormInfo(initialState?: Info) {
-  const [info, setInfo] = useState<Info>(initialState);
+  const [info, setInfo] = useState(initialState);
 
   return { info, setInfo, getInfo };
 }
