@@ -6,6 +6,26 @@ import { isUndefined } from "utils/common";
 
 type WithoutRef<T> = Omit<T, "ref">;
 
+interface Props<P> {
+  visible?: boolean;
+  props?: P;
+}
+
+type TransitionCSSProps<C> = C extends CSSTransitionProps
+  ? Partial<CSSTransitionProps>
+  : CSSTransitionProps;
+
+type TransitionCSSGroupProps<G> = WithoutRef<G>;
+
+interface TransitionsBase<G, C> {
+  transitionCss: TransitionCSSProps<C>;
+  transitionGroup?: TransitionCSSGroupProps<G>;
+}
+
+type Transitions<G, C> = C extends CSSTransitionProps
+  ? Partial<TransitionsBase<G, C>>
+  : TransitionsBase<G, C>;
+
 export default function withTransition<
   P,
   G extends Partial<TransitionGroupProps>,
@@ -15,31 +35,14 @@ export default function withTransition<
   transitionGroupInitial?: G,
   transitionCssInitial?: C
 ) {
-  type TransitionCSSProps = C extends CSSTransitionProps
-    ? Partial<CSSTransitionProps>
-    : CSSTransitionProps;
-  type TransitionCSSGroupProps = WithoutRef<G>;
-
-  interface TransitionsBase {
-    transitionCss: TransitionCSSProps;
-    transitionGroup?: TransitionCSSGroupProps;
-  }
-
-  type Transitions = C extends CSSTransitionProps
-    ? Partial<TransitionsBase>
-    : TransitionsBase;
-
-  interface Props {
-    visible?: boolean;
-    props?: P;
-  }
+  type WithTransitionProps = Props<P> & Transitions<G, C>;
 
   return ({
     visible,
     transitionCss,
     transitionGroup,
     props,
-  }: Props & Transitions) => {
+  }: WithTransitionProps) => {
     const groupTransitionProps = mergeProps(
       transitionGroupInitial,
       transitionGroup
