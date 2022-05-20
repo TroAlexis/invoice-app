@@ -54,7 +54,15 @@ export default function SignUpForm({
 
   const handleError: SignUpResponseHandler = (response) => {
     if (response.error) {
-      setInfo(getInfo(State.ERROR, response));
+      const errorInfo = getInfo(State.ERROR, response);
+
+      setInfo({
+        ...errorInfo,
+        action: {
+          text: errorInfo.action?.text,
+          handler: () => setInfo(undefined),
+        },
+      });
     }
   };
 
