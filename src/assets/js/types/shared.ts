@@ -6,6 +6,8 @@ export type Falsy = false | 0 | "" | null | undefined;
 export type Callback = (...args: any[]) => any;
 export type UseStateSetter<T> = Dispatch<SetStateAction<T>>;
 
+export type AwaitedReturnType<T extends Callback> = Awaited<ReturnType<T>>;
+
 export type ClassName = string | Falsy;
 export type ClassNamesObject = Record<string, true | Falsy>;
 export type ClassNamesArray = Array<ClassNames>;
