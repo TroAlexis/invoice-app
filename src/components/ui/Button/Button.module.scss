@@ -24,6 +24,14 @@
     font-size: 1.6rem;
   }
 
+  &.weight-heavy {
+    font-weight: 700;
+  }
+
+  &.weight-regular {
+    font-weight: 400;
+  }
+
   &.is-violet {
     color: colors.$white;
     background-color: colors.$violet-400;
@@ -34,6 +42,10 @@
 
     &.is-outline {
       color: colors.$violet-400;
+
+      &.shade-light {
+        color: colors.$violet-300;
+      }
     }
   }
 
@@ -71,6 +83,10 @@
     border: 0;
     cursor: pointer;
     appearance: none;
+  }
+
+  &.is-linkish {
+    text-decoration: underline;
   }
 
   &.is-fluid {
