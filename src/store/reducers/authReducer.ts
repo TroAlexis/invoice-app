@@ -9,7 +9,7 @@ export const defaultState: AuthState = {
 
 const authReducer: Reducer<AuthState, AuthAction> = (
   state = defaultState,
-  action: AuthAction
+  action
 ): AuthState => {
   switch (action.type) {
     case AuthActionType.LOADING:
