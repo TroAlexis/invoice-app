@@ -2,7 +2,6 @@
 @use "styles/_text.scss";
 
 .remark {
-  margin-top: 2rem;
   color: colors.$violet-200;
   text-align: center;
   @include text.h3-small;
