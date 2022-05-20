@@ -1,9 +1,11 @@
-import { AuthProvider } from "@/api/auth";
 import { Props as AuthFormProps } from "components/AuthForm/AuthForm";
 import { State } from "constants/state";
 import { useState } from "react";
+import { AuthProvider } from "types/auth";
 
-type Response = Awaited<ReturnType<AuthProvider["signUp"]>>;
+type Response = Awaited<
+  ReturnType<AuthProvider["signUp"] | AuthProvider["signIn"]>
+>;
 type Info = NonNullable<AuthFormProps["info"]>;
 
 const infos: Record<State, Info | ((response?: Response) => Info)> = {
