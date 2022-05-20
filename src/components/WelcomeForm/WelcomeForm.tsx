@@ -1,12 +1,12 @@
-import styles from "./WelcomeForm.module.scss";
+import { Props } from "components/AuthForm/AuthForm";
 import LoginForm from "components/LoginForm/LoginForm";
 import SignUpForm from "components/SignUpForm/SignUpForm";
+import { Path } from "constants/route";
 import { ComponentPropsWithoutRef } from "react";
+import { Link } from "react-router-dom";
 import { BasicSlot } from "types/shared";
 import { renderSlot } from "utils/dom";
-import { Props } from "components/AuthForm/AuthForm";
-import { Link } from "react-router-dom";
-import { Path } from "constants/route";
+import styles from "./WelcomeForm.module.scss";
 
 const formComponents = {
   [Path.LOGIN]: LoginForm,
@@ -15,8 +15,7 @@ const formComponents = {
 
 const formConfigs: Record<Path, FormSwitchBaseProps> = {
   [Path.LOGIN]: {
-    children: "No account yet?",
-    actionSlot: "Sign up here.",
+    actionSlot: "Sign up",
     form: Path.SIGNUP,
   },
   [Path.SIGNUP]: {

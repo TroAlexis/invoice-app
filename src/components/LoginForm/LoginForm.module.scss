@@ -1,0 +1,27 @@
+@use "styles/_colors.scss";
+@use "styles/_text.scss";
+
+.remark {
+  margin-top: 2rem;
+  color: colors.$violet-200;
+  text-align: center;
+  @include text.h3-small;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+
+  > * {
+    margin-top: 0;
+  }
+}
+
+.action {
+  &:not(:only-child) {
+    margin-right: 2rem;
+  }
+}
