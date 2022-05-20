@@ -18,6 +18,9 @@ const infos: Record<State, Info | ((response?: Response) => Info)> = {
     type: State.ERROR,
     heading: { children: "Oops! An error occurred" },
     icon: { name: "close" },
+    action: {
+      text: "Try again",
+    },
   }),
 };
 

@@ -50,11 +50,7 @@ interface ActionProps {
   className?: string;
 }
 
-function AuthFormAction({
-  text = "Try again",
-  handler,
-  ...props
-}: ActionProps) {
+function AuthFormAction({ text, handler, ...props }: ActionProps) {
   const handleClick = () => handler && handler();
 
   return (
