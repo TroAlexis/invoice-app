@@ -29,7 +29,7 @@ function getStyles<
   return {
     container: (base) => ({
       ...base,
-      fontSize: text["h3-small-font-size"],
+      fontSize: "1.2rem",
       fontWeight: "700",
       lineHeight: text["h3-small-line-height"],
       letterSpacing: text["h3-small-letter-spacing"],
@@ -46,11 +46,13 @@ function getStyles<
     }),
     valueContainer: (base) => ({
       ...base,
-      padding: "1.6rem 2rem",
+      padding: "1.7rem 2rem 1.6rem 2rem",
     }),
     input: (base) => ({
       ...base,
       margin: "0",
+      paddingTop: "0",
+      paddingBottom: "0",
     }),
     indicatorSeparator: () => ({
       display: "none",
