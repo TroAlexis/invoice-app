@@ -1,6 +1,6 @@
 import { useEventSelf } from "@/hooks/useEventSelf";
 import { useTypedSelector } from "@/hooks/useTypedStore";
-import { RootState } from "@/store/reducers";
+import { authSelector } from "@/store/selectors/auth";
 import AnimatedRoutes from "components/AnimatedRoutes/AnimatedRoutes";
 import TheSidebar, { Classes } from "components/TheSidebar/TheSidebar";
 import WelcomeForm from "components/WelcomeForm/WelcomeForm";
@@ -14,8 +14,6 @@ import { CSSTransition } from "react-transition-group";
 
 import { classNames } from "utils/classnames";
 import styles from "./default.module.scss";
-
-const authSelector = ({ auth }: RootState) => auth;
 
 export default function Default() {
   const { ref, withEventSelf } = useEventSelf();
