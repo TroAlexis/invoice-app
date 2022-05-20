@@ -1,8 +1,6 @@
 import supabase from "@/api";
 import { UserCredentials } from "@supabase/supabase-js";
-
-export type Database = typeof supabase;
-export type AuthProvider = Database["auth"];
+import { AuthProvider } from "types/auth";
 
 const signUp = (...args: Parameters<AuthProvider["signUp"]>) => {
   return supabase.auth.signUp(...args);
