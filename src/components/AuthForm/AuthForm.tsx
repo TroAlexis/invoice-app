@@ -36,6 +36,10 @@ export interface Props
   classes?: typeof baseClasses;
   loading?: boolean;
   info?: InfoProps;
+  fields?: {
+    email?: boolean;
+    password?: boolean;
+  };
   onSubmit: (data: FormData) => void;
 }
 
@@ -72,10 +76,12 @@ export default function AuthForm({
   loading,
   children,
   info,
+  fields = {},
   ...props
 }: Props) {
   const styles = mergeCssModules(baseClasses, classes);
 
+  const { email = true, password = true } = fields;
   const hasInfo = !!info;
 
   const formClasses = classNames([
@@ -106,21 +112,25 @@ export default function AuthForm({
         {renderSlot(headingSlot)}
       </Heading>
 
-      <Input
-        label="Email"
-        name="email"
-        value={data.email}
-        onInput={inputHandlers.email}
-        wrapperClassName={styles.input}
-      />
+      {email && (
+        <Input
+          label="Email"
+          name="email"
+          value={data.email}
+          onInput={inputHandlers.email}
+          wrapperClassName={styles.input}
+        />
+      )}
 
-      <Input
-        label="Password"
-        name="password"
-        value={data.password}
-        onInput={inputHandlers.password}
-        wrapperClassName={styles.input}
-      />
+      {password && (
+        <Input
+          label="Password"
+          name="password"
+          value={data.password}
+          onInput={inputHandlers.password}
+          wrapperClassName={styles.input}
+        />
+      )}
 
       <Button
         type="submit"
