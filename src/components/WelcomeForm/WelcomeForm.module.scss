@@ -1,7 +1,10 @@
 @use "styles/_colors.scss";
 
 .switch {
-  margin-top: 2rem;
+  &:only-child {
+    margin-top: 2rem;
+  }
+
   text-align: center;
 }
 
