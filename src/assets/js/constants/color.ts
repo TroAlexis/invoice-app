@@ -5,3 +5,8 @@ export enum Color {
   SECONDARY = "secondary",
   BLACK = "black",
 }
+
+export enum Shade {
+  LIGHT = "light",
+  REGULAR = "regular",
+}
