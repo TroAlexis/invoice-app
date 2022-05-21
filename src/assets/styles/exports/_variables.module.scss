@@ -1,0 +1,8 @@
+@use "styles/_variables.scss";
+@use "styles/_helpers.scss";
+
+// stylelint-disable
+:export {
+  @include helpers.include-properties(variables.$transition-timings);
+}
+// stylelint-enable

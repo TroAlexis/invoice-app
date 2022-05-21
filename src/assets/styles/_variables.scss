@@ -1,2 +1,6 @@
 $transition-default: 0.3s ease-in;
 $transition-fast: 0.2s ease-in;
+$transition-timings: (
+  transition-default: $transition-default,
+  transition-fast: $transition-fast,
+);
