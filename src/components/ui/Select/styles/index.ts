@@ -1,5 +1,12 @@
+import { SelectProps } from "components/ui/Select/Select";
 import stylesCreators from "components/ui/Select/styles/creators";
-import { GroupBase, Props, StylesConfig } from "react-select";
+import {
+  CSSObjectWithLabel,
+  GroupBase,
+  Props,
+  StylesConfig,
+} from "react-select";
+import { StylesProps } from "react-select/dist/declarations/src/styles";
 import colors from "styles/exports/_colors.module.scss";
 
 export type StylesCreator<Component = undefined> = <
@@ -7,11 +14,19 @@ export type StylesCreator<Component = undefined> = <
   IsMulti extends boolean,
   Group extends GroupBase<Option>
 >(
-  componentProps: Props<Option, IsMulti, Group>,
+  componentProps: Props<Option, IsMulti, Group> & SelectProps,
   creators?: StylesCreator[]
 ) => Component extends keyof StylesConfig
   ? StylesConfig<Option, IsMulti, Group>[Component]
   : StylesConfig<Option, IsMulti, Group>;
+
+export type PropertyCreator<
+  P extends keyof CSSObjectWithLabel,
+  C extends keyof StylesConfig
+> = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
+  selectProps: Props<Option, IsMulti, Group> & SelectProps,
+  componentProps: StylesProps<Option, IsMulti, Group>[C]
+) => CSSObjectWithLabel[P];
 
 export const composeStyles: StylesCreator = (
   componentProps,
