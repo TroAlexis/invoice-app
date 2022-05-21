@@ -1,4 +1,5 @@
 import { GroupBase } from "react-select";
+import { Callback } from "types/shared";
 
 declare module "*.svg?sprite";
 
@@ -9,5 +10,7 @@ declare module "react-select/dist/declarations/src/Select" {
     Group extends GroupBase<Option>
   > {
     outline?: boolean;
+    menuIsOpenAnimatable?: boolean;
+    onMenuCloseAnimated?: Callback;
   }
 }
