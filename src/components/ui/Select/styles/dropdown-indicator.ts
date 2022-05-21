@@ -1,14 +1,36 @@
-import { StylesCreator, theme } from "components/ui/Select/styles/index";
+import {
+  CSSProperty,
+  PropertyCreator,
+  StylesCreator,
+} from "components/ui/Select/styles/index";
+import { theme } from "components/ui/Select/theme";
+import variables from "styles/exports/_variables.module.scss";
 
-const createDropdownIndicatorStyles: StylesCreator = (componentProps) => ({
-  dropdownIndicator: (base) => ({
+type DropdownPropertyCreator<P extends CSSProperty> = PropertyCreator<
+  P,
+  "dropdownIndicator"
+>;
+
+const { color } = theme.dropdownIndicator;
+
+const getTransform: DropdownPropertyCreator<"transform"> = (
+  base,
+  { selectProps }
+) => {
+  return selectProps.menuIsOpenAnimatable ? "rotate(180deg)" : "rotate(0deg)";
+};
+
+const createDropdownIndicatorStyles: StylesCreator = () => ({
+  dropdownIndicator: (base, props) => ({
     ...base,
-    ...theme.dropdownIndicator,
+    color,
+    transform: getTransform(base, props),
+    transition: variables["transition-fast"],
     ":hover": {
-      ...theme.dropdownIndicator,
+      color,
     },
     ":focus": {
-      ...theme.dropdownIndicator,
+      color,
     },
   }),
 });
