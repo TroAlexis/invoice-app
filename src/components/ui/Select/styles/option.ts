@@ -1,5 +1,6 @@
 import { StylesCreator } from "components/ui/Select/styles/index";
 import colors from "styles/exports/_colors.module.scss";
+import variables from "styles/exports/_variables.module.scss";
 
 const createOptionStyles: StylesCreator = (componentProps) => ({
   option: (base, { isSelected }) => ({
@@ -7,6 +8,7 @@ const createOptionStyles: StylesCreator = (componentProps) => ({
     color: isSelected ? colors["violet-200"] : "inherit",
     padding: "1.5rem 2.4rem",
     backgroundColor: "transparent",
+    transition: `color ${variables["transition-fast"]}`,
     ":hover": {
       color: colors["violet-400"],
     },
