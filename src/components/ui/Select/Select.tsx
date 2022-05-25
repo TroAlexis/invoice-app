@@ -8,16 +8,19 @@ export default function Select<
   IsMulti extends boolean = false,
   Group extends GroupBase<Option> = GroupBase<Option>
 >(props: Props<Option, IsMulti, Group>) {
-  const styles = composeStyles(props);
+  const { styles, components, ...propsToSpread } = props;
+  const composedStyles = composeStyles(props);
   const menuProps = useMenuState(props.menuIsOpen);
+
+  const composedComponents = { Menu, ...components };
 
   return (
     <ReactSelect
-      {...props}
-      styles={styles}
-      components={{ Menu }}
       blurInputOnSelect
+      components={composedComponents}
       {...menuProps}
+      {...propsToSpread}
+      styles={composedStyles}
     />
   );
 }
