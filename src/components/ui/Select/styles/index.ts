@@ -32,8 +32,11 @@ export const composeStyles: StylesCreator = (
   componentProps,
   creators = stylesCreators
 ) => {
-  return creators.reduce((res, creator) => {
-    const styles = creator(componentProps);
-    return { ...res, ...styles };
-  }, {});
+  return creators.reduce(
+    (res, creator) => {
+      const styles = creator(componentProps);
+      return { ...styles, ...res };
+    },
+    { ...componentProps.styles }
+  );
 };
