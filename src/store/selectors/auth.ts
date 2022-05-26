@@ -1,3 +1,3 @@
-import { RootState } from "@/store/reducers";
+import { RootState } from "@/store";
 
 export const authSelector = ({ auth }: RootState) => auth;
