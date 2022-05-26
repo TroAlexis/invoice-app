@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1;
+}
+
+.empty {
+  max-width: 25rem;
+  margin: auto;
+}

@@ -1,0 +1,15 @@
+@use "styles/_text.scss";
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin: 0 0 0.8rem;
+}
