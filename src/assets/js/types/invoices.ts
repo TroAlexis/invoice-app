@@ -1,9 +1,9 @@
 import { Status } from "constants/invoices";
 
-export type AddressLine = "street" | "city" | "postCode" | "country";
-export type Address = Record<AddressLine, string>;
-export type PersonLine = "name" | "email";
-export type Person = Record<PersonLine, string>;
+export type AddressProperty = "street" | "city" | "postCode" | "country";
+export type Address = Record<AddressProperty, string>;
+export type PersonProperty = "name" | "email";
+export type Person = Record<PersonProperty, string>;
 
 export interface Item {
   name: string;
