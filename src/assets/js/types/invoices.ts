@@ -13,8 +13,8 @@ export interface Item {
 
 export interface Invoice {
   id: number;
-  from: AddressLine;
-  to: AddressLine & Person;
+  from: Address;
+  to: Address & Person;
   date: Date;
   term: string;
   description: string;
