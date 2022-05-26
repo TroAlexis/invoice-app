@@ -3,3 +3,11 @@
   white-space: nowrap;
   text-indent: 100%;
 }
+
+$font-weights: (500, 700);
+
+@each $font-weight in $font-weights {
+  .fw-#{$font-weight} {
+    font-weight: $font-weight;
+  }
+}
