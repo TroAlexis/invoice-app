@@ -9,16 +9,20 @@ export interface Item {
   name: string;
   quantity: number;
   price: number;
+  total?: number;
 }
 
 export interface Invoice {
   id: number;
-  from: Address;
-  to: Address & Person;
-  date: Date;
-  term: string;
+  createdAt: Date;
+  senderAddress: Address;
+  clientAddress: Address;
+  client: Person;
+  paymentTerms: number;
+  paymentDue: Date;
   description: string;
   items: Item[];
+  total?: number;
   status?: Status;
 }
 
