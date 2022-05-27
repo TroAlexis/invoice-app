@@ -1,4 +1,4 @@
-import authApi from "@/api/auth";
+import authApi from "@/api/modules/auth";
 import useAuthFormInfo from "@/hooks/useAuthFormInfo";
 import { UserCredentials } from "@supabase/supabase-js";
 import { State } from "constants/state";

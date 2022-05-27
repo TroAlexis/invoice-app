@@ -1,11 +1,11 @@
-import { Dispatch } from "redux";
+import authApi from "@/api/modules/auth";
 import {
   AuthAction,
   AuthActionType,
   SetSessionAction,
 } from "@/store/types/auth";
-import authApi from "@/api/auth";
 import { Session } from "@supabase/supabase-js";
+import { Dispatch } from "redux";
 
 export const logIn = () => {
   return async (dispatch: Dispatch<AuthAction>) => {

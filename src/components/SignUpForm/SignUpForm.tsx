@@ -1,4 +1,4 @@
-import authApi from "@/api/auth";
+import authApi from "@/api/modules/auth";
 import useAuthFormInfo from "@/hooks/useAuthFormInfo";
 import useLoading from "@/hooks/useLoading";
 import { ApiError, Session, User } from "@supabase/supabase-js";

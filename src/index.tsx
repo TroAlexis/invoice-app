@@ -1,15 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
-import { bindActionCreators } from "redux";
-import reportWebVitals from "./reportWebVitals";
-import "./assets/styles/base.scss";
-import App from "./components/App/App";
+import authApi from "@/api/modules/auth";
 import store from "@/store";
-import authApi from "@/api/auth";
 import { setSession } from "@/store/action-creators/auth";
 import "@/svgSprite";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { bindActionCreators } from "redux";
+import "./assets/styles/base.scss";
+import App from "./components/App/App";
+import reportWebVitals from "./reportWebVitals";
 
 // Init auth ------
 const boundSetSession = bindActionCreators(setSession, store.dispatch);

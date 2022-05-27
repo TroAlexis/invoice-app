@@ -1,4 +1,4 @@
-import authApi from "@/api/auth";
+import authApi from "@/api/modules/auth";
 import Icon from "components/ui/Icon/Icon";
 import iconStyles from "components/ui/Icon/Icon.module.scss";
 import { Size } from "constants/size";
