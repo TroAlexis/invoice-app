@@ -25,7 +25,7 @@ export interface AddItem extends Action {
 
 export interface RemoveItem extends Action {
   type: InvoiceActionType.REMOVE_ITEM;
-  id: number;
+  id: string;
 }
 
 export interface SetFilters extends Action {

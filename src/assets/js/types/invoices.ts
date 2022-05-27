@@ -13,7 +13,7 @@ export interface Item {
 }
 
 export interface Invoice {
-  id: number;
+  id: string;
   createdAt: Date;
   senderAddress: Address;
   clientAddress: Address;
@@ -22,8 +22,7 @@ export interface Invoice {
   paymentDue: Date;
   description: string;
   items: Item[];
-  total?: number;
-  status?: Status;
+  status: Status;
 }
 
 export interface Filter {
