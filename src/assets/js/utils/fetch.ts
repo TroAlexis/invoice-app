@@ -14,7 +14,10 @@ export const $fetch = async (...args: Parameters<typeof fetch>) => {
   }
 };
 
-export const withTimeout = async <T>(promise: Promise<T>, time = 2000) => {
+export const withTimeout = async <T>(
+  promise: Promise<T>,
+  time = 2000
+): Promise<T> => {
   await timeout(time);
 
   return promise;
