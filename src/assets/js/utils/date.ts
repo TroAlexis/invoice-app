@@ -5,3 +5,7 @@ export const prettifyDate = (date: Date) => {
     year: "numeric",
   });
 };
+
+export const isDate = (date: unknown): date is Date => {
+  return date instanceof Date;
+};
