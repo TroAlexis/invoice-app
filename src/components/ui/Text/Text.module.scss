@@ -1,3 +1,5 @@
+@use "styles/_text.scss";
+
 .text {
   font-weight: 500;
 }
@@ -6,6 +8,10 @@
   font-size: 1.2rem;
   line-height: 1.25;
   letter-spacing: -0.25px;
+
+  &.size-regular {
+    @include text.h3;
+  }
 }
 
 .loose {
