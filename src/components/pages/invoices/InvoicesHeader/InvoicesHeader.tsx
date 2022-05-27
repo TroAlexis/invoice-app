@@ -7,9 +7,10 @@ import InvoicesHeaderCount, {
 import Container from "components/ui/Container/Container";
 import Heading from "components/ui/Heading/Heading";
 import { Status } from "constants/invoices";
-import { FC } from "react";
+import { ComponentPropsWithoutRef, FC } from "react";
 import { shallowEqual } from "react-redux";
 import { Filter } from "types/invoices";
+import { classNames } from "utils/classnames";
 import styles from "./InvoicesHeader.module.scss";
 
 const statusLabels = {
@@ -28,12 +29,15 @@ const filterOptions: Filter[] = [Status.DRAFT, Status.PENDING, Status.PAID].map(
   }
 );
 
-export default function InvoicesHeader() {
+interface Props extends ComponentPropsWithoutRef<"header"> {}
+
+export default function InvoicesHeader({ className, ...props }: Props) {
   const { items } = useTypedSelector(invoicesSelector, shallowEqual);
   const invoicesCount = items.length;
+  const classes = classNames([className]);
 
   return (
-    <header>
+    <header {...props} className={classes}>
       <Container className={styles.wrapper}>
         {" "}
         <InvoicesHeaderHeading count={invoicesCount} />
