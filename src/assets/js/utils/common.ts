@@ -24,3 +24,9 @@ export function withTrace<F extends Callback>(fn: F) {
 export const isUndefined = <T>(
   variable: T | undefined
 ): variable is undefined => variable === undefined;
+
+export const timeout = (timeout: number) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, timeout);
+  });
+};
