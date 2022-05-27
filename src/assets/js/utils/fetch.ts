@@ -1,3 +1,5 @@
+import { timeout } from "utils/common";
+
 export const $fetch = async (...args: Parameters<typeof fetch>) => {
   try {
     const response = await fetch(...args);
@@ -10,4 +12,10 @@ export const $fetch = async (...args: Parameters<typeof fetch>) => {
   } catch (e) {
     console.error(e);
   }
+};
+
+export const withTimeout = async <T>(promise: Promise<T>, time = 2000) => {
+  await timeout(time);
+
+  return promise;
 };
