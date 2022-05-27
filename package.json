@@ -48,6 +48,8 @@
   },
   "scripts": {
     "start": "craco start",
+    "start:mocked": "npm run start & npm run start:mock-api",
+    "start:mock-api": "cd packages/mock-api && npm run start",
     "build": "craco build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
