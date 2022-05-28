@@ -1,0 +1,83 @@
+@use "styles/_colors.scss";
+@use "styles/_variables.scss";
+
+$min-spacing: 2rem;
+
+.chevron {
+  width: 1rem;
+  height: 1rem;
+  color: colors.$violet-400;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  padding: 1.6rem 2.4rem 1.6rem 3.2rem;
+  color: colors.$black-500;
+  background-color: colors.$white;
+  border-radius: 8px;
+  box-shadow: 0 10px 10px -10px #48549f1a;
+  transition: box-shadow variables.$transition-default;
+
+  .chevron {
+    transition: transform variables.$transition-fast;
+  }
+
+  &:hover {
+    box-shadow: 0 10px 15px -10px rgb(72 84 159 / 15%);
+
+    .chevron {
+      transform: translate3d(0.2rem, 0, 0);
+    }
+  }
+}
+
+.secondary {
+  color: colors.$violet-200;
+}
+
+.id,
+.due,
+.name,
+.price,
+.status,
+.label {
+  flex-basis: 0;
+  margin-right: 2rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.id {
+  flex-grow: 0.6;
+  min-width: 6rem;
+
+  &::before {
+    display: inline;
+    color: colors.$violet-200;
+    content: "#";
+  }
+}
+
+.due {
+  flex-grow: 1;
+  min-width: 10rem;
+}
+
+.name {
+  flex-grow: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.price {
+  flex-grow: 1;
+  margin-right: 4rem;
+  margin-left: auto;
+  text-align: right;
+}
+
+.label {
+  flex-grow: 0.65;
+}
