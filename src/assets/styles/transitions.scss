@@ -104,3 +104,30 @@ $fade-in-left-timing: 600ms cubic-bezier(0.39, 0.09, 0, 1.35);
     ),
   )
 );
+
+$fade-in-up-timing: 300ms ease-out;
+@include simple-transition(
+  "fade-in-up",
+  (
+    from: (
+      opacity: (
+        value: 0,
+        timing: $fade-in-up-timing,
+      ),
+      transform: (
+        value: translate3d(0, 100%, 0),
+        timing: $fade-in-up-timing,
+      ),
+    ),
+    to: (
+      opacity: (
+        value: 1,
+        timing: $fade-in-up-timing,
+      ),
+      transform: (
+        value: translate3d(0, 0, 0),
+        timing: $fade-in-up-timing,
+      ),
+    ),
+  )
+);
