@@ -105,7 +105,7 @@ $fade-in-left-timing: 600ms cubic-bezier(0.39, 0.09, 0, 1.35);
   )
 );
 
-$fade-in-up-timing: 300ms ease-out;
+$fade-in-up-timing: 800ms cubic-bezier(0.19, 0.46, 0, 0.99);
 @include simple-transition(
   "fade-in-up",
   (
