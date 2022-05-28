@@ -1,3 +1,5 @@
+@use "styles/_colors.scss";
+
 .layout {
   display: flex;
   flex: 1;
@@ -9,6 +11,7 @@
   flex-direction: column;
   padding-top: 6.4rem;
   padding-bottom: 6.4rem;
+  background-color: colors.$grey-100;
 }
 
 $transition-delay: 250ms;
