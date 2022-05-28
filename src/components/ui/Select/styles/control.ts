@@ -11,6 +11,16 @@ type ControlPropertyCreator<P extends CSSProperty> = PropertyCreator<
   "control"
 >;
 
+const getBackgroundColor: ControlPropertyCreator<"backgroundColor"> = (
+  base,
+  { selectProps }
+) => {
+  if (selectProps.outline) {
+    return "transparent";
+  }
+  return base.backgroundColor;
+};
+
 const getBorderColor: ControlPropertyCreator<"borderColor"> = (
   base,
   { isFocused, selectProps }
@@ -45,6 +55,7 @@ const createControlStyles: StylesCreator = () => ({
   control: (base, props) => ({
     ...base,
     borderColor: getBorderColor(base, props),
+    backgroundColor: getBackgroundColor(base, props),
     boxShadow: props.isFocused ? getBoxShadow(base, props) : base.boxShadow,
     ":hover": {
       borderColor: getHoverBorderColor(base, props),
