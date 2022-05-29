@@ -3,6 +3,7 @@ import { invoicesSelector } from "@/store/selectors/invoices";
 import styles from "components/pages/invoices/InvoicesHeaderCount/InvoicesHeaderCount.module.scss";
 import Text from "components/ui/Text/Text";
 import { FC } from "react";
+import { shallowEqual } from "react-redux";
 import { Filter } from "types/invoices";
 
 export interface Props {
@@ -10,7 +11,7 @@ export interface Props {
 }
 
 const InvoicesHeaderCount: FC<Props> = ({ count }) => {
-  const { filters } = useTypedSelector(invoicesSelector);
+  const { filters } = useTypedSelector(invoicesSelector, shallowEqual);
 
   return (
     <Text className={styles.count}>
@@ -31,7 +32,8 @@ interface TypesProps {
 
 const Types: FC<TypesProps> = ({ filters }) => {
   const types = filters.reduce((res, { label }) => {
-    return res.length ? [res, label].join(", ") : label;
+    const lowercasedLabel = label.toLowerCase();
+    return res.length ? [res, lowercasedLabel].join(", ") : lowercasedLabel;
   }, "");
 
   return <span>{types || "total"}</span>;
