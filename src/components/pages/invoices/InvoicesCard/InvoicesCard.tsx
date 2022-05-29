@@ -6,7 +6,7 @@ import { ComponentPropsWithoutRef, PropsWithChildren } from "react";
 import { Invoice } from "types/invoices";
 import { classNames } from "utils/classnames";
 import { prettifyDate } from "utils/date";
-import { capitalize } from "utils/string";
+import { capitalize, splitThousands } from "utils/string";
 import styles from "./InvoicesCard.module.scss";
 
 interface Props extends ComponentPropsWithoutRef<"article"> {
@@ -22,7 +22,7 @@ export default function InvoicesCard({
   const classes = getClasses(className);
   const dueDateText = prettifyDate(paymentDue);
   const totalPrice = items.reduce((total, { price }) => total + price, 0);
-  const formattedPrice = totalPrice.toFixed(2);
+  const formattedPrice = splitThousands(totalPrice.toFixed(2));
   const formattedStatus = capitalize(status.toLowerCase());
 
   return (
