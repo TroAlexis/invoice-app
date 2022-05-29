@@ -1,0 +1,13 @@
+@use "styles/_colors.scss";
+@use "styles/_variables.scss";
+
+.card {
+  background-color: colors.$white;
+  border-radius: 8px;
+  box-shadow: 0 10px 10px -10px #48549f1a;
+  transition: box-shadow variables.$transition-default;
+
+  &:hover {
+    box-shadow: 0 10px 15px -10px rgb(72 84 159 / 15%);
+  }
+}

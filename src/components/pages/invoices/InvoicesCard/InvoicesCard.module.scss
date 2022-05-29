@@ -14,18 +14,12 @@ $min-spacing: 2rem;
   align-items: center;
   padding: 1.6rem 2.4rem 1.6rem 3.2rem;
   color: colors.$black-500;
-  background-color: colors.$white;
-  border-radius: 8px;
-  box-shadow: 0 10px 10px -10px #48549f1a;
-  transition: box-shadow variables.$transition-default;
 
   .chevron {
     transition: transform variables.$transition-fast;
   }
 
   &:hover {
-    box-shadow: 0 10px 15px -10px rgb(72 84 159 / 15%);
-
     .chevron {
       transform: translate3d(0.2rem, 0, 0);
     }

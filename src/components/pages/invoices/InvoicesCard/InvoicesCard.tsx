@@ -1,3 +1,4 @@
+import Card from "components/ui/Card/Card";
 import Icon from "components/ui/Icon/Icon";
 import Label from "components/ui/Label/Label";
 import Text from "components/ui/Text/Text";
@@ -26,7 +27,7 @@ export default function InvoicesCard({
   const formattedStatus = capitalize(status.toLowerCase());
 
   return (
-    <article className={classes.root} {...props}>
+    <Card className={classes.root} {...props}>
       <Text className={classes.id}>{id}</Text>
 
       <Text className={classes.due}>{`Due ${dueDateText}`}</Text>
@@ -42,7 +43,7 @@ export default function InvoicesCard({
       </Label>
 
       <Icon name="chevron" className={classes.chevron} />
-    </article>
+    </Card>
   );
 }
 
