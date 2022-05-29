@@ -1,5 +1,5 @@
 import { useTypedSelector } from "@/hooks/useTypedStore";
-import { invoicesSelector } from "@/store/selectors/invoices";
+import { filteredInvoicesSelector } from "@/store/selectors/invoices";
 import InvoicesHeaderControls from "components/pages/invoices/InvoicesHeaderControls/InvoicesHeaderControls";
 import InvoicesHeaderCount, {
   Props as InvoicesHeaderCountProps,
@@ -8,7 +8,6 @@ import Container from "components/ui/Container/Container";
 import Heading from "components/ui/Heading/Heading";
 import { Status } from "constants/invoices";
 import { ComponentPropsWithoutRef, FC } from "react";
-import { shallowEqual } from "react-redux";
 import { Filter } from "types/invoices";
 import { classNames } from "utils/classnames";
 import styles from "./InvoicesHeader.module.scss";
@@ -32,15 +31,14 @@ const filterOptions: Filter[] = [Status.DRAFT, Status.PENDING, Status.PAID].map(
 interface Props extends ComponentPropsWithoutRef<"header"> {}
 
 export default function InvoicesHeader({ className, ...props }: Props) {
-  const { items } = useTypedSelector(invoicesSelector, shallowEqual);
-  const invoicesCount = items.length;
+  const invoices = useTypedSelector(filteredInvoicesSelector);
   const classes = classNames([className]);
 
   return (
     <header {...props} className={classes}>
       <Container className={styles.wrapper}>
         {" "}
-        <InvoicesHeaderHeading count={invoicesCount} />
+        <InvoicesHeaderHeading count={invoices.length} />
         <InvoicesHeaderControls options={filterOptions} />{" "}
       </Container>
     </header>
