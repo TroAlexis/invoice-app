@@ -1,4 +1,4 @@
-import InvoicesCard from "components/pages/invoices/InvoicesCard/InvoicesCard";
+import InvoicesCard from "components/pages/invoices/index/InvoicesCard/InvoicesCard";
 import { FC } from "react";
 import { Flipped, Flipper, spring } from "react-flip-toolkit";
 import { NavLink } from "react-router-dom";

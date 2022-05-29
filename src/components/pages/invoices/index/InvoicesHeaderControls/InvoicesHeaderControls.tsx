@@ -1,7 +1,7 @@
 import { useTypedDispatch } from "@/hooks/useTypedStore";
 import { InvoiceActionType } from "@/store/types/invoices";
 import InvoiceButton from "components/elements/InvoiceButton/InvoiceButton";
-import styles from "components/pages/invoices/InvoicesHeaderControls/InvoicesHeaderControls.module.scss";
+import styles from "components/pages/invoices/index/InvoicesHeaderControls/InvoicesHeaderControls.module.scss";
 import Select from "components/ui/Select/Select";
 import { ComponentPropsWithoutRef, FC } from "react";
 import { GroupBase, MultiValue, StylesConfig } from "react-select";

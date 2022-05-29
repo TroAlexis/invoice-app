@@ -1,9 +1,9 @@
 import { useTypedSelector } from "@/hooks/useTypedStore";
 import { filteredInvoicesSelector } from "@/store/selectors/invoices";
-import InvoicesHeaderControls from "components/pages/invoices/InvoicesHeaderControls/InvoicesHeaderControls";
+import InvoicesHeaderControls from "components/pages/invoices/index/InvoicesHeaderControls/InvoicesHeaderControls";
 import InvoicesHeaderCount, {
   Props as InvoicesHeaderCountProps,
-} from "components/pages/invoices/InvoicesHeaderCount/InvoicesHeaderCount";
+} from "components/pages/invoices/index/InvoicesHeaderCount/InvoicesHeaderCount";
 import Container from "components/ui/Container/Container";
 import Heading from "components/ui/Heading/Heading";
 import { Status } from "constants/invoices";

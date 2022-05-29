@@ -1,6 +1,6 @@
 import { useTypedSelector } from "@/hooks/useTypedStore";
 import { invoicesSelector } from "@/store/selectors/invoices";
-import styles from "components/pages/invoices/InvoicesHeaderCount/InvoicesHeaderCount.module.scss";
+import styles from "components/pages/invoices/index/InvoicesHeaderCount/InvoicesHeaderCount.module.scss";
 import Text from "components/ui/Text/Text";
 import { FC } from "react";
 import { shallowEqual } from "react-redux";

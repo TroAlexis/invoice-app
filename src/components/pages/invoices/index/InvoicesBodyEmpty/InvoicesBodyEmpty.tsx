@@ -1,4 +1,4 @@
-import styles from "components/pages/invoices/InvoicesBodyEmpty/InvoicesBodyEmpty.module.scss";
+import styles from "components/pages/invoices/index/InvoicesBodyEmpty/InvoicesBodyEmpty.module.scss";
 import Heading from "components/ui/Heading/Heading";
 import Text from "components/ui/Text/Text";
 import { ReactComponent as Placeholder } from "images/common/no-mail.svg";
