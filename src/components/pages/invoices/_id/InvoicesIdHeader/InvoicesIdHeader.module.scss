@@ -1,0 +1,25 @@
+@use "styles/_colors.scss";
+@use "styles/_text.scss";
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 2rem 3.2rem;
+}
+
+.text {
+  margin-right: 1.6rem;
+  color: colors.$grey-550;
+}
+
+.control {
+  margin-left: auto;
+
+  & + & {
+    margin-left: 0.8rem;
+  }
+}
+
+.label {
+  font-weight: 700;
+}

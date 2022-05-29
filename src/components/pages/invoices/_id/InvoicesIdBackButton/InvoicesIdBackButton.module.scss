@@ -1,0 +1,21 @@
+@use "styles/_colors.scss";
+@use "styles/_variables.scss";
+
+.button {
+  &#{&} {
+    align-items: flex-start;
+  }
+
+  .icon {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 2rem;
+    color: colors.$violet-400;
+    transform: rotate(-180deg) translateX(0);
+    transition: transform variables.$transition-fast;
+
+    @at-root .button:hover#{&} {
+      transform: rotate(-180deg) translateX(0.2rem);
+    }
+  }
+}
