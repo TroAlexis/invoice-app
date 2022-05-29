@@ -1,6 +1,12 @@
 @use "styles/_colors.scss";
 @use "styles/_variables.scss";
 
+@mixin hover() {
+  &:not(.is-outline):hover {
+    @content;
+  }
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -54,17 +60,23 @@
     background-color: colors.$grey-110;
     transition-property: background-color;
 
-    &:hover {
+    @include hover {
       background-color: colors.$grey-300;
     }
   }
 
-  &.is-black {
+  &.is-grey {
     color: colors.$grey-500;
     background-color: colors.$black-200;
 
-    &:hover {
+    @include hover {
       background-color: colors.$black-500;
+    }
+  }
+
+  &.is-black {
+    &.is-outline {
+      color: colors.$black-500;
     }
   }
 
@@ -72,7 +84,7 @@
     color: colors.$white;
     background-color: colors.$red-400;
 
-    &:hover {
+    @include hover {
       background-color: colors.$red-200;
     }
   }

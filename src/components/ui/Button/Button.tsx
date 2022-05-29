@@ -8,7 +8,7 @@ import { classNames } from "utils/classnames";
 import styles from "./Button.module.scss";
 
 interface Props extends ComponentPropsWithoutRef<"button"> {
-  color?: Color.VIOLET | Color.RED | Color.BLACK | Color.SECONDARY;
+  color?: Color.VIOLET | Color.RED | Color.BLACK | Color.GREY | Color.SECONDARY;
   shade?: Shade.LIGHT;
   outline?: boolean;
   fluid?: boolean;
