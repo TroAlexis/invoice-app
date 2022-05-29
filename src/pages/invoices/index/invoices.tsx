@@ -5,7 +5,7 @@ import styles from "./invoices.module.scss";
 export default function Invoices() {
   return (
     <section className={styles.section}>
-      <InvoicesHeader />
+      <InvoicesHeader className={styles.header} />
 
       <InvoicesBody />
     </section>
