@@ -1,0 +1,11 @@
+@use "styles/_variables.scss";
+
+.card {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:not(:last-child) {
+    margin-bottom: 1.6rem;
+  }
+}
