@@ -1,4 +1,5 @@
 import InvoiceIdDetailBody from "components/pages/invoices/_id/InvoiceIdDetailBody/InvoiceIdDetailBody";
+import InvoiceIdDetailItems from "components/pages/invoices/_id/InvoiceIdDetailItems/InvoiceIdDetailItems";
 import InvoicesIdDetailHeader from "components/pages/invoices/_id/InvoicesIdDetailHeader/InvoicesIdDetailHeader";
 import Card from "components/ui/Card/Card";
 import { Invoice } from "types/invoices";
@@ -14,7 +15,9 @@ export default function InvoicesIdDetail({ invoice }: Props) {
     <Card className={styles.wrapper}>
       <InvoicesIdDetailHeader invoice={invoice} className={styles.header} />
 
-      <InvoiceIdDetailBody {...invoice} />
+      <InvoiceIdDetailBody {...invoice} className={styles.body} />
+
+      <InvoiceIdDetailItems items={invoice.items} />
     </Card>
   );
 }

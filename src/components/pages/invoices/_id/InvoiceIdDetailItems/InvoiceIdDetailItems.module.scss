@@ -1,0 +1,75 @@
+@use "styles/_colors.scss";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.body {
+  color: colors.$black-500;
+  font-weight: 700;
+  table-layout: fixed;
+  background-color: colors.$grey-110;
+  border-radius: 8px 8px 0 0;
+
+  & *:not(.label) {
+    font-weight: inherit;
+  }
+}
+
+.column {
+  width: 20%;
+  padding: 1.6rem;
+  text-align: right;
+
+  &:first-child {
+    width: 40%;
+    padding-left: 3.2rem;
+    text-align: left;
+  }
+
+  &:nth-child(2) {
+    text-align: center;
+  }
+
+  &:last-child {
+    padding-right: 3.2rem;
+  }
+}
+
+.header {
+  .column {
+    padding-top: 3.2rem;
+  }
+}
+
+.row {
+  &:last-child .column {
+    padding-bottom: 3.2rem;
+  }
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3.2rem;
+  color: colors.$white;
+  background-color: colors.$black-200;
+  border-radius: 0 0 8px 8px;
+}
+
+.total {
+  font-weight: 700;
+  font-size: 2.4rem;
+  line-height: 1.33;
+  letter-spacing: -0.5px;
+}
+
+.label {
+  font-weight: 500;
+}
+
+.secondary {
+  color: colors.$violet-200;
+}

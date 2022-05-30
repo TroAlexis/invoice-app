@@ -9,7 +9,8 @@ import styles from "./InvoiceIdDetailBody.module.scss";
 type Props = Pick<
   Invoice,
   "createdAt" | "paymentDue" | "clientAddress" | "client"
->;
+> &
+  ComponentPropsWithoutRef<"section">;
 
 export default function InvoiceIdDetailBody(props: Props) {
   const {
@@ -17,10 +18,13 @@ export default function InvoiceIdDetailBody(props: Props) {
     clientAddress,
     createdAt,
     paymentDue,
+    className,
   } = props;
 
+  const classes = classNames([styles.wrapper, className]);
+
   return (
-    <section className={styles.wrapper}>
+    <section className={classes}>
       <div className={styles.dates}>
         <InfoItem label={"Invoice Date"}>{prettifyDate(createdAt)}</InfoItem>{" "}
         <InfoItem label={"Payment Due"}>{prettifyDate(paymentDue)}</InfoItem>
