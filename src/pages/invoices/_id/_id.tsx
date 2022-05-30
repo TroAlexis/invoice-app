@@ -1,13 +1,12 @@
 import { useTypedSelector } from "@/hooks/useTypedStore";
 import { invoicesSelector } from "@/store/selectors/invoices";
 import InvoicesIdBackButton from "components/pages/invoices/_id/InvoicesIdBackButton/InvoicesIdBackButton";
+import InvoicesIdDetail from "components/pages/invoices/_id/InvoicesIdDetail/InvoicesIdDetail";
 import InvoicesIdHeader from "components/pages/invoices/_id/InvoicesIdHeader/InvoicesIdHeader";
 import InvoicesPageSection from "components/pages/invoices/InvoicesPageSection/InvoicesPageSection";
 import Container from "components/ui/Container/Container";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import styles from "./_id.module.scss";
-
-interface Props {}
 
 export default function InvoicePage() {
   const { invoice } = useInvoice();
@@ -15,9 +14,13 @@ export default function InvoicePage() {
     <InvoicesPageSection>
       {invoice && (
         <Container>
-          <InvoicesIdBackButton className={styles.back} />
+          <NavLink to="/invoices" className={styles["back-link"]}>
+            <InvoicesIdBackButton className={styles.back} />
+          </NavLink>
 
-          <InvoicesIdHeader status={invoice.status} />
+          <InvoicesIdHeader status={invoice.status} className={styles.header} />
+
+          <InvoicesIdDetail invoice={invoice} />
         </Container>
       )}
     </InvoicesPageSection>
