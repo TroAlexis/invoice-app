@@ -4,6 +4,7 @@ import { ComponentPropsWithoutRef } from "react";
 import { Invoice } from "types/invoices";
 import { classNames } from "utils/classnames";
 import { prettifyDate } from "utils/date";
+import { TEXT_PLACEHOLDER } from "utils/string";
 import styles from "./InvoiceIdDetailBody.module.scss";
 
 type Props = Pick<
@@ -36,7 +37,7 @@ export default function InvoiceIdDetailBody(props: Props) {
       </div>
 
       <InfoItem label={"Sent to"} className={styles.email}>
-        {email}
+        {email || TEXT_PLACEHOLDER}
       </InfoItem>
     </section>
   );

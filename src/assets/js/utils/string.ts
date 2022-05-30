@@ -1,3 +1,5 @@
+export const TEXT_PLACEHOLDER = "－";
+
 export const capitalize = (string: string) => {
   const firstLetter = string[0];
 
