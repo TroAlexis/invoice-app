@@ -57,8 +57,10 @@ function animateFadeInUp(
     },
     onUpdate: (snapshot) => {
       if (typeof snapshot === "object") {
-        element.style.opacity = `${snapshot.opacity}`;
-        element.style.transform = `translate3d(0, ${snapshot.translate}%, 0)`;
+        requestAnimationFrame(() => {
+          element.style.opacity = `${snapshot.opacity}`;
+          element.style.transform = `translate3d(0, ${snapshot.translate}%, 0)`;
+        });
       }
     },
     onComplete,
