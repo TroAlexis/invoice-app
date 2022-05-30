@@ -29,7 +29,7 @@ export default function InvoiceIdDetailItems({
           <tr className={headerClasses}>
             {["Item Name", "QTY.", "Price", "Total"].map((label) => {
               return (
-                <th className={styles.column}>
+                <th className={styles.column} key={label}>
                   <Text className={styles.label} type={Constraints.LOOSE}>
                     {label}
                   </Text>
