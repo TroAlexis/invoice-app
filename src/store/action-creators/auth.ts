@@ -1,4 +1,4 @@
-import authApi from "@/api/modules/auth";
+import authApi from "@/api/modules/auth/auth";
 import {
   AuthAction,
   AuthActionType,

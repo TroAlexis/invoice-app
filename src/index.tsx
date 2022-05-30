@@ -1,4 +1,4 @@
-import authApi from "@/api/modules/auth";
+import authApi from "@/api/modules/auth/auth";
 import store from "@/store";
 import { setSession } from "@/store/action-creators/auth";
 import "@/svgSprite";
