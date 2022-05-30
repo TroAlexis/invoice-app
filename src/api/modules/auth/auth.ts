@@ -1,5 +1,6 @@
 import supabase from "@/api";
 import { UserCredentials } from "@supabase/supabase-js";
+import { genConfig } from "react-nice-avatar";
 import { AuthProvider } from "types/auth";
 
 const authApi = {
@@ -13,6 +14,22 @@ const authApi = {
 
   logOut: () => {
     return supabase.auth.signOut();
+  },
+
+  update: (...args: Parameters<AuthProvider["update"]>) => {
+    return supabase.auth.update(...args);
+  },
+
+  setUserAvatar() {
+    return authApi.update({
+      data: {
+        avatar: genConfig({
+          sex: "man",
+          hairColorRandom: true,
+          isGradient: true,
+        }),
+      },
+    });
   },
 
   getUser: () => {

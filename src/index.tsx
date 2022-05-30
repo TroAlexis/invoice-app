@@ -15,6 +15,9 @@ import reportWebVitals from "./reportWebVitals";
 const boundSetSession = bindActionCreators(setSession, store.dispatch);
 
 authApi.onStateChange(async (event, session) => {
+  if (session && !session.user?.user_metadata?.avatar) {
+    await authApi.setUserAvatar();
+  }
   boundSetSession(session);
 });
 // Init auth ------
