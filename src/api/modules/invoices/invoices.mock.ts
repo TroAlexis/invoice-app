@@ -1,6 +1,6 @@
-import { invoicesApi } from "@/api/modules/invoices";
-import { invoiceShaper } from "@/api/modules/shapers/invoices.shaper";
-import { ApiInvoice } from "@/api/modules/types/invoices.types";
+import { invoicesApi } from "@/api/modules/invoices/invoices";
+import { invoiceShaper } from "@/api/modules/invoices/invoices.shaper";
+import { ApiInvoice } from "@/api/modules/invoices/invoices.types";
 import { MOCK_API_URL } from "constants/api";
 import { $fetch, withTimeout } from "utils/fetch";
 

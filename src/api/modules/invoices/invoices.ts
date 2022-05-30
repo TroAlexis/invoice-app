@@ -1,4 +1,4 @@
-import invoicesApiMock from "@/api/modules/mocks/invoices.mock";
+import invoicesApiMock from "@/api/modules/invoices/invoices.mock";
 import { MOCK_ON } from "constants/api";
 import { Invoice } from "types/invoices";
 

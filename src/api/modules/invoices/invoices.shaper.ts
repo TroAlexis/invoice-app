@@ -1,4 +1,4 @@
-import { ApiInvoice } from "@/api/modules/types/invoices.types";
+import { ApiInvoice } from "@/api/modules/invoices/invoices.types";
 import { Status } from "constants/invoices";
 import { Invoice } from "types/invoices";
 

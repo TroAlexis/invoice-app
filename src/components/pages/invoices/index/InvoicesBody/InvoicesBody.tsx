@@ -1,4 +1,4 @@
-import invoicesApi from "@/api/modules/invoices";
+import invoicesApi from "@/api/modules/invoices/invoices";
 import useEffectOnce from "@/hooks/useEffectOnce";
 import useLoading from "@/hooks/useLoading";
 import { useTypedDispatch, useTypedSelector } from "@/hooks/useTypedStore";
