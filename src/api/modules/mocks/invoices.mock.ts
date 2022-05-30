@@ -16,6 +16,11 @@ const invoicesApiMock: InvoicesApi = {
       return invoiceShaper(invoice);
     });
   },
+  delete(id) {
+    return $fetch(`${MOCK_API_URL}/invoices/${id}`, {
+      method: "DELETE",
+    });
+  },
 } as const;
 
 export default invoicesApiMock;

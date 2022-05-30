@@ -6,6 +6,7 @@ export const invoicesApi = {
   getAll: async (): Promise<Invoice[]> => {
     return [];
   },
+  delete: async (id: Invoice["id"]) => null,
 } as const;
 
 const api = MOCK_ON ? invoicesApiMock : invoicesApi;
