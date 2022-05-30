@@ -1,0 +1,9 @@
+@use "styles/_colors.scss";
+
+.id {
+  &::before {
+    display: inline;
+    color: colors.$violet-200;
+    content: "#";
+  }
+}

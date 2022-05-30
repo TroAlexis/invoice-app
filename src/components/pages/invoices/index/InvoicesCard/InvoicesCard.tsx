@@ -1,3 +1,4 @@
+import InvoiceId from "components/pages/invoices/InvoiceId/InvoiceId";
 import Card from "components/ui/Card/Card";
 import Icon from "components/ui/Icon/Icon";
 import Label from "components/ui/Label/Label";
@@ -28,7 +29,7 @@ export default function InvoicesCard({
 
   return (
     <Card className={classes.root} {...props}>
-      <Text className={classes.id}>{id}</Text>
+      <InvoiceId className={classes.id}>{id}</InvoiceId>
 
       <Text className={classes.due}>{`Due ${dueDateText}`}</Text>
 
@@ -50,7 +51,7 @@ export default function InvoicesCard({
 const getClasses = (className: Props["className"]) => {
   return {
     root: classNames([className, styles.wrapper]),
-    id: classNames([styles.id, "fw-700"]),
+    id: classNames([styles.id]),
     due: classNames([styles.due, styles.secondary]),
     name: classNames([styles.name, styles.secondary]),
     price: classNames([styles.price]),

@@ -46,12 +46,6 @@ $min-spacing: 2rem;
 .id {
   flex-grow: 0.6;
   min-width: 6rem;
-
-  &::before {
-    display: inline;
-    color: colors.$violet-200;
-    content: "#";
-  }
 }
 
 .due {
