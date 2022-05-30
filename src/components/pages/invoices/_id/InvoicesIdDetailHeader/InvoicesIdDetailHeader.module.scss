@@ -9,6 +9,7 @@
 .id {
   margin-bottom: 0.8rem;
   color: colors.$black-500;
+  font-weight: 700;
   @include text.h3;
 }
 
