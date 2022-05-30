@@ -3,19 +3,18 @@ import Card from "components/ui/Card/Card";
 import Label from "components/ui/Label/Label";
 import Text from "components/ui/Text/Text";
 import { Color } from "constants/color";
-import { Status } from "constants/invoices";
+import { Invoice } from "types/invoices";
 import { PropsOf } from "types/shared";
 import { classNames } from "utils/classnames";
 import { capitalize } from "utils/string";
 import styles from "./InvoicesIdHeader.module.scss";
 
-interface Props {
-  status: Status;
-}
+type Props = Pick<Invoice, "status" | "id">;
 
 export default function InvoicesIdHeader({
   className,
   status,
+  id,
   ...props
 }: Props & PropsOf<typeof Card>) {
   const classes = classNames([styles.header, className]);

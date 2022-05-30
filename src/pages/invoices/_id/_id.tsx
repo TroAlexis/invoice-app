@@ -18,7 +18,11 @@ export default function InvoicePage() {
             <InvoicesIdBackButton className={styles.back} />
           </NavLink>
 
-          <InvoicesIdHeader status={invoice.status} className={styles.header} />
+          <InvoicesIdHeader
+            status={invoice.status}
+            id={invoice.id}
+            className={styles.header}
+          />
 
           <InvoicesIdDetail invoice={invoice} />
         </Container>
