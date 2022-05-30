@@ -4,14 +4,12 @@ import Label from "components/ui/Label/Label";
 import Text from "components/ui/Text/Text";
 import { Color } from "constants/color";
 import { Status } from "constants/invoices";
-import { ComponentPropsWithoutRef } from "react";
+import { PropsOf } from "types/shared";
 import { classNames } from "utils/classnames";
 import { capitalize } from "utils/string";
 import styles from "./InvoicesIdHeader.module.scss";
 
-type CardElement = ReturnType<typeof Card>;
-
-interface Props extends ComponentPropsWithoutRef<CardElement["type"]> {
+interface Props {
   status: Status;
 }
 
@@ -19,7 +17,7 @@ export default function InvoicesIdHeader({
   className,
   status,
   ...props
-}: Props) {
+}: Props & PropsOf<typeof Card>) {
   const classes = classNames([styles.header, className]);
   const formattedStatus = capitalize(status.toLowerCase());
 
