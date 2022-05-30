@@ -21,9 +21,10 @@ export default function InvoiceAddress({
 
   return (
     <address className={classes}>
-      {[street, city, postCode, country].map((text) => {
+      {[street, city, postCode, country].map((text, index) => {
+        const key = text + index;
         return (
-          <Text key={text} type={Constraints.LOOSE}>
+          <Text key={key} type={Constraints.LOOSE}>
             {text}
           </Text>
         );
