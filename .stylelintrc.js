@@ -15,7 +15,7 @@ module.exports = {
     "selector-class-pattern": [
       withIgnoredPatterns(cases.kebab, ignoredPatterns),
       {
-        message: "Expected class selector to be lol",
+        message: "Expected class selector to be kebab-case",
       },
     ],
     "selector-pseudo-class-no-unknown": [
