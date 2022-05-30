@@ -2,7 +2,10 @@ import invoicesApi from "@/api/modules/invoices";
 import useEffectOnce from "@/hooks/useEffectOnce";
 import useLoading from "@/hooks/useLoading";
 import { useTypedDispatch, useTypedSelector } from "@/hooks/useTypedStore";
-import { filteredInvoicesSelector } from "@/store/selectors/invoices";
+import {
+  filteredInvoicesSelector,
+  invoicesSelector,
+} from "@/store/selectors/invoices";
 import { InvoiceActionType } from "@/store/types/invoices";
 import InvoicesBodyEmpty from "components/pages/invoices/index/InvoicesBodyEmpty/InvoicesBodyEmpty";
 import InvoicesList from "components/pages/invoices/index/InvoicesList/InvoicesList";
@@ -59,19 +62,26 @@ const Transition: FC<PropsWithChildren<TransitionProps>> = ({
 };
 
 const useInvoices = () => {
+  const { items } = useTypedSelector(invoicesSelector);
   const invoices = useTypedSelector(filteredInvoicesSelector);
-  const { loading, withLoading } = useLoading(true);
+
+  const shouldFetch = !items.length;
+
+  const { loading, withLoading } = useLoading(shouldFetch);
   const dispatch = useTypedDispatch();
 
-  const fetchInvoices = async () => {
-    const items = await invoicesApi.getAll();
-    dispatch({ type: InvoiceActionType.SET_ITEMS, items });
-  };
   const fetchWithLoading = withLoading(fetchInvoices);
 
   useEffectOnce(() => {
-    fetchWithLoading();
+    if (shouldFetch) {
+      fetchWithLoading(dispatch);
+    }
   });
 
   return { invoices, loading };
 };
+
+async function fetchInvoices(dispatch: ReturnType<typeof useTypedDispatch>) {
+  const items = await invoicesApi.getAll();
+  dispatch({ type: InvoiceActionType.SET_ITEMS, items });
+}
