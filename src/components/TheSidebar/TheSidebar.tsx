@@ -1,4 +1,5 @@
 import authApi from "@/api/modules/auth/auth";
+import withTransition from "components/ui/hocs/withTransition/withTransition";
 import Icon from "components/ui/Icon/Icon";
 import iconStyles from "components/ui/Icon/Icon.module.scss";
 import { Size } from "constants/size";
@@ -7,6 +8,8 @@ import {
   ComponentPropsWithRef,
   forwardRef,
 } from "react";
+import Avatar, { AvatarConfig } from "react-nice-avatar";
+import { NavLink } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import { classNames } from "utils/classnames";
 import { withDisplayName } from "utils/hoc";
@@ -25,6 +28,17 @@ interface Props
   isAuthenticated?: boolean;
 }
 
+const ProfileWithTransition = withTransition(
+  Profile,
+  { component: null },
+  {
+    classNames: "fade",
+    timeout: 200,
+    appear: true,
+    unmountOnExit: true,
+  }
+);
+
 const TheSidebar = forwardRef<HTMLElement, Props>(
   ({ children, ...props }, ref) => {
     const {
@@ -35,15 +49,13 @@ const TheSidebar = forwardRef<HTMLElement, Props>(
       isAuthenticated,
       ...attrs
     } = props;
+    const user = authApi.getUser();
+    const avatar = user?.user_metadata?.avatar;
+
     const classes = getClasses(props);
 
     return (
-      <nav
-        className={classes.className}
-        ref={ref}
-        onClick={authApi.logOut}
-        {...attrs}
-      >
+      <nav className={classes.className} ref={ref} {...attrs}>
         <Logo className={classes.logoClassName} />
         <div className={classes.navigationClassName}>
           {children || <Navigation />}
@@ -55,7 +67,10 @@ const TheSidebar = forwardRef<HTMLElement, Props>(
           unmountOnExit
         >
           <div className={classes.profileClassName}>
-            <Profile />
+            <ProfileWithTransition
+              visible={isAuthenticated}
+              props={{ avatar, onClick: authApi.logOut }}
+            />
           </div>
         </CSSTransition>
       </nav>
@@ -79,9 +94,9 @@ function Logo({ className }: ComponentPropsWithoutRef<"span">) {
   const classes = classNames([className, styles.logo]);
 
   return (
-    <span className={classes}>
+    <NavLink className={classes} to="/invoices">
       <Icon name="logo" className={styles.icon} size={Size.MEDIUM} />
-    </span>
+    </NavLink>
   );
 }
 
@@ -99,10 +114,14 @@ const avatarClasses = classNames([
   styles.avatar,
 ]);
 
-function Profile() {
+type ProfileProps = {
+  avatar: AvatarConfig;
+} & ComponentPropsWithoutRef<"figure">;
+
+function Profile({ avatar, ...props }: ProfileProps) {
   return (
-    <figure className={styles.container}>
-      <img src="" alt="Avatar" className={avatarClasses} />
+    <figure className={styles.container} {...props}>
+      <Avatar className={avatarClasses} {...avatar} />
     </figure>
   );
 }
