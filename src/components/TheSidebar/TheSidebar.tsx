@@ -88,7 +88,7 @@ function Logo({ className }: ComponentPropsWithoutRef<"span">) {
 function Navigation() {
   return (
     <ul className={styles.container}>
-      <li>..</li>
+      <li />
     </ul>
   );
 }
