@@ -1,0 +1,38 @@
+@use "styles/_colors.scss";
+@use "styles/_text.scss";
+
+.wrapper {
+  display: flex;
+}
+
+.dates {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.to {
+  flex: 1;
+}
+
+.email {
+  flex: 1;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
+  @include text.h3;
+}
+
+.label {
+  margin-bottom: 1.2rem;
+  font-weight: 500;
+}
+
+.address,
+.label {
+  color: colors.$violet-200;
+}
