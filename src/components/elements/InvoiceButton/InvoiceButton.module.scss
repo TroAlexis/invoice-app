@@ -1,5 +1,9 @@
 @use "styles/_colors.scss";
 
+.link {
+  text-decoration: none;
+}
+
 .icon {
   color: colors.$violet-400;
   fill: colors.$white;
