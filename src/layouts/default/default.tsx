@@ -7,7 +7,7 @@ import WelcomeForm from "components/WelcomeForm/WelcomeForm";
 
 import { Path } from "constants/route";
 
-import React, { useState } from "react";
+import React, { ComponentPropsWithoutRef, useState } from "react";
 import { shallowEqual } from "react-redux";
 import { Navigate, Outlet, Route } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
@@ -15,7 +15,10 @@ import { CSSTransition } from "react-transition-group";
 import { classNames } from "utils/classnames";
 import styles from "./default.module.scss";
 
-export default function Default() {
+export default function Default({
+  className,
+}: ComponentPropsWithoutRef<"div">) {
+  const classes = classNames([styles.layout, className]);
   const { ref, withEventSelf } = useEventSelf();
   const { session } = useTypedSelector(authSelector, shallowEqual);
   const hasSession = Boolean(session);
@@ -32,7 +35,7 @@ export default function Default() {
   const sidebarClasses = getSideBarClasses(hasSession);
 
   return (
-    <div className={styles.layout}>
+    <div className={classes}>
       <TheSidebar
         ref={ref}
         {...sidebarClasses}
