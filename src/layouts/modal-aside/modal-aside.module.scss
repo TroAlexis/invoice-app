@@ -1,0 +1,18 @@
+$background-color: rgb(0 0 0 / 50%);
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background-color: $background-color;
+
+  .main {
+    padding: 0;
+    background-color: transparent;
+  }
+
+  .sidebar {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
