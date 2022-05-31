@@ -15,9 +15,16 @@ import { CSSTransition } from "react-transition-group";
 import { classNames } from "utils/classnames";
 import styles from "./default.module.scss";
 
+interface Props extends ComponentPropsWithoutRef<"div"> {
+  sidebarClassName?: string;
+  mainClassName?: string;
+}
+
 export default function Default({
   className,
-}: ComponentPropsWithoutRef<"div">) {
+  sidebarClassName,
+  mainClassName,
+}: Props) {
   const classes = classNames([styles.layout, className]);
   const { ref, withEventSelf } = useEventSelf();
   const { session } = useTypedSelector(authSelector, shallowEqual);
@@ -32,7 +39,7 @@ export default function Default({
     setTransitioned(hasSession);
   });
 
-  const sidebarClasses = getSideBarClasses(hasSession);
+  const sidebarClasses = getSideBarClasses(hasSession, sidebarClassName);
 
   return (
     <div className={classes}>
@@ -45,19 +52,23 @@ export default function Default({
         {!isAuthenticated && <AuthenticationRoutes visible={isFormVisible} />}
       </TheSidebar>
 
-      <Main visible={isAuthenticated} />
+      <Main visible={isAuthenticated} className={mainClassName} />
     </div>
   );
 }
 
-function getSideBarClasses(isAuthenticated: boolean): Partial<Classes> {
-  const className = classNames([
+function getSideBarClasses(
+  isAuthenticated: boolean,
+  className?: string
+): Partial<Classes> {
+  const classes = classNames([
+    className,
     styles.sidebar,
     !isAuthenticated && styles["is-not-authenticated"],
   ]);
 
   return {
-    className,
+    className: classes,
     logoClassName: styles.logo,
     navigationClassName: styles.navigation,
   };
@@ -94,7 +105,11 @@ function AuthenticationRoutes({ visible }: Transitionable) {
   );
 }
 
-function Main({ visible }: Transitionable) {
+function Main({
+  visible,
+  className,
+}: Transitionable & ComponentPropsWithoutRef<"main">) {
+  const classes = classNames([className, styles.main]);
   return (
     <CSSTransition
       timeout={{
@@ -106,7 +121,7 @@ function Main({ visible }: Transitionable) {
       mountOnEnter
       unmountOnExit
     >
-      <main className={styles.main}>
+      <main className={classes}>
         <Outlet />
       </main>
     </CSSTransition>
