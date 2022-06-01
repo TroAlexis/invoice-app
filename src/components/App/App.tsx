@@ -5,6 +5,7 @@ import InvoiceEdit from "@/pages/invoices/_id/edit/edit";
 import InvoicesNew from "@/pages/invoices/_id/new/new";
 import Invoices from "@/pages/invoices/index/invoices";
 import AnimatedRoutes from "components/AnimatedRoutes/AnimatedRoutes";
+import withTransition from "components/ui/hocs/withTransition/withTransition";
 import React from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import {
@@ -18,9 +19,11 @@ import {
 const App = (): JSX.Element => {
   const location = useLocation();
 
-  const state = location.state as { backgroundLocation?: Location };
+  const state = (location.state as { backgroundLocation?: Location }) || {};
 
-  const currentLocation = state?.backgroundLocation || location;
+  const { backgroundLocation } = state;
+
+  const currentLocation = backgroundLocation || location;
 
   return (
     <>
@@ -35,7 +38,10 @@ const App = (): JSX.Element => {
         </Route>
       </Routes>
 
-      {state?.backgroundLocation && <InvoicesModalRoutes />}
+      <AnimatedInvoicesModalRoutes
+        visible={!!backgroundLocation}
+        props={backgroundLocation}
+      />
     </>
   );
 };
@@ -57,15 +63,30 @@ const InvoicesRoutes = ({ location }: { location: Location }) => {
   );
 };
 
+const invoicesModalTransition = {
+  classNames: "fade",
+  timeout: 200,
+  appear: true,
+};
+
 const InvoicesModalRoutes = () => {
   return (
-    <Routes>
+    <AnimatedRoutes
+      switchProps={{ mode: "out-in" }}
+      transitionProps={invoicesModalTransition}
+    >
       <Route path="invoices/*" element={<ModalAside />}>
         <Route path="new" element={<InvoicesNew />} />
         <Route path="edit/:id" element={<InvoiceEdit />} />
 
         <Route path="*" element={<Navigate to="/invoices" replace />} />
       </Route>
-    </Routes>
+    </AnimatedRoutes>
   );
 };
+
+const AnimatedInvoicesModalRoutes = withTransition(
+  InvoicesModalRoutes,
+  { component: null },
+  invoicesModalTransition
+);
