@@ -7,7 +7,12 @@ import WelcomeForm from "components/WelcomeForm/WelcomeForm";
 
 import { Path } from "constants/route";
 
-import React, { ComponentPropsWithoutRef, useState } from "react";
+import React, {
+  ComponentPropsWithoutRef,
+  ComponentPropsWithRef,
+  forwardRef,
+  useState,
+} from "react";
 import { shallowEqual } from "react-redux";
 import { Navigate, Outlet, Route } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
@@ -17,13 +22,13 @@ import styles from "./default.module.scss";
 
 interface Props extends ComponentPropsWithoutRef<"div"> {
   sidebarClassName?: string;
-  mainClassName?: string;
+  mainProps?: Omit<MainProps, "visible">;
 }
 
 export default function Default({
   className,
   sidebarClassName,
-  mainClassName,
+  mainProps,
 }: Props) {
   const classes = classNames([styles.layout, className]);
   const { ref, withEventSelf } = useEventSelf();
@@ -52,7 +57,7 @@ export default function Default({
         {!isAuthenticated && <AuthenticationRoutes visible={isFormVisible} />}
       </TheSidebar>
 
-      <Main visible={isAuthenticated} className={mainClassName} />
+      <Main visible={isAuthenticated} {...mainProps} />
     </div>
   );
 }
@@ -105,25 +110,26 @@ function AuthenticationRoutes({ visible }: Transitionable) {
   );
 }
 
-function Main({
-  visible,
-  className,
-}: Transitionable & ComponentPropsWithoutRef<"main">) {
-  const classes = classNames([className, styles.main]);
-  return (
-    <CSSTransition
-      timeout={{
-        enter: 200,
-        exit: 0,
-      }}
-      in={visible}
-      classNames="fade"
-      mountOnEnter
-      unmountOnExit
-    >
-      <main className={classes}>
-        <Outlet />
-      </main>
-    </CSSTransition>
-  );
-}
+type MainProps = Transitionable & ComponentPropsWithRef<"main">;
+
+const Main = forwardRef<HTMLElement, MainProps>(
+  ({ visible, className, ...props }, ref) => {
+    const classes = classNames([className, styles.main]);
+    return (
+      <CSSTransition
+        timeout={{
+          enter: 200,
+          exit: 0,
+        }}
+        in={visible}
+        classNames="fade"
+        mountOnEnter
+        unmountOnExit
+      >
+        <main className={classes} {...props} ref={ref}>
+          <Outlet />
+        </main>
+      </CSSTransition>
+    );
+  }
+);
