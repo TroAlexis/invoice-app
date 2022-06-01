@@ -1,26 +1,22 @@
+import useModalNavigation from "@/hooks/useModalNavigation";
 import styles from "components/elements/InvoiceButton/InvoiceButton.module.scss";
 import Button from "components/ui/Button/Button";
 import Heading from "components/ui/Heading/Heading";
 import Icon from "components/ui/Icon/Icon";
 import { Size } from "constants/size";
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { SlotProps } from "types/shared";
 import { classNames } from "utils/classnames";
 
 interface Props extends Omit<React.ComponentPropsWithoutRef<"a">, "color"> {}
 
 export default function InvoiceButton({ className, ...props }: Props) {
-  const location = useLocation();
+  const { state } = useModalNavigation();
   const classes = classNames([styles.link, className]);
 
   return (
-    <NavLink
-      to="/invoices/new"
-      state={{ backgroundLocation: location }}
-      className={classes}
-      {...props}
-    >
+    <NavLink to="/invoices/new" state={state} className={classes} {...props}>
       <Button icon={renderButtonIcon}>
         <Heading level="h3" element="p" size={Size.SMALL}>
           New Invoice
