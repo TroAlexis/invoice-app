@@ -1,8 +1,10 @@
+import useModalNavigation from "@/hooks/useModalNavigation";
 import Button from "components/ui/Button/Button";
 import Card from "components/ui/Card/Card";
 import Label from "components/ui/Label/Label";
 import Text from "components/ui/Text/Text";
 import { Color } from "constants/color";
+import { NavLink } from "react-router-dom";
 import { Invoice } from "types/invoices";
 import { PropsOf } from "types/shared";
 import { classNames } from "utils/classnames";
@@ -19,6 +21,7 @@ export default function InvoicesIdHeader({
 }: Props & PropsOf<typeof Card>) {
   const classes = classNames([styles.header, className]);
   const formattedStatus = capitalize(status.toLowerCase());
+  const { state } = useModalNavigation();
 
   return (
     <Card className={classes} {...props}>
@@ -27,9 +30,13 @@ export default function InvoicesIdHeader({
         {formattedStatus}
       </Label>
 
-      <Button color={Color.SECONDARY} className={styles.control}>
-        Edit
-      </Button>
+      <NavLink
+        to={`/invoices/edit/${id}`}
+        className={styles.control}
+        state={state}
+      >
+        <Button color={Color.SECONDARY}>Edit</Button>
+      </NavLink>
       <Button color={Color.RED} className={styles.control}>
         Delete
       </Button>
