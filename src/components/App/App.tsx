@@ -1,6 +1,7 @@
 import LayoutDefault from "@/layouts/default/default";
 import ModalAside from "@/layouts/modal-aside/modal-aside";
 import InvoicePage from "@/pages/invoices/_id/_id";
+import InvoiceEdit from "@/pages/invoices/_id/edit/edit";
 import InvoicesNew from "@/pages/invoices/_id/new/new";
 import Invoices from "@/pages/invoices/index/invoices";
 import AnimatedRoutes from "components/AnimatedRoutes/AnimatedRoutes";
@@ -61,6 +62,7 @@ const InvoicesModalRoutes = () => {
     <Routes>
       <Route path="invoices/*" element={<ModalAside />}>
         <Route path="new" element={<InvoicesNew />} />
+        <Route path="edit/:id" element={<InvoiceEdit />} />
 
         <Route path="*" element={<Navigate to="/invoices" replace />} />
       </Route>

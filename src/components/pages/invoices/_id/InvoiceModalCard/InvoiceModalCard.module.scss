@@ -1,0 +1,13 @@
+@use "styles/_colors.scss";
+
+$offset: 5rem;
+$padding: 5.6rem;
+
+.card {
+  flex: 1;
+  max-width: 62rem;
+  margin-left: -$offset;
+  padding: $padding $padding $padding $offset + $padding;
+  overflow: auto;
+  background-color: colors.$white;
+}

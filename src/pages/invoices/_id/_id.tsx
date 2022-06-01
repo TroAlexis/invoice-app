@@ -35,7 +35,7 @@ type InvoiceParams = {
   id?: string;
 };
 
-function useInvoice() {
+export function useInvoice() {
   const { items } = useTypedSelector(invoicesSelector);
 
   const { id: invoiceId } = useParams<InvoiceParams>();
