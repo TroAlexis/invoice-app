@@ -1,10 +1,10 @@
+import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import {
   ActionCreator,
   ActionCreatorsMapObject,
   bindActionCreators,
 } from "redux";
-import { useMemo } from "react";
 
 export function useActions<A, M extends ActionCreatorsMapObject<A>>(
   actionCreators: M
