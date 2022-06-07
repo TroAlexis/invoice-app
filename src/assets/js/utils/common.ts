@@ -30,3 +30,9 @@ export const timeout = (timeout: number) => {
     setTimeout(resolve, timeout);
   });
 };
+
+export const set = <T>(obj: T, key: keyof T, value: T[typeof key]) => {
+  obj[key] = value;
+
+  return obj;
+};
