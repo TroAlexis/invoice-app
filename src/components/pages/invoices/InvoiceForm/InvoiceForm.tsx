@@ -1,8 +1,7 @@
 import InvoiceFormAddressSection from "components/pages/invoices/InvoiceFormAddressSection/InvoiceFormAddressSection";
+import InvoiceFormClientSection from "components/pages/invoices/InvoiceFormClientSection/InvoiceFormClientSection";
 import InvoiceFormDates from "components/pages/invoices/InvoiceFormDates/InvoiceFormDates";
-import InvoiceFormSection from "components/pages/invoices/InvoiceFormSection/InvoiceFormSection";
 import Heading from "components/ui/Heading/Heading";
-import Input from "components/ui/Input/Input";
 import { Status } from "constants/invoices";
 import { ComponentPropsWithoutRef, useCallback } from "react";
 import { Invoice } from "types/invoices";
@@ -49,30 +48,11 @@ export default function InvoiceForm({ invoice, className, heading }: Props) {
         className={styles.section}
         onChange={handleChange}
       >
-        <InvoiceFormSection
+        <InvoiceFormClientSection
           values={state.client}
-          name="client"
           onChange={handleChange}
-        >
-          {({ handleInput, values }) => (
-            <>
-              <Input
-                label="Client's Name"
-                name="name"
-                value={values.name}
-                className={styles.input}
-                onInput={handleInput}
-              />
-              <Input
-                label="Client's Email"
-                name="email"
-                value={values.email}
-                className={styles.input}
-                onInput={handleInput}
-              />
-            </>
-          )}
-        </InvoiceFormSection>
+          inputClassName={styles.input}
+        />
       </InvoiceFormAddressSection>
 
       <InvoiceFormDates
