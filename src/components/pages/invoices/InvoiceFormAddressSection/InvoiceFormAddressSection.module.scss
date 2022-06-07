@@ -1,0 +1,26 @@
+@use 'styles/_colors.scss';
+
+.section {
+    display: flex;
+    flex-direction: column;
+}
+
+.heading {
+    margin-bottom: 2.4rem;
+    color: colors.$violet-400;
+    font-weight: 700;
+}
+
+.row {
+    display: flex;
+    margin-top: 2.4rem;
+
+    > * {
+        flex: 1;
+        min-width: 0;
+
+        &:not(:last-child) {
+            margin-right: 2.4rem;
+        }
+    }
+}
