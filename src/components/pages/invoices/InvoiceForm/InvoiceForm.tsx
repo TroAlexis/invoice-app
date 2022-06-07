@@ -3,6 +3,7 @@ import InvoiceFormClientSection from "components/pages/invoices/InvoiceFormClien
 import InvoiceFormDates from "components/pages/invoices/InvoiceFormDates/InvoiceFormDates";
 import Heading from "components/ui/Heading/Heading";
 import { Status } from "constants/invoices";
+import { castDraft, Immutable } from "immer";
 import { ComponentPropsWithoutRef, useCallback } from "react";
 import { Invoice } from "types/invoices";
 import { BasicSlot, ValueOf } from "types/shared";
@@ -12,7 +13,7 @@ import { set } from "utils/common";
 import { renderSlot } from "utils/dom";
 import styles from "./InvoiceForm.module.scss";
 
-type InvoiceData = Omit<Invoice, "id">;
+type InvoiceData = Immutable<Omit<Invoice, "id">>;
 
 interface Props extends ComponentPropsWithoutRef<"form"> {
   heading: BasicSlot;
@@ -66,7 +67,7 @@ export default function InvoiceForm({ invoice, className, heading }: Props) {
 }
 
 const useInvoiceForm = (invoice?: Invoice) => {
-  const initialState = invoice
+  const initialState: InvoiceData = invoice
     ? invoice
     : {
         items: [],
@@ -83,7 +84,9 @@ const useInvoiceForm = (invoice?: Invoice) => {
 
   const handleChange = useCallback(
     (key: keyof InvoiceData, value: ValueOf<InvoiceData>) => {
-      return setInvoiceState((prevState) => set(prevState, key, value));
+      return setInvoiceState((prevState) =>
+        set(prevState, key, castDraft(value))
+      );
     },
     [setInvoiceState]
   );
