@@ -11,6 +11,11 @@ $sizes: (
     font-size: 2rem,
     line-height: 1.1,
     letter-spacing: -0.625px,
+    small: (
+      font-size: 1.8rem,
+      line-height: 2,
+      letter-spacing: -0.38px,
+    ),
   ),
   h3: (
     font-size: 1.6rem,
@@ -30,7 +35,15 @@ $h3-sizes: map.get($sizes, h3);
 }
 
 @mixin h2() {
-  @include helpers.include-properties(map.get($sizes, h2));
+  @include helpers.include-properties(map.get($sizes, h2), $recursive: false);
+
+  &.small {
+    @include h2-small;
+  }
+}
+
+@mixin h2-small() {
+  @include helpers.include-properties(map.get($sizes, h3));
 }
 
 @mixin h3() {
