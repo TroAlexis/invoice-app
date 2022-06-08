@@ -1,4 +1,10 @@
-import { Dispatch, FunctionComponent, Ref, SetStateAction } from "react";
+import {
+  Dispatch,
+  FunctionComponent,
+  Ref,
+  SetStateAction,
+  SyntheticEvent,
+} from "react";
 
 export type ValueOf<T> = T[keyof T];
 export type Falsy = false | 0 | "" | null | undefined;
@@ -33,3 +39,5 @@ export type RenderSlotWithProps<SlotName extends string, ParentProps> = (
 export interface WithForwardedRef {
   fRef?: Ref<HTMLElement> | null;
 }
+
+export type InputHandler<T = void> = (e: SyntheticEvent<HTMLInputElement>) => T;

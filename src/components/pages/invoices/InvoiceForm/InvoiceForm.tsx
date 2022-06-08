@@ -2,11 +2,12 @@ import InvoiceFormAddressSection from "components/pages/invoices/InvoiceFormAddr
 import InvoiceFormClientSection from "components/pages/invoices/InvoiceFormClientSection/InvoiceFormClientSection";
 import InvoiceFormDates from "components/pages/invoices/InvoiceFormDates/InvoiceFormDates";
 import Heading from "components/ui/Heading/Heading";
+import Input from "components/ui/Input/Input";
 import { Status } from "constants/invoices";
 import { castDraft, Immutable } from "immer";
 import { ComponentPropsWithoutRef, useCallback } from "react";
 import { Invoice } from "types/invoices";
-import { BasicSlot, ValueOf } from "types/shared";
+import { BasicSlot, InputHandler, ValueOf } from "types/shared";
 import { useImmer } from "use-immer";
 import { classNames } from "utils/classnames";
 import { set } from "utils/common";
@@ -26,7 +27,7 @@ const paymentTermsOptions = [1, 7, 14, 30].map((value) => {
 
 export default function InvoiceForm({ invoice, className, heading }: Props) {
   const classes = classNames([styles.form, className]);
-  const { handleChange, state } = useInvoiceForm(invoice);
+  const { handleChange, handleInput, state } = useInvoiceForm(invoice);
 
   return (
     <form className={classes}>
@@ -57,10 +58,19 @@ export default function InvoiceForm({ invoice, className, heading }: Props) {
       </InvoiceFormAddressSection>
 
       <InvoiceFormDates
+        className={styles.input}
         createdAt={state.createdAt}
         paymentTerms={state.paymentTerms}
         paymentTermsOptions={paymentTermsOptions}
         handleChange={handleChange}
+      />
+
+      <Input
+        value={state.description}
+        className={styles.input}
+        onInput={handleInput}
+        name="description"
+        label="Project Description"
       />
     </form>
   );
@@ -84,15 +94,30 @@ const useInvoiceForm = (invoice?: Invoice) => {
 
   const handleChange = useCallback(
     (key: keyof InvoiceData, value: ValueOf<InvoiceData>) => {
-      return setInvoiceState((prevState) =>
-        set(prevState, key, castDraft(value))
-      );
+      setInvoiceState((prevState) => set(prevState, key, castDraft(value)));
     },
     [setInvoiceState]
+  );
+
+  const isValidName = useCallback(
+    (name: string): name is keyof InvoiceData => name in invoiceState,
+    [invoiceState]
+  );
+
+  const handleInput = useCallback<InputHandler>(
+    (e) => {
+      const { name, value } = e.target as HTMLInputElement;
+
+      if (isValidName(name)) {
+        handleChange(name, value);
+      }
+    },
+    [handleChange, isValidName]
   );
 
   return {
     state: invoiceState,
     handleChange,
+    handleInput,
   };
 };
