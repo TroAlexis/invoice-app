@@ -1,8 +1,9 @@
 import Text from "components/ui/Text/Text";
 import { Constraints } from "constants/size";
 import { ComponentPropsWithoutRef } from "react";
-import { Invoice, Item } from "types/invoices";
+import { Invoice } from "types/invoices";
 import { classNames } from "utils/classnames";
+import { getTotalPrice } from "utils/invoices";
 import { prettifyPrice } from "utils/string";
 import styles from "./InvoiceIdDetailItems.module.scss";
 
@@ -71,8 +72,4 @@ export default function InvoiceIdDetailItems({
       </div>
     </section>
   );
-}
-
-function getTotalPrice({ quantity, price }: Pick<Item, "quantity" | "price">) {
-  return price * quantity;
 }
