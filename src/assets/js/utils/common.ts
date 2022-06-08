@@ -36,3 +36,8 @@ export const set = <T>(obj: T, key: keyof T, value: T[typeof key]) => {
 
   return obj;
 };
+
+export const isKeyIn = <T extends object>(
+  obj: T,
+  key: string | number | symbol
+): key is keyof T => key in obj;

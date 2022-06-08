@@ -10,7 +10,7 @@ import { Invoice } from "types/invoices";
 import { BasicSlot, InputHandler, ValueOf } from "types/shared";
 import { useImmer } from "use-immer";
 import { classNames } from "utils/classnames";
-import { set } from "utils/common";
+import { isKeyIn, set } from "utils/common";
 import { renderSlot } from "utils/dom";
 import styles from "./InvoiceForm.module.scss";
 
@@ -93,26 +93,25 @@ const useInvoiceForm = (invoice?: Invoice) => {
   const [invoiceState, setInvoiceState] = useImmer<InvoiceData>(initialState);
 
   const handleChange = useCallback(
-    (key: keyof InvoiceData, value: ValueOf<InvoiceData>) => {
-      setInvoiceState((prevState) => set(prevState, key, castDraft(value)));
+    (key: string, value: ValueOf<InvoiceData>) => {
+      if (isKeyIn(invoiceState, key)) {
+        setInvoiceState((prevState) => set(prevState, key, castDraft(value)));
+      } else {
+        console.warn(
+          `Seems like you are trying to set "${key}" which is not present in invoice interface.`
+        );
+      }
     },
-    [setInvoiceState]
-  );
-
-  const isValidName = useCallback(
-    (name: string): name is keyof InvoiceData => name in invoiceState,
-    [invoiceState]
+    [setInvoiceState, invoiceState]
   );
 
   const handleInput = useCallback<InputHandler>(
     (e) => {
       const { name, value } = e.target as HTMLInputElement;
 
-      if (isValidName(name)) {
-        handleChange(name, value);
-      }
+      handleChange(name, value);
     },
-    [handleChange, isValidName]
+    [handleChange]
   );
 
   return {
