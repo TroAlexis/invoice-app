@@ -29,13 +29,14 @@ $sizes: (
   ),
 );
 $h3-sizes: map.get($sizes, h3);
+$h2-sizes: map.get($sizes, h2);
 
 @mixin h1() {
   @include helpers.include-properties(map.get($sizes, h1));
 }
 
 @mixin h2() {
-  @include helpers.include-properties(map.get($sizes, h2), $recursive: false);
+  @include helpers.include-properties($h2-sizes, $recursive: false);
 
   &.small {
     @include h2-small;
@@ -43,7 +44,7 @@ $h3-sizes: map.get($sizes, h3);
 }
 
 @mixin h2-small() {
-  @include helpers.include-properties(map.get($sizes, h3));
+  @include helpers.include-properties(map.get($h2-sizes, small));
 }
 
 @mixin h3() {
