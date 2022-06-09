@@ -22,6 +22,7 @@
     },
     "items": [
       {
+        "id": "X1000",
         "name": "Brand Guidelines",
         "quantity": 1,
         "price": 1800.90,
@@ -53,12 +54,14 @@
     },
     "items": [
       {
+        "id": "X1001",
         "name": "Banner Design",
         "quantity": 1,
         "price": 156.00,
         "total": 156.00
       },
       {
+        "id": "X1003",
         "name": "Email Design",
         "quantity": 2,
         "price": 200.00,
@@ -90,6 +93,7 @@
     },
     "items": [
       {
+        "id": "X1004",
         "name": "Website Redesign",
         "quantity": 1,
         "price": 14002.33,
@@ -121,6 +125,7 @@
     },
     "items": [
       {
+        "id": "X1005",
         "name": "Logo Sketches",
         "quantity": 1,
         "price": 102.04,
@@ -152,12 +157,14 @@
     },
     "items": [
       {
+        "id": "X1006",
         "name": "New Logo",
         "quantity": 1,
         "price": 1532.33,
         "total": 1532.33
       },
       {
+        "id": "X1007",
         "name": "Brand Guidelines",
         "quantity": 1,
         "price": 2500.00,
@@ -189,6 +196,7 @@
     },
     "items": [
       {
+        "id": "X1008",
         "name": "Web Design",
         "quantity": 1,
         "price": 6155.91,
@@ -220,6 +228,7 @@
     },
     "items": [
       {
+        "id": "X1010",
         "name": "Logo Re-design",
         "quantity": 1,
         "price": 3102.04,

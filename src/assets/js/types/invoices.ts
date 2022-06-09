@@ -6,6 +6,7 @@ export type PersonProperty = "name" | "email";
 export type Person = Record<PersonProperty, string>;
 
 export interface Item {
+  id: string;
   name: string;
   quantity: number;
   price: number;
