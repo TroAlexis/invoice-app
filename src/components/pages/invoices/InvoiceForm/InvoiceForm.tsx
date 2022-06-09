@@ -1,12 +1,13 @@
 import InvoiceFormAddressSection from "components/pages/invoices/InvoiceFormAddressSection/InvoiceFormAddressSection";
 import InvoiceFormClientSection from "components/pages/invoices/InvoiceFormClientSection/InvoiceFormClientSection";
 import InvoiceFormDates from "components/pages/invoices/InvoiceFormDates/InvoiceFormDates";
+import InvoiceFormItemList from "components/pages/invoices/InvoiceFormItemList/InvoiceFormItemList";
 import Heading from "components/ui/Heading/Heading";
 import Input from "components/ui/Input/Input";
 import { Status } from "constants/invoices";
 import { castDraft, Immutable } from "immer";
 import { ComponentPropsWithoutRef, useCallback } from "react";
-import { Invoice } from "types/invoices";
+import { Invoice, Item } from "types/invoices";
 import { BasicSlot, InputHandler, ValueOf } from "types/shared";
 import { useImmer } from "use-immer";
 import { classNames } from "utils/classnames";
@@ -28,6 +29,7 @@ const paymentTermsOptions = [1, 7, 14, 30].map((value) => {
 export default function InvoiceForm({ invoice, className, heading }: Props) {
   const classes = classNames([styles.form, className]);
   const { handleChange, handleInput, state } = useInvoiceForm(invoice);
+  const handleItemsChange = (value: Item[]) => handleChange("items", value);
 
   return (
     <form className={classes}>
@@ -50,11 +52,12 @@ export default function InvoiceForm({ invoice, className, heading }: Props) {
         className={styles.section}
         onChange={handleChange}
       >
+        {" "}
         <InvoiceFormClientSection
           values={state.client}
           onChange={handleChange}
           inputClassName={styles.input}
-        />
+        />{" "}
       </InvoiceFormAddressSection>
 
       <InvoiceFormDates
@@ -72,6 +75,8 @@ export default function InvoiceForm({ invoice, className, heading }: Props) {
         name="description"
         label="Project Description"
       />
+
+      <InvoiceFormItemList items={state.items} onChange={handleItemsChange} />
     </form>
   );
 }

@@ -1,0 +1,81 @@
+@use "styles/_colors.scss";
+@use "styles/_variables.scss";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  margin-bottom: 1.6rem;
+  color: colors.$grey-600;
+}
+
+.table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.head {
+  color: colors.$violet-200;
+
+  & > tr > * {
+    padding-top: 0;
+  }
+}
+
+.column {
+  box-sizing: content-box;
+  padding: 0.8rem;
+  text-align: left;
+
+  &:first-child {
+    width: 40%;
+    padding-left: 0;
+  }
+
+  &:nth-child(2),
+  &:nth-child(4),
+  &:nth-child(5) {
+    width: 13%;
+  }
+
+  &:nth-child(3) {
+    width: 21%;
+  }
+
+  &:last-child {
+    padding-right: 0;
+  }
+}
+
+.actions {
+  text-align: center;
+}
+
+.delete {
+  color: colors.$grey-500;
+  transition: color variables.$transition-fast;
+
+  &:hover {
+    color: colors.$red-400;
+  }
+}
+
+.quantity {
+  &#{&} {
+    padding-right: 1rem;
+    padding-left: 1rem;
+    text-align: center;
+  }
+}
+
+.total {
+  color: colors.$grey-600;
+  font-weight: 700;
+}
+
+.transitioning {
+  display: flex;
+  align-items: center;
+}
