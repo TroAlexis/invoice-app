@@ -27,9 +27,13 @@ $sizes: (
       letter-spacing: -0.25px,
     ),
   ),
+  body: (
+    font-size: 1.2rem,
+  ),
 );
 $h3-sizes: map.get($sizes, h3);
 $h2-sizes: map.get($sizes, h2);
+$body-sizes: map.get($sizes, body);
 
 @mixin h1() {
   @include helpers.include-properties(map.get($sizes, h1));
@@ -52,6 +56,10 @@ $h2-sizes: map.get($sizes, h2);
 
   &.small {
     @include h3-small;
+  }
+
+  &.smaller {
+    @include helpers.include-properties($body-sizes, $recursive: false);
   }
 }
 

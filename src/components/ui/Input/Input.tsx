@@ -12,7 +12,7 @@ type InputProps = Omit<React.ComponentPropsWithRef<"input">, "size">;
 
 interface ComponentProps {
   inputClassName?: string;
-  size?: Size.SMALL;
+  size?: Size.SMALL | Size.SMALLER;
   type?: HTMLInputTypeAttribute;
   icon?: RenderSlotWithProps<"icon", ComponentProps>;
 }
