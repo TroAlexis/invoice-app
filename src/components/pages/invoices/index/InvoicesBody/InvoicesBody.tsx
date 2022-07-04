@@ -82,6 +82,6 @@ const useInvoices = () => {
 };
 
 async function fetchInvoices(dispatch: ReturnType<typeof useTypedDispatch>) {
-  const items = await invoicesApi.getAll();
+  const items = await invoicesApi.get();
   dispatch({ type: InvoiceActionType.SET_ITEMS, items });
 }
