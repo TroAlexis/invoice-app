@@ -1,127 +1,88 @@
+import { InvoiceData } from "@/hooks/useInvoiceForm";
 import InvoiceFormAddressSection from "components/pages/invoices/InvoiceFormAddressSection/InvoiceFormAddressSection";
 import InvoiceFormClientSection from "components/pages/invoices/InvoiceFormClientSection/InvoiceFormClientSection";
 import InvoiceFormDates from "components/pages/invoices/InvoiceFormDates/InvoiceFormDates";
 import InvoiceFormItemList from "components/pages/invoices/InvoiceFormItemList/InvoiceFormItemList";
 import Heading from "components/ui/Heading/Heading";
 import Input from "components/ui/Input/Input";
-import { Status } from "constants/invoices";
-import { castDraft, Immutable } from "immer";
-import { ComponentPropsWithoutRef, useCallback } from "react";
-import { Invoice, Item } from "types/invoices";
+import { ComponentPropsWithoutRef } from "react";
+import { Item } from "types/invoices";
 import { BasicSlot, InputHandler, ValueOf } from "types/shared";
-import { useImmer } from "use-immer";
 import { classNames } from "utils/classnames";
-import { isKeyIn, set } from "utils/common";
 import { renderSlot } from "utils/dom";
 import styles from "./InvoiceForm.module.scss";
 
-type InvoiceData = Immutable<Omit<Invoice, "id">>;
-
-interface Props extends ComponentPropsWithoutRef<"form"> {
+interface OwnProps {
   heading: BasicSlot;
-  invoice?: Invoice;
+  invoice: InvoiceData;
+  onChange: (key: string, value: ValueOf<InvoiceData>) => void;
+  onInput: InputHandler;
 }
+
+interface Props
+  extends OwnProps,
+    Omit<ComponentPropsWithoutRef<"form">, keyof OwnProps> {}
 
 const paymentTermsOptions = [1, 7, 14, 30].map((value) => {
   return { value };
 });
 
-export default function InvoiceForm({ invoice, className, heading }: Props) {
+export default function InvoiceForm({
+  invoice,
+  className,
+  heading,
+  onChange,
+  onInput,
+}: Props) {
   const classes = classNames([styles.form, className]);
-  const { handleChange, handleInput, state } = useInvoiceForm(invoice);
-  const handleItemsChange = (value: Item[]) => handleChange("items", value);
+  const handleItemsChange = (value: Item[]) => onChange("items", value);
 
   return (
-    <form className={classes}>
+    <div className={classes}>
       <Heading level="h1" className={styles.heading}>
         {renderSlot(heading)}
       </Heading>
 
       <InvoiceFormAddressSection
-        values={state.senderAddress}
+        values={invoice.senderAddress}
         name="senderAddress"
         heading="Bill from"
         className={styles.section}
-        onChange={handleChange}
+        onChange={onChange}
       />
 
       <InvoiceFormAddressSection
-        values={state.clientAddress}
+        values={invoice.clientAddress}
         name="clientAddress"
         heading="Bill to"
         className={styles.section}
-        onChange={handleChange}
+        onChange={onChange}
       >
         {" "}
         <InvoiceFormClientSection
-          values={state.client}
-          onChange={handleChange}
+          values={invoice.client}
+          onChange={onChange}
           inputClassName={styles.input}
         />{" "}
       </InvoiceFormAddressSection>
 
       <InvoiceFormDates
         className={styles.input}
-        createdAt={state.createdAt}
-        paymentTerms={state.paymentTerms}
+        createdAt={invoice.createdAt}
+        paymentTerms={invoice.paymentTerms}
         paymentTermsOptions={paymentTermsOptions}
-        handleChange={handleChange}
+        handleChange={onChange}
       />
 
       <Input
-        value={state.description}
+        value={invoice.description}
         className={styles.input}
-        onInput={handleInput}
+        onInput={onInput}
         name="description"
         label="Project Description"
       />
 
-      <InvoiceFormItemList items={state.items} onChange={handleItemsChange} />
-    </form>
+      <InvoiceFormItemList items={invoice.items} onChange={handleItemsChange} />
+    </div>
   );
 }
-
-const useInvoiceForm = (invoice?: Invoice) => {
-  const initialState: InvoiceData = invoice
-    ? invoice
-    : {
-        items: [],
-        createdAt: new Date(),
-        paymentDue: new Date(),
-        senderAddress: { street: "", country: "", postCode: "", city: "" },
-        clientAddress: { street: "", country: "", postCode: "", city: "" },
-        client: { name: "", email: "" },
-        description: "",
-        status: Status.PENDING,
-        paymentTerms: 1,
-      };
-  const [invoiceState, setInvoiceState] = useImmer<InvoiceData>(initialState);
-
-  const handleChange = useCallback(
-    (key: string, value: ValueOf<InvoiceData>) => {
-      if (isKeyIn(invoiceState, key)) {
-        setInvoiceState((prevState) => set(prevState, key, castDraft(value)));
-      } else {
-        console.warn(
-          `Seems like you are trying to set "${key}" which is not present in invoice interface.`
-        );
-      }
-    },
-    [setInvoiceState, invoiceState]
-  );
-
-  const handleInput = useCallback<InputHandler>(
-    (e) => {
-      const { name, value } = e.target as HTMLInputElement;
-
-      handleChange(name, value);
-    },
-    [handleChange]
-  );
-
-  return {
-    state: invoiceState,
-    handleChange,
-    handleInput,
-  };
-};
