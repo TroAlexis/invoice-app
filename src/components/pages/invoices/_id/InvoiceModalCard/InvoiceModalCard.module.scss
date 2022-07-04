@@ -7,7 +7,7 @@ $padding: 5.6rem;
   flex: 1;
   max-width: 62rem;
   margin-left: -$offset;
-  padding: $padding $padding $padding $offset + $padding;
+  padding: $padding $padding 0 $offset + $padding;
   overflow: auto;
   background-color: colors.$white;
 }

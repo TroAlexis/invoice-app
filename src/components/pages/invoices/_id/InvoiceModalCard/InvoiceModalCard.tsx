@@ -9,5 +9,5 @@ export default function InvoiceModalCard({
 }: PropsOf<typeof Card>) {
   const classes = classNames([className, styles.card]);
 
-  return <Card className={classes} {...props} />;
+  return <Card className={classes} {...props} tag={"form"} />;
 }
