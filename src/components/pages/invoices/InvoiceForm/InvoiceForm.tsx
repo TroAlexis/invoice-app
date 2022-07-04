@@ -33,12 +33,14 @@ export default function InvoiceForm({
   heading,
   onChange,
   onInput,
+  children,
+  ...attrs
 }: Props) {
   const classes = classNames([styles.form, className]);
   const handleItemsChange = (value: Item[]) => onChange("items", value);
 
   return (
-    <div className={classes}>
+    <form className={classes} {...attrs}>
       <Heading level="h1" className={styles.heading}>
         {renderSlot(heading)}
       </Heading>
@@ -58,12 +60,11 @@ export default function InvoiceForm({
         className={styles.section}
         onChange={onChange}
       >
-        {" "}
         <InvoiceFormClientSection
           values={invoice.client}
           onChange={onChange}
           inputClassName={styles.input}
-        />{" "}
+        />
       </InvoiceFormAddressSection>
 
       <InvoiceFormDates
@@ -83,6 +84,8 @@ export default function InvoiceForm({
       />
 
       <InvoiceFormItemList items={invoice.items} onChange={handleItemsChange} />
-    </div>
+
+      {children}
+    </form>
   );
 }
