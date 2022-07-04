@@ -2,23 +2,25 @@ import { Item } from "types/invoices";
 
 export interface ApiInvoice {
   id: string;
-  createdAt: string;
-  paymentDue: string;
+  created_at: string;
+  payment_due: string;
   description: string;
-  paymentTerms: number;
-  clientName: string;
-  clientEmail: string;
+  payment_terms: number;
   status: string;
-  senderAddress: {
+  client: {
+    name: string;
+    email: string;
+  };
+  sender_address: {
     street: string;
     city: string;
-    postCode: string;
+    post_code: string;
     country: string;
   };
-  clientAddress: {
+  client_address: {
     street: string;
     city: string;
-    postCode: string;
+    post_code: string;
     country: string;
   };
   items: Item[];

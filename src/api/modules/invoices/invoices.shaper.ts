@@ -1,22 +1,27 @@
 import { ApiInvoice } from "@/api/modules/invoices/invoices.types";
+import camelcaseKeys from "camelcase-keys";
 import { Status } from "constants/invoices";
 import { Invoice } from "types/invoices";
 
 export const invoiceShaper = (invoice: ApiInvoice): Invoice => {
+  const {
+    client_address,
+    created_at,
+    payment_due,
+    payment_terms,
+    sender_address,
+    status,
+    ...rest
+  } = invoice;
+
   return {
-    client: {
-      name: invoice.clientName,
-      email: invoice.clientEmail,
-    },
-    clientAddress: invoice.clientAddress,
-    createdAt: new Date(invoice.createdAt),
-    description: invoice.description,
-    id: invoice.id,
-    items: invoice.items,
-    paymentDue: new Date(invoice.paymentDue),
-    paymentTerms: invoice.paymentTerms,
-    senderAddress: invoice.senderAddress,
-    status: statusShaper(invoice.status),
+    clientAddress: camelcaseKeys(invoice.client_address),
+    createdAt: new Date(invoice.created_at),
+    paymentDue: new Date(invoice.payment_due),
+    paymentTerms: invoice.payment_terms,
+    senderAddress: camelcaseKeys(invoice.sender_address),
+    status: statusShaper(status),
+    ...rest,
   };
 };
 
