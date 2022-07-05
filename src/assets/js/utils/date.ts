@@ -9,3 +9,7 @@ export const prettifyDate = (date: Date) => {
 export const isDate = (date: unknown): date is Date => {
   return date instanceof Date;
 };
+
+export const toUTCString = (date: Date): string => {
+  return date.toUTCString();
+};

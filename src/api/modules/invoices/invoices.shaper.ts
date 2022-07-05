@@ -1,7 +1,9 @@
 import { ApiInvoice } from "@/api/modules/invoices/invoices.types";
 import camelcaseKeys from "camelcase-keys";
 import { Status } from "constants/invoices";
-import { Invoice } from "types/invoices";
+import snakecaseKeys from "snakecase-keys";
+import { Invoice, InvoiceData } from "types/invoices";
+import { toUTCString } from "utils/date";
 
 export const invoiceShaper = (invoice: ApiInvoice): Invoice => {
   const {
@@ -30,6 +32,16 @@ export const statusShaper = (status: string): Status => {
   return isOneOfStatuses(upperCasedStatus)
     ? Status[upperCasedStatus]
     : Status.PENDING;
+};
+
+export const apiInvoiceShaper = (invoice: InvoiceData) => {
+  const dateLess = {
+    ...invoice,
+    paymentDue: toUTCString(invoice.paymentDue),
+    createdAt: toUTCString(invoice.createdAt),
+  };
+
+  return snakecaseKeys(dateLess, { deep: true });
 };
 
 const isOneOfStatuses = (status: string): status is keyof typeof Status => {
