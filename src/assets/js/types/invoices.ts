@@ -14,7 +14,7 @@ export interface Item {
 }
 
 export interface Invoice {
-  id: string;
+  id: number;
   createdAt: Date;
   senderAddress: Partial<Address>;
   clientAddress: Partial<Address>;

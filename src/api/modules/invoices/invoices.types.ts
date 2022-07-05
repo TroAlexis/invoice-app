@@ -1,7 +1,7 @@
 import { Item } from "types/invoices";
 
 export interface ApiInvoice {
-  id: string;
+  id: number;
   created_at: string;
   description?: string;
   payment_terms: number;

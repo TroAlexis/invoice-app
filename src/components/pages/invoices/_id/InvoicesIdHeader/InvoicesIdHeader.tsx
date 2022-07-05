@@ -18,7 +18,7 @@ export default function InvoicesIdHeader({
   status,
   id,
   ...props
-}: Props & PropsOf<typeof Card>) {
+}: Props & Omit<PropsOf<typeof Card>, keyof Props>) {
   const classes = classNames([styles.header, className]);
   const formattedStatus = capitalize(status.toLowerCase());
   const { state } = useModalNavigation();

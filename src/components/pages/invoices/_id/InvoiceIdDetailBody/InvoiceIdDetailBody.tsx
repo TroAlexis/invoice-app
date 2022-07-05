@@ -12,7 +12,7 @@ type Props = Pick<
   Invoice,
   "createdAt" | "paymentTerms" | "clientAddress" | "client"
 > &
-  ComponentPropsWithoutRef<"section">;
+  Omit<ComponentPropsWithoutRef<"section">, "id">;
 
 export default function InvoiceIdDetailBody(props: Props) {
   const {

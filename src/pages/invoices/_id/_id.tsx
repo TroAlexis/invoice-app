@@ -41,7 +41,7 @@ export function useInvoice() {
   const { id: invoiceId } = useParams<InvoiceParams>();
 
   const invoice = items.find(({ id }) => {
-    return invoiceId === id;
+    return Number(invoiceId) === id;
   });
 
   return { invoice };
