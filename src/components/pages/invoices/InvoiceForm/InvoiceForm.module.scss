@@ -1,3 +1,5 @@
+@use "styles/_colors.scss";
+
 .form {
   display: flex;
   flex-direction: column;
@@ -13,4 +15,15 @@
 
 .input {
   margin-bottom: 2.4rem;
+}
+
+.footer {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  margin-right: -5.6rem;
+  margin-left: -5.6rem;
+  padding: 3.1rem 5.6rem;
+  background-color: colors.$white;
+  border-radius: 0 20px 20px 0;
 }

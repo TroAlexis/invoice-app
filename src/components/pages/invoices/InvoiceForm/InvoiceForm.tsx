@@ -84,7 +84,7 @@ export default function InvoiceForm({
 
       <InvoiceFormItemList items={invoice.items} onChange={handleItemsChange} />
 
-      {children}
+      <div className={styles.footer}>{children}</div>
     </form>
   );
 }
