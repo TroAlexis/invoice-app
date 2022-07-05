@@ -24,5 +24,7 @@ export interface ApiInvoice {
     country: string;
   };
   items: Item[];
-  total: number;
+  total?: number;
 }
+
+export type ApiInvoiceDto = Omit<ApiInvoice, "id" | "created_at">;

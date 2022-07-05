@@ -1,41 +1,35 @@
 import supabase from "@/api";
+import { TableType } from "@/api/enums";
 import { invoiceShaper } from "@/api/modules/invoices/invoices.shaper";
-import { ApiInvoice } from "@/api/modules/invoices/invoices.types";
-import { InvoiceData } from "@/hooks/useInvoiceForm";
-import { PostgrestError } from "@supabase/supabase-js";
-import snakecaseKeys from "snakecase-keys";
-import { Invoice } from "types/invoices";
+import {
+  ApiInvoice,
+  ApiInvoiceDto,
+} from "@/api/modules/invoices/invoices.types";
 
 export const invoicesApi = {
-  get: async (id?: Invoice["id"]): Promise<Invoice[]> => {
-    const request = supabase.from<ApiInvoice>("invoices").select("*");
+  get: async (id?: ApiInvoice["id"]) => {
+    const request = supabase.from<ApiInvoice>(TableType.INVOICES).select("*");
     if (id) {
       request.eq("id", id);
     }
 
-    const { data: invoices, error } = await request;
+    const response = await request;
+    const invoices = response.data
+      ? response.data.map((invoice) => invoiceShaper(invoice))
+      : null;
 
-    if (error) {
-      throw error;
-    }
-
-    return invoices.map((invoice) => invoiceShaper(invoice));
+    return {
+      ...response,
+      data: invoices,
+    };
   },
-  delete: async (id: Invoice["id"]): Promise<PostgrestError | ApiInvoice[]> => {
-    const { data, error } = await supabase
-      .from<ApiInvoice>("invoices")
-      .delete()
-      .eq("id", id);
-
-    return error || data;
+  delete: async (id: ApiInvoice["id"]) => {
+    return supabase.from<ApiInvoice>(TableType.INVOICES).delete().eq("id", id);
   },
-  add: async (invoice: InvoiceData) => {
-    const invoiceData = [snakecaseKeys(invoice)];
-    const { data, error } = await supabase
-      .from("invoices")
-      .insert(invoiceData, { returning: "minimal" });
-
-    return error || data;
+  add: async (invoice: ApiInvoiceDto) => {
+    return supabase
+      .from<ApiInvoiceDto[]>(TableType.INVOICES)
+      .insert([invoice], { returning: "minimal" });
   },
 } as const;
 
