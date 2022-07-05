@@ -31,6 +31,12 @@ export const invoicesApi = {
       .from<ApiInvoiceDto[]>(TableType.INVOICES)
       .insert([invoice], { returning: "minimal" });
   },
+  patch: async (id: ApiInvoice["id"], values: Partial<ApiInvoice>) => {
+    return supabase
+      .from<ApiInvoice>(TableType.INVOICES)
+      .update(values)
+      .eq("id", id);
+  },
 } as const;
 
 export default invoicesApi;
