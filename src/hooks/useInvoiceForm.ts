@@ -1,12 +1,10 @@
 import { Status } from "constants/invoices";
-import { castDraft, Immutable } from "immer";
+import { castDraft } from "immer";
 import { useCallback } from "react";
-import { Invoice } from "types/invoices";
+import { Invoice, InvoiceData } from "types/invoices";
 import { InputHandler, ValueOf } from "types/shared";
 import { useImmer } from "use-immer";
 import { isKeyIn, set } from "utils/common";
-
-export type InvoiceData = Immutable<Omit<Invoice, "id">>;
 
 export const useInvoiceForm = (invoice?: Invoice) => {
   const initialState: InvoiceData = invoice

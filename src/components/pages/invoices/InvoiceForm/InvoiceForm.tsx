@@ -1,4 +1,3 @@
-import { InvoiceData } from "@/hooks/useInvoiceForm";
 import InvoiceFormAddressSection from "components/pages/invoices/InvoiceFormAddressSection/InvoiceFormAddressSection";
 import InvoiceFormClientSection from "components/pages/invoices/InvoiceFormClientSection/InvoiceFormClientSection";
 import InvoiceFormDates from "components/pages/invoices/InvoiceFormDates/InvoiceFormDates";
@@ -6,7 +5,7 @@ import InvoiceFormItemList from "components/pages/invoices/InvoiceFormItemList/I
 import Heading from "components/ui/Heading/Heading";
 import Input from "components/ui/Input/Input";
 import { ComponentPropsWithoutRef } from "react";
-import { Item } from "types/invoices";
+import { InvoiceData, Item } from "types/invoices";
 import { BasicSlot, InputHandler, ValueOf } from "types/shared";
 import { classNames } from "utils/classnames";
 import { renderSlot } from "utils/dom";

@@ -31,3 +31,5 @@ export interface Filter {
   label: string;
   filterer: (invoice: Invoice) => boolean;
 }
+
+export type InvoiceData = Omit<Invoice, "id">;
