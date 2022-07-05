@@ -8,6 +8,7 @@ import { ComponentPropsWithoutRef, PropsWithChildren } from "react";
 import { Invoice } from "types/invoices";
 import { classNames } from "utils/classnames";
 import { prettifyDate } from "utils/date";
+import { getPaymentDue } from "utils/invoices";
 import { capitalize, prettifyPrice } from "utils/string";
 import styles from "./InvoicesCard.module.scss";
 
@@ -20,9 +21,10 @@ export default function InvoicesCard({
   invoice,
   ...props
 }: PropsWithChildren<Props>) {
-  const { id, paymentDue, client, items, status } = invoice;
+  const { id, paymentTerms, client, items = [], status, createdAt } = invoice;
   const classes = getClasses(className);
-  const dueDateText = prettifyDate(paymentDue);
+  const dueDate = getPaymentDue({ paymentTerms, createdAt });
+  const dueDateText = prettifyDate(dueDate);
   const totalPrice = items.reduce((total, { price }) => total + price, 0);
   const formattedPrice = prettifyPrice(totalPrice);
   const formattedStatus = capitalize(status.toLowerCase());

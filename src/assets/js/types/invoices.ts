@@ -16,12 +16,11 @@ export interface Item {
 export interface Invoice {
   id: string;
   createdAt: Date;
-  senderAddress: Address;
-  clientAddress: Address;
+  senderAddress: Partial<Address>;
+  clientAddress: Partial<Address>;
   client: Person;
   paymentTerms: number;
-  paymentDue: Date;
-  description: string;
+  description?: string;
   items: Item[];
   status: Status;
 }

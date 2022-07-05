@@ -9,7 +9,6 @@ export const invoiceShaper = (invoice: ApiInvoice): Invoice => {
   const {
     client_address,
     created_at,
-    payment_due,
     payment_terms,
     sender_address,
     status,
@@ -17,12 +16,12 @@ export const invoiceShaper = (invoice: ApiInvoice): Invoice => {
   } = invoice;
 
   return {
-    clientAddress: camelcaseKeys(invoice.client_address),
+    clientAddress: camelcaseKeys(invoice.client_address ?? {}),
     createdAt: new Date(invoice.created_at),
-    paymentDue: new Date(invoice.payment_due),
     paymentTerms: invoice.payment_terms,
-    senderAddress: camelcaseKeys(invoice.sender_address),
+    senderAddress: camelcaseKeys(invoice.sender_address ?? {}),
     status: statusShaper(status),
+    items: [],
     ...rest,
   };
 };
@@ -37,7 +36,6 @@ export const statusShaper = (status: string): Status => {
 export const apiInvoiceShaper = (invoice: InvoiceData) => {
   const dateLess = {
     ...invoice,
-    paymentDue: toUTCString(invoice.paymentDue),
     createdAt: toUTCString(invoice.createdAt),
   };
 

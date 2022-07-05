@@ -15,7 +15,7 @@ type Props<V, N> = {
 } & Omit<SectionProps<V, N>, "children">;
 
 export default function InvoiceFormAddressSection<
-  V extends Address,
+  V extends Partial<Address>,
   N extends string
 >({ className, heading, children, ...sectionProps }: Props<V, N>) {
   const classes = classNames([styles.section, className]);

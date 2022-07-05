@@ -12,7 +12,6 @@ export const useInvoiceForm = (invoice?: Invoice) => {
     : {
         items: [],
         createdAt: new Date(),
-        paymentDue: new Date(),
         senderAddress: { street: "", country: "", postCode: "", city: "" },
         clientAddress: { street: "", country: "", postCode: "", city: "" },
         client: { name: "", email: "" },

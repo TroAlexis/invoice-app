@@ -4,12 +4,13 @@ import { ComponentPropsWithoutRef } from "react";
 import { Invoice } from "types/invoices";
 import { classNames } from "utils/classnames";
 import { prettifyDate } from "utils/date";
+import { getPaymentDue } from "utils/invoices";
 import { TEXT_PLACEHOLDER } from "utils/string";
 import styles from "./InvoiceIdDetailBody.module.scss";
 
 type Props = Pick<
   Invoice,
-  "createdAt" | "paymentDue" | "clientAddress" | "client"
+  "createdAt" | "paymentTerms" | "clientAddress" | "client"
 > &
   ComponentPropsWithoutRef<"section">;
 
@@ -18,10 +19,11 @@ export default function InvoiceIdDetailBody(props: Props) {
     client: { email, name },
     clientAddress,
     createdAt,
-    paymentDue,
+    paymentTerms,
     className,
   } = props;
 
+  const paymentDue = getPaymentDue({ paymentTerms, createdAt });
   const classes = classNames([styles.wrapper, className]);
 
   return (

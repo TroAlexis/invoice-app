@@ -6,10 +6,7 @@ import { classNames } from "utils/classnames";
 import { TEXT_PLACEHOLDER } from "utils/string";
 import styles from "./InvoiceAddress.module.scss";
 
-type AddressSectionProps = {
-  [K in keyof Address]: Address[K];
-};
-type AddressProps = ComponentPropsWithoutRef<"address"> & AddressSectionProps;
+type AddressProps = ComponentPropsWithoutRef<"address"> & Partial<Address>;
 
 export default function InvoiceAddress({
   street,
@@ -21,22 +18,17 @@ export default function InvoiceAddress({
   const classes = classNames([styles.address, className]);
   const fields = [street, city, postCode, country];
 
-  const allFieldsAbsent = fields.every((field) => !field);
-
   return (
     <address className={classes}>
-      {!allFieldsAbsent ? (
-        fields.map((text, index) => {
-          const key = text + index;
-          return (
-            <Text key={key} type={Constraints.LOOSE}>
-              {text || TEXT_PLACEHOLDER}
-            </Text>
-          );
-        })
-      ) : (
-        <Text type={Constraints.LOOSE}>{TEXT_PLACEHOLDER}</Text>
-      )}
+      {fields.map((text, index) => {
+        const content = text ?? TEXT_PLACEHOLDER;
+        const key = content + index;
+        return (
+          <Text key={key} type={Constraints.LOOSE}>
+            {content}
+          </Text>
+        );
+      })}
     </address>
   );
 }
