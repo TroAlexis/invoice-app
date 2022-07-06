@@ -1,3 +1,4 @@
+import withTransition from "components/ui/hocs/withTransition/withTransition";
 import Loader from "components/ui/Loader/Loader";
 
 import { Color, Shade } from "constants/color";
@@ -45,20 +46,36 @@ export default function Button({
       [styles["is-outline"]]: !!outline,
       [styles["has-icon"]]: !!icon,
       [styles["is-linkish"]]: !!linkish,
+      [styles["loading"]]: loading,
     },
   ]);
 
   return (
     <button className={classes} type="button" {...attrs}>
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          {icon?.({ classes: styles.icon })}
+      <ButtonLoader visible={!!loading} props={{ className: styles.loader }} />
 
-          {children}
-        </>
-      )}
+      <div className={styles.wrapper}>
+        {icon?.({ classes: styles.icon })}
+
+        {children}
+      </div>
     </button>
   );
 }
+
+const ButtonLoader = withTransition(
+  (props: ComponentPropsWithoutRef<"span">) => {
+    return (
+      <span {...props}>
+        <Loader />
+      </span>
+    );
+  },
+  { component: null },
+  {
+    timeout: 200,
+    appear: true,
+    unmountOnExit: true,
+    classNames: "fade",
+  }
+);
