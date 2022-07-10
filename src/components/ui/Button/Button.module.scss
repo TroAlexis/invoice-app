@@ -9,12 +9,15 @@
 
 .wrapper {
   display: inline-flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
 }
 
 .button {
   position: relative;
+  display: inline-flex;
+  align-items: center;
   padding: 1.6rem 2.4rem;
   font-weight: 700;
   line-height: 1;
