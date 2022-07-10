@@ -12,7 +12,7 @@ const Headings = {
 export interface Props extends ComponentPropsWithoutRef<"p"> {
   element?: ElementType;
   level: keyof typeof Headings;
-  size?: Size.SMALL;
+  size?: Size.SMALL | Size.MEDIUM;
 }
 
 export default function Heading({

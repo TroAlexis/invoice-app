@@ -16,6 +16,11 @@ $sizes: (
       line-height: 2,
       letter-spacing: -0.38px,
     ),
+    medium: (
+      font-size: 2.4rem,
+      line-height: 1.33,
+      letter-spacing: -0.5px,
+    ),
   ),
   h3: (
     font-size: 1.6rem,
@@ -45,10 +50,18 @@ $body-sizes: map.get($sizes, body);
   &.small {
     @include h2-small;
   }
+
+  &.medium {
+    @include h2-medium;
+  }
 }
 
 @mixin h2-small() {
   @include helpers.include-properties(map.get($h2-sizes, small));
+}
+
+@mixin h2-medium() {
+  @include helpers.include-properties(map.get($h2-sizes, medium));
 }
 
 @mixin h3() {
