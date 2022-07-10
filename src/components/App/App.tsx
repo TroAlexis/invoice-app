@@ -15,6 +15,7 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 const App = (): JSX.Element => {
   const location = useLocation();
@@ -41,6 +42,12 @@ const App = (): JSX.Element => {
       <AnimatedInvoicesModalRoutes
         visible={!!backgroundLocation}
         props={backgroundLocation}
+      />
+
+      <ToastContainer
+        position={"bottom-right"}
+        hideProgressBar
+        autoClose={2000}
       />
     </>
   );

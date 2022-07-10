@@ -1,0 +1,9 @@
+@use "node_modules/react-toastify/dist/ReactToastify.css";
+
+/* stylelint-disable */
+.Toastify {
+  &__toast {
+    font-family: inherit;
+  }
+}
+/* stylelint-enable */
