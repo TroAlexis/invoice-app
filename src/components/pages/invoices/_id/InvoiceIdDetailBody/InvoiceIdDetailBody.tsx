@@ -34,7 +34,7 @@ export default function InvoiceIdDetailBody(props: Props) {
       </div>
 
       <div className={styles.to}>
-        <InfoItem label={"Bill To"}>{name}</InfoItem>{" "}
+        <InfoItem label={"Bill To"}>{name || TEXT_PLACEHOLDER}</InfoItem>{" "}
         <InvoiceAddress className={styles.address} {...clientAddress} />
       </div>
 
@@ -52,7 +52,7 @@ interface InfoItemProps extends ComponentPropsWithoutRef<"p"> {
 function InfoItem({ label, children, className, ...props }: InfoItemProps) {
   const classes = classNames([styles.info, className]);
   return (
-    <p className={classes}>
+    <p className={classes} {...props}>
       <Text tag="span" className={styles.label}>
         {label}
       </Text>
