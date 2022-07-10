@@ -21,6 +21,6 @@ export const toUTCString = (date: Date): string => {
 
 export const daysToMs = (days: number): number => {
   return (
-    days / HOURS_IN_DAY / MINUTES_IN_HOUR / SECONDS_IN_MINUTE / MS_IN_SECONDS
+    days * HOURS_IN_DAY * MINUTES_IN_HOUR * SECONDS_IN_MINUTE * MS_IN_SECONDS
   );
 };
