@@ -1,5 +1,7 @@
 import { useEventSelf } from "@/hooks/useEventSelf";
 import LayoutDefault from "@/layouts/default/default";
+import debounce from "lodash.debounce";
+import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./modal-aside.module.scss";
 
@@ -8,7 +10,16 @@ export default function ModalAside() {
   const navigate = useNavigate();
 
   const navigateBack = () => navigate(-1);
-  const handleClickSelf = withEventSelf(navigateBack);
+  const debouncedNavigateBack = useMemo(
+    () =>
+      debounce(navigateBack, 2000, {
+        leading: true,
+        trailing: false,
+      }),
+    []
+  );
+
+  const handleClickSelf = withEventSelf(debouncedNavigateBack);
 
   return (
     <LayoutDefault
