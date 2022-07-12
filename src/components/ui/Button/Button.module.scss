@@ -1,8 +1,14 @@
 @use "styles/_colors.scss";
 @use "styles/_variables.scss";
 
-@mixin hover() {
-  &:not(.is-outline) {
+@mixin hover($outline: false) {
+  $outline-selector: ":not(.is-outline)";
+
+  @if $outline {
+    $outline-selector: "";
+  }
+
+  &#{$outline-selector} {
     &:hover,
     &:focus {
       @content;
@@ -85,6 +91,10 @@
   }
 
   &.is-black {
+    @include hover(true) {
+      opacity: 0.9;
+    }
+
     &.is-outline {
       color: colors.$black-500;
     }
