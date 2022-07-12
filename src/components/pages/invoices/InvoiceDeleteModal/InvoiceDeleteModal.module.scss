@@ -1,0 +1,40 @@
+@use "src/layouts/modal-aside/modal-aside.module";
+@use "styles/_colors.scss";
+
+.modal {
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  border-color: red;
+}
+
+.card {
+  padding: 4.8rem;
+}
+
+.heading {
+  margin-top: 0;
+  margin-bottom: 1.3rem;
+}
+
+.description {
+  margin-bottom: 1.6rem;
+  color: colors.$grey-500;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.button {
+  & + & {
+    margin-left: 0.8rem;
+  }
+}
