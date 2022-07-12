@@ -21,10 +21,14 @@ export default function InvoiceEdit() {
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
 
-  const handleSave = withLoading(() => {
+  const handleSave = withLoading(async () => {
     if (invoice?.id) {
       const data = apiInvoiceShaper(state);
-      return invoicesApi.patch(invoice.id, data);
+      const response = await invoicesApi.patch(invoice.id, data);
+
+      navigate(-1);
+
+      return response;
     }
   });
 
