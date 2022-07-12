@@ -17,17 +17,25 @@ interface Props {}
 export default function InvoicesNew() {
   const { handleChange, handleInput, state } = useInvoiceForm();
   const { loading, withLoading } = useLoading();
-  const saveAsDraft = withLoading(() => {
+  const saveAsDraft = withLoading(async () => {
     const invoice = apiInvoiceShaper(state);
-    return invoicesApi.add({
+    const response = await invoicesApi.add({
       ...invoice,
       status: Status.DRAFT,
     });
+
+    navigate(-1);
+
+    return response;
   });
 
-  const handleSave = withLoading(() => {
+  const handleSave = withLoading(async () => {
     const invoice = apiInvoiceShaper(state);
-    return invoicesApi.add(invoice);
+    const response = await invoicesApi.add(invoice);
+
+    navigate(-1);
+
+    return response;
   });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
