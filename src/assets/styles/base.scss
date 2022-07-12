@@ -9,6 +9,10 @@
 @use "vendors/react-modal";
 @use "vendors/react-toastify";
 
+* {
+  outline: 0;
+}
+
 html,
 body {
   height: 100%;
