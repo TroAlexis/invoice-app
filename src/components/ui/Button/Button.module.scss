@@ -2,8 +2,11 @@
 @use "styles/_variables.scss";
 
 @mixin hover() {
-  &:not(.is-outline):hover {
-    @content;
+  &:not(.is-outline) {
+    &:hover,
+    &:focus {
+      @content;
+    }
   }
 }
 
@@ -49,7 +52,7 @@
     color: colors.$white;
     background-color: colors.$violet-400;
 
-    &:hover {
+    @include hover {
       opacity: 0.9;
     }
 
