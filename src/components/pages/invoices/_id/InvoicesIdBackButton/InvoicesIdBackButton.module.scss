@@ -14,7 +14,8 @@
     transform: rotate(-180deg) translateX(0);
     transition: transform variables.$transition-fast;
 
-    @at-root .button:hover#{&} {
+    @at-root .button:hover#{&},
+      .button:focus#{&} {
       transform: rotate(-180deg) translateX(0.2rem);
     }
   }
