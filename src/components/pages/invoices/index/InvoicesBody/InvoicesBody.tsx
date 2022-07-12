@@ -1,12 +1,11 @@
-import invoicesApi from "@/api/modules/invoices/invoices";
 import useEffectOnce from "@/hooks/useEffectOnce";
 import useLoading from "@/hooks/useLoading";
 import { useTypedDispatch, useTypedSelector } from "@/hooks/useTypedStore";
+import { fetchInvoices } from "@/store/action-creators/invoices";
 import {
   filteredInvoicesSelector,
   invoicesSelector,
 } from "@/store/selectors/invoices";
-import { InvoiceActionType } from "@/store/types/invoices";
 import InvoicesBodyEmpty from "components/pages/invoices/index/InvoicesBodyEmpty/InvoicesBodyEmpty";
 import InvoicesList from "components/pages/invoices/index/InvoicesList/InvoicesList";
 import Container from "components/ui/Container/Container";
@@ -80,10 +79,3 @@ const useInvoices = () => {
 
   return { invoices, loading };
 };
-
-async function fetchInvoices(dispatch: ReturnType<typeof useTypedDispatch>) {
-  const { data: invoices } = await invoicesApi.get();
-  const items = invoices ?? [];
-
-  dispatch({ type: InvoiceActionType.SET_ITEMS, items });
-}
